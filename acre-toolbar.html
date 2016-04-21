@@ -1,0 +1,369 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../paper-badge/paper-badge.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <acre-toolbar></acre-toolbar>
+
+Example:
+
+    <acre-toolbar>
+      <h2>Hello acre-toolbar</h2>
+    </acre-toolbar>
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="acre-toolbar">
+    <template>
+        <style include="iron-flex iron-flex-alignment" />
+        <style>
+            :host {
+                display: block;
+                box-sizing: border-box;
+            }
+
+            a,
+            a:link,
+            a:visited,
+            a:hover,
+            a:focus,
+            a:active {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .container {
+                @apply(--layout-vertical);
+            }
+
+            .top,
+            .middle,
+            .bottom {
+                @apply(--layout-horizontal);
+            }
+            /**
+            * TOP
+            */
+
+            .top {
+                @apply(--layout-end-justified);
+                background-color: var(--top-color, --primary-color);
+                color: var(--top-text-color, --primary-text-color);
+                padding: 10px 10px 5px 10px;
+                font-size: 12px;
+            }
+
+            .top .action {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .top .action:hover {
+                cursor: pointer;
+            }
+            /**
+            * Middle
+            */
+
+            .middle {
+                @apply(--layout-center);
+                background-color: var(--middle-color, --primary-color);
+                color: var(--middle-text-color, --primary-text-color);
+                padding: 0 10px 5px 10px;
+            }
+
+            .logo {
+                width: 150px;
+                height: 40px;
+                margin-left: 10px;
+                margin-right: 10px;
+                @apply(--toolbar-logo);
+            }
+
+            .search-bar {
+                height: 33px;
+                border-radius: 0;
+                font-size: 16px;
+                background: var(--search-bar-color, #fff);
+                color: var(--search-bar-text-color, #5a6674);
+                transition: all 0.3s ease;
+                -webkit-transition: all 0.3s ease;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-flex);
+            }
+
+            .search-button {
+                padding-right: 10px;
+            }
+
+            .search-input {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                border: none;
+                outline: none;
+                padding-left: 10px;
+                background: var(--search-bar-color, #fff);
+                color: var(--search-bar-text-color, #5a6674);
+                @apply(--layout-flex);
+            }
+
+            .search-input::-webkit-search-cancel-button {
+                -webkit-appearance: none;
+                appearance: none;
+            }
+
+            .cart {
+                display: inline-block;
+                margin-left: 10px;
+                margin-right: 10px;
+                @apply(--toolbar-cart-button);
+            }
+
+            .cart .card-badge {
+                font-weight: normal;
+                font-size: 14px;
+                border-radius: 50%;
+                margin-left: 5px;
+                margin-bottom: 0px;
+                background-color: var(--badge-color, --dark-primary-color);
+                opacity: 1.0;
+                color: var(--badge-text-color, --primary-text-color);
+                padding: 3px 7px;
+            }
+            /**
+            * Bottom
+            */
+
+            .bottom {
+                background-color: var(--bottom-color, --dark-primary-color);
+                color: var(--bottom-text-color, --primary-text-color);
+                ;
+                padding: 0;
+                margin: 0;
+            }
+
+            .dropmenu {
+                margin: 0;
+                padding: 0;
+            }
+
+            .dropmenu ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            .dropmenu li {
+                float: left;
+                list-style: none;
+                background-color: var(--bottom-color, --dark-primary-color);
+                position: relative;
+                padding: 10px 15px;
+                line-height: 27px;
+            }
+
+            .dropmenu li .menu-item-name {
+                text-decoration: none;
+                display: block;
+            }
+
+            .dropmenu li ul {
+                display: none;
+                position: absolute;
+                left: 0;
+                top: 100%;
+                min-width: 10em;
+                box-shadow: 7px 10px 19px -8px rgba(0, 0, 0, 0.63);
+                z-index: 999;
+            }
+
+            .dropmenu li ul li {
+                float: none;
+            }
+
+            .dropmenu li:hover {
+                background: var(--menu-item-hover-background-color, white);
+                color: var(--menu-item-hover-color, white);
+            }
+
+            .dropmenu li:hover > .menu-item-name {
+                display: block;
+                color: var(--menu-item-hover-color, white);
+            }
+
+            .dropmenu li:hover > ul {
+                display: block;
+                color: var(--menu-item-hover-color, white);
+                background: var(--dropdown-background-color, white);
+            }
+
+            .dropmenu:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            .menu-subitems,
+            .menu-display {
+                min-width: 200px;
+            }
+
+            .menu-subitems {
+                padding: 20px 20px 20px 10px;
+                color: var(--subitem-text-color, #636363);
+                font-size: 14px;
+            }
+
+            .menu-display iron-image {
+                min-height: 300px;
+                width: 200px;
+            }
+
+            .menu-subitem .icon {
+                color: var(--dropdown-background-color, white);
+            }
+
+            .menu-subitem:hover,
+            .menu-subitem:hover > .icon {
+                cursor: pointer;
+                color: var(--subitem-text-hover-color, --primary-color);
+            }
+        </style>
+
+        <div class="container">
+            <div class="top">
+                <template is="dom-repeat" items=[[actions]] as=action index-as="index">
+                    <a class="action" href="[[action.link]]">[[action.name]]</a>
+                </template>
+            </div>
+            <div class="middle">
+                <a href="[[logo.link]]">
+                    <iron-image class="logo" src="[[logo.image]]" preload sizing="contain"></iron-image>
+                </a>
+                <div class="search-bar">
+                    <input class="search-input" is="iron-input" placeholder="Buscar" bind-value="{{searchText}}" />
+                    <iron-icon class="search-button" icon="search"></iron-icon>
+                </div>
+                <div class="cart">
+                    <paper-button style="margin:0">
+                        <iron-icon icon="shopping-cart"></iron-icon>
+                        <span>Carrinho</span>
+                        <span class="card-badge">4</span>
+                    </paper-button>
+
+                </div>
+            </div>
+            <div class="bottom">
+                <ul class="dropmenu">
+                    <template is="dom-repeat" items=[[menuItems]] as=menuItem index-as=index>
+                        <li>
+                            <a class="menu-item-name" href="[[menuItem.link]]">
+                              [[menuItem.name]]
+                              <template is="dom-if" if="{{menuItem.subitems}}">
+                                <iron-icon icon="expand-more"></iron-icon>
+                              </template>
+                            </a>
+                            <template is="dom-if" if="{{menuItem.subitems}}">
+                                <ul>
+                                    <div class="layout horizontal">
+                                        <div class="menu-subitems layout flex wrap">
+                                            <template is="dom-repeat" items=[[menuItem.subitems]] as=subitem index-as="index">
+                                                <div class="menu-subitem">
+                                                    <a href="[[subitem.link]]">[[subitem.name]]</a>
+                                                    <iron-icon class="icon" icon="chevron-right"></iron-icon>
+                                                </div>
+                                            </template>
+                                        </div>
+                                        <div class="menu-display vertical layout">
+                                            <iron-image class="flex" src="[[menuItem.cover]]" preload sizing="contain"></iron-image>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </template>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'acre-toolbar',
+
+            properties: {
+                logo: {
+                    type: Object,
+                    value: function() {
+                        return {}
+                    }
+                },
+                actions: {
+                    type: Array,
+                    value: function() {
+                        return []
+                    }
+                },
+                menuItems: {
+                    type: Array,
+                    value: function() {
+                        return []
+                    }
+                }
+            },
+
+            // Element Lifecycle
+
+            ready: function() {
+                // `ready` is called after all elements have been configured, but
+                // propagates bottom-up. This element's children are ready, but parents
+                // are not.
+                //
+                // This is the point where you should make modifications to the DOM (when
+                // necessary), or kick off any processes the element wants to perform.
+            },
+
+            attached: function() {
+                // `attached` fires once the element and its parents have been inserted
+                // into a document.
+                //
+                // This is a good place to perform any work related to your element's
+                // visual state or active behavior (measuring sizes, beginning animations,
+                // loading resources, etc).
+            },
+
+            detached: function() {
+                // The analog to `attached`, `detached` fires when the element has been
+                // removed from a document.
+                //
+                // Use this to clean up anything you did in `attached`.
+            },
+
+            // Element Behavior
+
+        });
+    </script>
+</dom-module>
