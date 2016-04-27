@@ -25,11 +25,27 @@ Example:
 
     <acre-toolbar></acre-toolbar>
 
-Example:
-
-    <acre-toolbar>
-      <h2>Hello acre-toolbar</h2>
-    </acre-toolbar>
+Custom property | Description | Default
+----------------|-------------|----------
+`--top-color` | The color at the top of the bar | `--primary-color`
+`--top-text-color` | The text color for the top of the bar | `--primary-text-color`
+`--middle-color` | The color at the middle of the bar | `--primary-color`
+`--middle-text-color` | The text color for the middle of the bar | `--primary-text-color`
+`--bottom-color` | The color at the bottom of the bar | `--primary-color`
+`--bottom-text-color` | The text color for the bottom of the bar | `--primary-text-color`
+`--toolbar-logo` | Mixin applied to the logo container | `{}`
+`--search-input` | Mixin applied to the search input container | `{}`
+`--search-bar-color` | The search bar background color | `#fff`
+`--search-bar-text-color` | The search bar text color | `#000`
+`--cart-badge-color` | The cart badge color | `--dark-primary-color`
+`--cart-badge-text-color` | The cart badge color | `---primary-text-color`
+`--menu-item-hover-background-color` | The background color user when the user hover menu item | `#fff`
+`--menu-item-hover-text-color` | The color text used when the user hover menu item | `#000`
+`--menu-subitems-container` | Mixin applied to the menu item container | `{}`
+`--menu-image-container` | Mixin applied to the menu image container | `{}`
+`--menu-image` | Mixin applied to the menu image | `{}`
+`--dropdown-background-color` | The dropdown background color | `#fff`
+`--subitem-text-hover-color` | The color user when the user hover the submenu item | `--primary-color`
 
 @demo demo/index.html
 @hero hero.svg
@@ -107,12 +123,13 @@ Example:
                 border-radius: 0;
                 font-size: 16px;
                 background: var(--search-bar-color, #fff);
-                color: var(--search-bar-text-color, #5a6674);
+                color: var(--search-bar-text-color, #000);
                 transition: all 0.3s ease;
                 -webkit-transition: all 0.3s ease;
                 @apply(--layout-horizontal);
                 @apply(--layout-center);
                 @apply(--layout-flex);
+                @apply(--search-input);
             }
 
             .search-button {
@@ -126,7 +143,7 @@ Example:
                 border: none;
                 outline: none;
                 padding-left: 10px;
-                background: var(--search-bar-color, #fff);
+                background: none;
                 color: var(--search-bar-text-color, #5a6674);
                 @apply(--layout-flex);
             }
@@ -136,10 +153,14 @@ Example:
                 appearance: none;
             }
 
+            .login paper-button {
+                --paper-button: {
+                    text-transform: none;
+                }
+            }
+
             .cart {
                 display: inline-block;
-                margin-left: 10px;
-                margin-right: 10px;
                 @apply(--toolbar-cart-button);
             }
 
@@ -149,9 +170,9 @@ Example:
                 border-radius: 50%;
                 margin-left: 5px;
                 margin-bottom: 0px;
-                background-color: var(--badge-color, --dark-primary-color);
+                background-color: var(--cart-badge-color, --dark-primary-color);
                 opacity: 1.0;
-                color: var(--badge-text-color, --primary-text-color);
+                color: var(--cart-badge-text-color, --primary-text-color);
                 padding: 3px 7px;
             }
             /**
@@ -206,17 +227,17 @@ Example:
 
             .dropmenu li:hover {
                 background: var(--menu-item-hover-background-color, white);
-                color: var(--menu-item-hover-color, white);
+                color: var(--menu-item-hover-text-color, black);
             }
 
             .dropmenu li:hover > .menu-item-name {
                 display: block;
-                color: var(--menu-item-hover-color, white);
+                color: var(--menu-item-hover-text-color, black);
             }
 
             .dropmenu li:hover > ul {
                 display: block;
-                color: var(--menu-item-hover-color, white);
+                color: var(--menu-item-hover-text-color, black);
                 background: var(--dropdown-background-color, white);
             }
 
@@ -228,7 +249,8 @@ Example:
 
             .menu-subitems,
             .menu-display {
-                min-width: 200px;
+                height: 200px;
+                width: 200px;
             }
 
             .menu-subitems {
@@ -238,8 +260,16 @@ Example:
             }
 
             .menu-display iron-image {
-                min-height: 300px;
                 width: 200px;
+                @apply(--menu-image-container);
+            }
+
+            .menu-subitems {
+                @apply(--menu-subitems-container);
+            }
+
+            .menu-display {
+                @apply(--menu-image);
             }
 
             .menu-subitem .icon {
@@ -267,13 +297,32 @@ Example:
                     <input class="search-input" is="iron-input" placeholder="Buscar" bind-value="{{searchText}}" />
                     <iron-icon class="search-button" icon="search"></iron-icon>
                 </div>
+                <div class="login">
+                    <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
+                        <a href="[[loginUrl]]">
+                            <paper-button class="layout horizontal center" style="margin:0">
+                                <iron-icon icon="account-box"></iron-icon>
+                                <span>Entre ou Cadastre-se</span>
+                            </paper-button>
+                        </a>
+                    </template>
+                    <template is="dom-if" if="{{loggedUser.name}}" restamp="true">
+                        <a href="[[profileUrl]]">
+                            <paper-button class="layout horizontal center" style="margin:0">
+                                <iron-icon icon="account-box"></iron-icon>
+                                <span>[[loggedUser.name]]</span>
+                            </paper-button>
+                        </a>
+                    </template>
+                </div>
                 <div class="cart">
-                    <paper-button style="margin:0">
-                        <iron-icon icon="shopping-cart"></iron-icon>
-                        <span>Carrinho</span>
-                        <span class="card-badge">4</span>
-                    </paper-button>
-
+                    <a href="[[cartUrl]]">
+                        <paper-button class="layout horizontal center" style="margin:0">
+                            <iron-icon icon="shopping-cart"></iron-icon>
+                            <span>Carrinho</span>
+                            <span class="card-badge">[[cartItemsCount]]</span>
+                        </paper-button>
+                    </a>
                 </div>
             </div>
             <div class="bottom">
@@ -289,17 +338,21 @@ Example:
                             <template is="dom-if" if="{{menuItem.subitems}}">
                                 <ul>
                                     <div class="layout horizontal">
-                                        <div class="menu-subitems layout flex wrap">
-                                            <template is="dom-repeat" items=[[menuItem.subitems]] as=subitem index-as="index">
-                                                <div class="menu-subitem">
-                                                    <a href="[[subitem.link]]">[[subitem.name]]</a>
-                                                    <iron-icon class="icon" icon="chevron-right"></iron-icon>
-                                                </div>
-                                            </template>
-                                        </div>
-                                        <div class="menu-display vertical layout">
-                                            <iron-image class="flex" src="[[menuItem.cover]]" preload sizing="contain"></iron-image>
-                                        </div>
+                                        <template is="dom-repeat" items=[[menuItem.subitems]] as=subitemArray index-as="index">
+                                            <div class="menu-subitems layout flex">
+                                                <template is="dom-repeat" items=[[subitemArray]] as=subitem index-as="index">
+                                                    <div class="menu-subitem flex">
+                                                        <a href="[[subitem.link]]">[[subitem.name]]</a>
+                                                        <iron-icon class="icon" icon="chevron-right"></iron-icon>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                        <template is="dom-if" if="[[menuItem.cover]]" restamp="true">
+                                            <div class="menu-display vertical layout">
+                                                <iron-image class="flex" src="[[menuItem.cover]]" preload sizing="[[menuItem.coverSizing]]"></iron-image>
+                                            </div>
+                                        </template>
                                     </div>
                                 </ul>
                             </template>
@@ -315,24 +368,99 @@ Example:
             is: 'acre-toolbar',
 
             properties: {
+                /**
+                 * Describes the logo
+                 *
+                 * @type {{image: string, link: string}}
+                 */
                 logo: {
                     type: Object,
                     value: function() {
                         return {}
                     }
                 },
+
+                /**
+                 * The actions list at the top bar
+                 *
+                 * @type {[{image: string, link: string}]}
+                 */
                 actions: {
                     type: Array,
                     value: function() {
                         return []
                     }
                 },
+
+                // name: "Aço",
+                // link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
+                // cover: 'http://www.wcm.ind.br/images/institucional.png',
+                // coverSizing: 'contain',
+
+                /**
+                 * The menu itens with this subitems, this is placed at the bottom bar
+                 *
+                 * @type {[{
+                 * name: string,
+                 * link:string,
+                 * cover: string,
+                 * coverSizing: contain,
+                 * subitems: [{name: string, link: string}]
+                 * }]}
+                 */
                 menuItems: {
                     type: Array,
                     value: function() {
                         return []
                     }
+                },
+
+                /**
+                 * The logged user data
+                 *
+                 * @type {{name: string}}
+                 */
+                loggedUser: {
+                    type: String,
+                    value: function() {
+                        return {
+
+                        }
+                    }
+                },
+
+                /**
+                 * The login url
+                 */
+                loginUrl: {
+                    type: String,
+                    value: '',
+                },
+
+                /**
+                 * The profile url
+                 */
+                profileUrl: {
+                    type: String,
+                    value: '',
+                },
+
+                /**
+                 * The cart url
+                 */
+                cartUrl: {
+                    type: String,
+                    value: '',
+                },
+
+                /**
+                * The cart items count
+                */
+                cartItemsCount:{
+                  type: Number,
+                  value: 0
                 }
+
             },
 
             // Element Lifecycle
