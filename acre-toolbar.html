@@ -17,6 +17,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../paper-badge/paper-badge.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../paper-progress/paper-progress.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -37,6 +39,9 @@ Custom property | Description | Default
 `--search-input` | Mixin applied to the search input container | `{}`
 `--search-bar-color` | The search bar background color | `#fff`
 `--search-bar-text-color` | The search bar text color | `#000`
+`--product-price-text-color` | The Search bar product price color | `--primary-color`
+`--product-name-text-color` | The Search bar product name text color | `--primary-text-color`
+`--product-description-text-color` | The product description text color | `--secondary-text-color`
 `--cart-badge-color` | The cart badge color | `--dark-primary-color`
 `--cart-badge-text-color` | The cart badge color | `---primary-text-color`
 `--menu-item-hover-background-color` | The background color user when the user hover menu item | `#fff`
@@ -118,6 +123,10 @@ Custom property | Description | Default
                 @apply(--toolbar-logo);
             }
 
+            /**
+            * Search Bar
+            */
+
             .search-bar {
                 height: 33px;
                 border-radius: 0;
@@ -130,6 +139,7 @@ Custom property | Description | Default
                 @apply(--layout-center);
                 @apply(--layout-flex);
                 @apply(--search-input);
+                position: relative;
             }
 
             .search-button {
@@ -151,6 +161,57 @@ Custom property | Description | Default
             .search-input::-webkit-search-cancel-button {
                 -webkit-appearance: none;
                 appearance: none;
+            }
+
+            .search-bar .search-results {
+                min-height: 30px;
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: 100%;
+                display: block;
+                background-color: white;
+                z-index: 10;
+                box-shadow: 7px 10px 19px -8px rgba(0, 0, 0, 0.63);
+            }
+
+            .search-result {
+                padding: 10px;
+            }
+
+            .search-result .image {
+                height: 70px;
+                width: 100px;
+                margin-right: 10px;
+            }
+
+            .search-result:hover {
+                background-color: #F7F7F7;
+                cursor: pointer;
+            }
+
+            .search-result .name {
+                font-weight: bold;
+                text-decoration: none;
+                color: var(--product-name-text-color, --primary-text-color);
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+            }
+
+            .search-result .description {
+                font-weight: bold;
+                color: var(--product-description-text-color, --secondary-text-color);
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+            }
+
+            .search-result .price {
+                font-weight: bold;
+                font-size: 25px;
+                margin: 0;
+                color: var(--product-price-text-color, --primary-color);
             }
 
             .login paper-button {
@@ -182,7 +243,6 @@ Custom property | Description | Default
             .bottom {
                 background-color: var(--bottom-color, --dark-primary-color);
                 color: var(--bottom-text-color, --primary-text-color);
-                ;
                 padding: 0;
                 margin: 0;
             }
@@ -283,6 +343,9 @@ Custom property | Description | Default
             }
         </style>
 
+        <iron-ajax id="searchRequest" auto url="[[_searchUrl]]" handle-as="json" debounce-duration="300" on-response="_handleSearchResponse" on-request="_handleSearchRequest">
+        </iron-ajax>
+
         <div class="container">
             <div class="top">
                 <template is="dom-repeat" items=[[actions]] as=action index-as="index">
@@ -294,8 +357,24 @@ Custom property | Description | Default
                     <iron-image class="logo" src="[[logo.image]]" preload sizing="contain"></iron-image>
                 </a>
                 <div class="search-bar">
-                    <input class="search-input" is="iron-input" placeholder="Buscar" bind-value="{{searchText}}" />
+                    <input class="search-input" is="iron-input" placeholder="Buscar" on-blur="_searchBlur" on-focus="_searchFocus" bind-value="{{query}}" />
                     <iron-icon class="search-button" icon="search"></iron-icon>
+                    <template is="dom-if" if="[[_searchResults]]" restamp="true">
+                        <template is="dom-repeat" items=[[_searchResults]] as=searchResult>
+                            <div class="search-results">
+                                <div class="search-result horizontal layout">
+                                    <template is="dom-if" if={{searchResult.image}}>
+                                        <iron-image class="image" src="[[searchResult.image]]" preload sizing="cover"></iron-image>
+                                    </template>
+                                    <div class="vertical layout">
+                                        <span class="name">[[searchResult.name]]</span>
+                                        <span class="description">[[searchResult.description]]</span>
+                                        <span class="price">{{_formatPrice(searchResult.price)}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
                 </div>
                 <div class="login">
                     <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
@@ -360,6 +439,9 @@ Custom property | Description | Default
                     </template>
                 </ul>
             </div>
+             <template is="dom-if" if="[[_searching]]" restamp="true">
+                <paper-progress class="fit" style="width:100%" indeterminate></paper-progress>
+             </template>
         </div>
     </template>
 
@@ -392,11 +474,6 @@ Custom property | Description | Default
                     }
                 },
 
-                // name: "Aço",
-                // link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-                // cover: 'http://www.wcm.ind.br/images/institucional.png',
-                // coverSizing: 'contain',
-
                 /**
                  * The menu itens with this subitems, this is placed at the bottom bar
                  *
@@ -423,9 +500,7 @@ Custom property | Description | Default
                 loggedUser: {
                     type: String,
                     value: function() {
-                        return {
-
-                        }
+                        return {}
                     }
                 },
 
@@ -454,13 +529,34 @@ Custom property | Description | Default
                 },
 
                 /**
-                * The cart items count
-                */
-                cartItemsCount:{
-                  type: Number,
-                  value: 0
-                }
+                 * The cart items count
+                 */
+                cartItemsCount: {
+                    type: Number,
+                    value: 0
+                },
 
+                searchUrl: {
+                    type: String,
+                    value: ''
+                },
+
+                _searchResults: {
+                    type: Array,
+                    value: function() {
+                        return []
+                    }
+                },
+
+                _searchUrl: {
+                    type: String,
+                    computed: '_computeSearchUrl(searchUrl, query)'
+                },
+
+                _searching: {
+                    type: Boolean,
+                    value: false,
+                },
             },
 
             // Element Lifecycle
@@ -491,6 +587,35 @@ Custom property | Description | Default
             },
 
             // Element Behavior
+
+            //utils
+            _formatPrice: function(price) {
+                if (!price) return price;
+                return "R$" + price.toFixed(2);
+            },
+
+            _computeSearchUrl: function(searchUrl, query) {
+                if (!query) return "";
+                return searchUrl.replace("searchPlaceholder", query);
+            },
+
+            _handleSearchRequest: function(e) {
+                this._searching = true;
+            },
+
+            _handleSearchResponse: function(e) {
+                this._searchResults = e.detail.xhr.response;
+                this._searching = false;
+            },
+
+            _searchBlur: function(e) {
+                this._searchResults = [];
+            },
+
+            _searchFocus: function(e) {
+                if (this.query)
+                    this.$.searchRequest.generateRequest();
+            }
 
         });
     </script>

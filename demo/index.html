@@ -22,655 +22,128 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
     </script>
     <link rel="import" href="../acre-toolbar.html">
+
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <style is="custom-style" include="demo-pages-shared-styles">
+
+    </style>
 </head>
-<style is="custom-style">
-#toolbar {
-        font-family: sans-serif, 'Roboto', 'Noto';
-        --dark-primary-color: #0f6cb2;
-        --primary-color: #157ed2;
-        --light-primary-color: #B2DFDB;
-        --top-text-color: white;
-        --middle-text-color: white;
-        --bottom-text-color: white;
-        --cart-badge-text-color: white;
-        --toolbar-logo: {
-            width: 110px;
-            height: 60px;
-            margin-left: 5px;
-            margin-right: 10px;
-        }
-        ;
-        --menu-subitems-container: {
-            width: 180px;
-        }
-        --menu-image-container: {
-            width: 180px;
-        }
-    }
-
-    #toolbar2 {
-        font-family: 'Noto', sans-serif, 'Roboto';
-        margin-top: 20px;
-        float: none;
-        display: flex;
-        flex-direction: column;
-        --top-color: #e9e9e9;
-        --middle-color: white;
-        --bottom-color: white;
-        --cart-badge-color: #999;
-        --cart-badge-text-color: white;
-        --bottom-text-color: #999;
-        --menu-item-hover-text-color: black;
-        --search-bar-color: #e9e9e9;
-        --search-bar-text-color: black;
-        --subitem-text-hover-color: #999;
-        --toolbar-logo: {
-            width: 180px;
-            height: 80px;
-            margin-left: 5px;
-            margin-right: 10px;
-        }
-        --toolbar-cart-button: {
-            border: 1px solid #E0E0E0;
-        }
-    }
-
-    #toolbar3 {
-        font-family: 'Noto', sans-serif, 'Roboto';
-        margin-top: 20px;
-        float: none;
-        display: flex;
-        flex-direction: column;
-        --top-color: #232F3E;
-        --middle-color: #232F3E;
-        --bottom-color: #232F3E;
-        --top-text-color: white;
-        --middle-text-color: white;
-        --bottom-text-color: white;
-        --cart-badge-text-color: black;
-        --cart-badge-color: #febd69;
-        --menu-item-hover-text-color: black;
-        --toolbar-logo: {
-            width: 110px;
-            height: 60px;
-            margin-left: 5px;
-            margin-right: 10px;
-        }
-    }
-
-    #toolbar4 {
-        font-family: 'Noto', sans-serif, 'Roboto';
-        margin-top: 20px;
-        float: none;
-        display: flex;
-        flex-direction: column;
-        --top-color: #e9e9e9;
-        --middle-color: white;
-        --bottom-color: white;
-        --cart-badge-color: #eb1753;
-        --cart-badge-text-color: white;
-        --bottom-text-color: #eb1753;
-        --menu-item-hover-text-color: #eb1753;
-        --search-bar-color: #e9e9e9;
-        --search-bar-text-color: black;
-        --subitem-text-hover-color: #eb1753;
-        --toolbar-logo: {
-            width: 180px;
-            height: 80px;
-            margin-left: 5px;
-            margin-right: 10px;
-        }
-        --toolbar-cart-button: {
-            border: 1px solid #E0E0E0;
-        }
-    }
-
-    #toolbar5 {
-        font-family: 'Noto', sans-serif, 'Roboto';
-        margin-top: 20px;
-        float: none;
-        display: flex;
-        flex-direction: column;
-        --top-color: #0f3456;
-        --middle-color: white;
-        --bottom-color: white;
-        --cart-badge-color: #428bca;
-        --cart-badge-text-color: white;
-        --top-text-color: white;
-        --middle-text-color: #999;
-        --bottom-text-color: #999;
-        --menu-item-hover-text-color: #428bca;
-        --search-bar-color: #e9e9e9;
-        --search-bar-text-color: black;
-        --subitem-text-hover-color: #428bca;
-        --toolbar-logo: {
-            width: 180px;
-            height: 80px;
-            margin-left: 5px;
-            margin-right: 10px;
-        }
-        --toolbar-cart-button: {
-            /*border: 1px solid #E0E0E0;*/
-        }
-    }
-}
-</style>
 
 <body unresolved style="background-color:gray">
+    <demo-snippet>
+        <template>
+            <style is="custom-style">
+                #toolbar {
+                    font-family: sans-serif, 'Roboto', 'Noto';
+                    --paper-progress-active-color: #157ed2;
+                    --dark-primary-color: #0f6cb2;
+                    --primary-color: #157ed2;
+                    --light-primary-color: #B2DFDB;
+                    --top-text-color: white;
+                    --middle-text-color: white;
+                    --bottom-text-color: white;
+                    --cart-badge-text-color: white;
+                    --toolbar-logo: {
+                        width: 110px;
+                        height: 60px;
+                        margin-left: 5px;
+                        margin-right: 10px;
+                    }
+                }
+            </style>
+            <acre-toolbar id="toolbar" login-url="/login"
+                profile-url="/profile"
+                cart-url="/cart"
+                search-url='http://localhost:5005/api/v1/Product?query={"name":{"$regex":"(?i:.*searchPlaceholder.*)"}}&limit=10'
+                logo='{"image": "img/logo2.png", "link": "/"}'>
+            </acre-toolbar>
 
-    <p>An example of <code>&lt;acre-toolbar&gt;</code>:</p>
-    <button id="btn">Act</button>
 
-    <acre-toolbar id="toolbar" login-url="/login" profile-url="/profile" cart-url="/cart" logo='{"image": "img/logo2.png", "link": "/"}'>
-    </acre-toolbar>
+            <script type="text/javascript">
+                var element = document.getElementById('toolbar');
 
-    <!-- <acre-toolbar id="toolbar2">
-    </acre-toolbar>
+                element.loggedUser = {
+                    name: 'Victor Hugo Marques'
+                };
 
-    <acre-toolbar id="toolbar5">
-    </acre-toolbar>
-
-    <acre-toolbar id="toolbar3">
-    </acre-toolbar>
-
-    <acre-toolbar id="toolbar4">
-    </acre-toolbar> -->
-
-    <script type="text/javascript">
-        var element = document.getElementById('toolbar');
-
-        element.loggedUser = {
-            name: 'Victor Hugo Marques'
-        };
-
-        element.actions = [{
-            name: 'Nossas Lojas',
-            link: ''
-        }, {
-            name: 'Tenha sua Loja',
-            link: ''
-        }, {
-            name: 'Atendimento (SAC): (55) 5555-5555',
-            link: ''
-        }, ];
-
-        element.menuItems = [{
-            name: "Aço",
-            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-            cover: 'http://www.wcm.ind.br/images/institucional.png',
-            coverSizing: 'contain',
-            subitems: [
-                [{
-                    name: 'Armário de Aço',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=38'
+                element.actions = [{
+                    name: 'Nossas Lojas',
+                    link: ''
                 }, {
-                    name: 'Estante de Aço',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=28'
+                    name: 'Tenha sua Loja',
+                    link: ''
                 }, {
-                    name: 'Reforço de estante par X',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=29'
+                    name: 'Atendimento (SAC): (55) 5555-5555',
+                    link: ''
+                }, ];
+
+                element.menuItems = [{
+                    name: "Aço",
+                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
+                    cover: 'http://www.wcm.ind.br/images/institucional.png',
+                    coverSizing: 'contain',
+                    subitems: [
+                        [{
+                            name: 'Armário de Aço',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=38'
+                        }, {
+                            name: 'Estante de Aço',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=28'
+                        }, {
+                            name: 'Reforço de estante par X',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=29'
+                        }, {
+                            name: 'Roupeiro de aço',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
+                        }]
+                    ]
                 }, {
-                    name: 'Roupeiro de aço',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-                }]
-            ]
-        }, {
-            name: "Cadeiras",
-            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
-            cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
-            coverSizing: 'contain',
-            subitems: [
-                [{
-                    name: 'Cadeira Caixa',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=48'
+                    name: "Cadeiras",
+                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
+                    cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
+                    coverSizing: 'contain',
+                    subitems: [
+                        [{
+                            name: 'Cadeira Caixa',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=48'
+                        }, {
+                            name: 'Cadeira Empilhavel',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=46'
+                        }, {
+                            name: 'Cadeira Universitária',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
+                        }, {
+                            name: 'Cadeira Secretária Fixa',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
+                        }, {
+                            name: 'Poltrona Diretor',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=36'
+                        }, {
+                            name: 'Poltrona Presidente',
+                            link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=7'
+                        }, ]
+                    ]
                 }, {
-                    name: 'Cadeira Empilhavel',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=46'
+                    name: "Escritório"
                 }, {
-                    name: 'Cadeira Universitária',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
+                    name: "Residência"
                 }, {
-                    name: 'Cadeira Secretária Fixa',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
+                    name: "Informática"
                 }, {
-                    name: 'Poltrona Diretor',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=36'
+                    name: "Multiuso"
                 }, {
-                    name: 'Poltrona Presidente',
-                    link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=7'
+                    name: "Ventiladores"
+                }, {
+                    name: "Arcondicionado"
+                }, {
+                    name: "Refrigeração"
                 }, ]
-            ]
-        }, {
-            name: "Escritório"
-        }, {
-            name: "Residência"
-        }, {
-            name: "Informática"
-        }, {
-            name: "Multiuso"
-        }, {
-            name: "Ventiladores"
-        }, {
-            name: "Arcondicionado"
-        }, {
-            name: "Refrigeração"
-        }, ]
+            </script>
 
-        // var element2 = document.getElementById('toolbar2');
-        //
-        // element2.logo = {
-        //         // image: 'http://s1.img-inbrands.com.br/102/456/870456.png',
-        //         image: 'img/logo-cab.png',
-        //         link: ''
-        //     }
-        //     // http://img6a.flixcart.com/www/prod/images/flipkart_logo_retina-9fddfff2.png
-        //
-        // element2.actions = [{
-        //     name: 'Nossas Lojas',
-        //     link: ''
-        // }, {
-        //     name: 'Tenha sua Loja',
-        //     link: ''
-        // }, {
-        //     name: 'Atendimento (SAC): (55) 5555-5555',
-        //     link: ''
-        // }, ];
-        //
-        // element2.menuItems = [{
-        //     name: "MASCULINO",
-        //     cover: 'http://www.richards.com.br/site/wp-content/uploads/2016/03/banner-menu-masc.jpg',
-        //     coverSizing: 'cover',
-        //     link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-        //     subitems: [
-        //         [{
-        //             name: 'camisas sociais',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=38'
-        //         }, {
-        //             name: 'camisas casuais',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=28'
-        //         }, {
-        //             name: 'calças',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=29'
-        //         }, {
-        //             name: 'tricot',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'polos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 't-shits',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }],
-        //         [{
-        //             name: 'bermudas',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'shorts',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'sungas',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'calçados',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'acessórios',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'intimos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'ver todos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }]
-        //     ]
-        // }, {
-        //     name: "FEMININO",
-        //     link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
-        //     cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
-        //     coverSizing: 'contain',
-        //     subitems: [
-        //         [{
-        //             name: 'Cadeira Caixa',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=48'
-        //         }, {
-        //             name: 'Cadeira Empilhavel',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=46'
-        //         }, {
-        //             name: 'Cadeira Universitária',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
-        //         }, {
-        //             name: 'Cadeira Secretária Fixa',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
-        //         }, {
-        //             name: 'Poltrona Diretor',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=36'
-        //         }, {
-        //             name: 'Poltrona Presidente',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=7'
-        //         }, ]
-        //     ]
-        // }, {
-        //     name: "KIDS"
-        // }, {
-        //     name: "CASA"
-        // }, {
-        //     name: "SELARIA"
-        // }, {
-        //     name: "OFF"
-        // }, {
-        //     name: "BLOG"
-        // }, {
-        //     name: "RELÓGIOS"
-        // }, ]
-        //
-        //
-        // var element3 = document.getElementById('toolbar3');
-        //
-        // element3.logo = {
-        //     image: 'https://images-na.ssl-images-amazon.com/images/G/01/SellerCentral/legal/amazon-logo_black.png',
-        //     link: ''
-        // }
-        //
-        // element3.actions = [{
-        //     name: 'Nossas Lojas',
-        //     link: ''
-        // }, {
-        //     name: 'Tenha sua Loja',
-        //     link: ''
-        // }, {
-        //     name: 'Atendimento (SAC): (55) 5555-5555',
-        //     link: ''
-        // }, ];
-        //
-        // element3.menuItems = [{
-        //     name: "Departments",
-        //     cover: '',
-        //     coverSizing: 'cover',
-        //     link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-        //     subitems: [
-        //         [{
-        //             name: 'camisas sociais',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=38'
-        //         }, {
-        //             name: 'camisas casuais',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=28'
-        //         }, {
-        //             name: 'calças',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=29'
-        //         }, {
-        //             name: 'tricot',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'polos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 't-shits',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'bermudas',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'shorts',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'sungas',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'calçados',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'acessórios',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'intimos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'ver todos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }]
-        //     ]
-        // }, {
-        //     name: "Shpopping History",
-        //     link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
-        //     cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
-        //     coverSizing: 'contain',
-        //     subitems: [
-        //         [{
-        //             name: 'Cadeira Caixa',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=48'
-        //         }, {
-        //             name: 'Cadeira Empilhavel',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=46'
-        //         }, {
-        //             name: 'Cadeira Universitária',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
-        //         }, {
-        //             name: 'Cadeira Secretária Fixa',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
-        //         }, {
-        //             name: 'Poltrona Diretor',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=36'
-        //         }, {
-        //             name: 'Poltrona Presidente',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=7'
-        //         }, ]
-        //     ]
-        // }, {
-        //     name: "Victor`s Amazon.com"
-        // }, {
-        //     name: "Today deals"
-        // }]
-        //
-        // var element4 = document.getElementById('toolbar4');
-        //
-        // element4.logo = {
-        //         // image: 'http://s1.img-inbrands.com.br/102/456/870456.png',
-        //         image: 'img/logo_demi.png',
-        //         link: ''
-        //     }
-        //     // http://img6a.flixcart.com/www/prod/images/flipkart_logo_retina-9fddfff2.png
-        //
-        // element4.actions = [{
-        //     name: 'Nossas Lojas',
-        //     link: ''
-        // }, {
-        //     name: 'Tenha sua Loja',
-        //     link: ''
-        // }, {
-        //     name: 'Atendimento (SAC): (55) 5555-5555',
-        //     link: ''
-        // }, ];
-        //
-        // element4.menuItems = [{
-        //     name: "SUTIÃS",
-        //     cover: 'http://demillus.vestemuitomelhor.com.br/wp-content/uploads/2015/08/74593-S-Up-Roterdan-16593_post_9818_thumbnail_resized.jpg',
-        //     coverSizing: 'cover',
-        //     link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-        //     subitems: [
-        //         [{
-        //             name: 'camisas sociais',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=38'
-        //         }, {
-        //             name: 'camisas casuais',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=28'
-        //         }, {
-        //             name: 'calças',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=29'
-        //         }, {
-        //             name: 'tricot',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'polos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 't-shits',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }],
-        //         [{
-        //             name: 'bermudas',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'shorts',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'sungas',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'calçados',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'acessórios',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'intimos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'ver todos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }]
-        //     ]
-        // }, {
-        //     name: "CALCINHA",
-        //     link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
-        //     cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
-        //     coverSizing: 'contain',
-        //     subitems: [
-        //         [{
-        //             name: 'Cadeira Caixa',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=48'
-        //         }, {
-        //             name: 'Cadeira Empilhavel',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=46'
-        //         }, {
-        //             name: 'Cadeira Universitária',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
-        //         }, {
-        //             name: 'Cadeira Secretária Fixa',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
-        //         }, {
-        //             name: 'Poltrona Diretor',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=36'
-        //         }, {
-        //             name: 'Poltrona Presidente',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=7'
-        //         }, ]
-        //     ]
-        // }, {
-        //     name: "KIDS"
-        // }, {
-        //     name: "CASA"
-        // }, {
-        //     name: "SELARIA"
-        // }, {
-        //     name: "OFF"
-        // }, {
-        //     name: "BLOG"
-        // }, {
-        //     name: "RELÓGIOS"
-        // }, ]
-        //
-        // var element5 = document.getElementById('toolbar5');
-        //
-        // element5.logo = {
-        //         image: 'https://www.ortobom.com.br/Content/images/ortobom-logo-slogan.png',
-        //         link: ''
-        //     }
-        //     // http://img6a.flixcart.com/www/prod/images/flipkart_logo_retina-9fddfff2.png
-        //
-        // element5.actions = [{
-        //     name: 'Nossas Lojas',
-        //     link: ''
-        // }, {
-        //     name: 'Tenha sua Loja',
-        //     link: ''
-        // }, {
-        //     name: 'Atendimento (SAC): (55) 5555-5555',
-        //     link: ''
-        // }, , {
-        //     name: 'Minha Conta',
-        //     link: ''
-        // }];
-        //
-        // element5.menuItems = [{
-        //     name: "COLCHÕES",
-        //     cover: 'https://www.ortobom.com.br/Content/images/header/Colchao.png',
-        //     coverSizing: 'contain',
-        //     link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-        //     subitems: [
-        //         [{
-        //             name: 'POR TAMANHO',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=38'
-        //         }, {
-        //             name: 'Todos',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=28'
-        //         }, {
-        //             name: 'Solteiro',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=29'
-        //         }, {
-        //             name: 'Viuva',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'Casal',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'Queen',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'King',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, ],
-        //         [{
-        //             name: 'POR TIPO',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'Molas Ensacadas',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'Molas Nanoelastic',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'Espuma',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }, {
-        //             name: 'Ortopédico',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=75'
-        //         }]
-        //     ]
-        // }, {
-        //     name: "CAMAS",
-        //     link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
-        //     cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
-        //     coverSizing: 'contain',
-        //     subitems: [
-        //         [{
-        //             name: 'Cadeira Caixa',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=48'
-        //         }, {
-        //             name: 'Cadeira Empilhavel',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=46'
-        //         }, {
-        //             name: 'Cadeira Universitária',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
-        //         }, {
-        //             name: 'Cadeira Secretária Fixa',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=44'
-        //         }, {
-        //             name: 'Poltrona Diretor',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=36'
-        //         }, {
-        //             name: 'Poltrona Presidente',
-        //             link: 'http://www.shoppingmatriz.com.br/sm2011/scr/smprodtipo.asp?id=7'
-        //         }, ]
-        //     ]
-        // }, {
-        //     name: "OFERTAS"
-        // }, {
-        //     name: "TRAVESSEIROS"
-        // }, {
-        //     name: "ACCESÓRIOS"
-        // }]
-    </script>
+        </template>
+    </demo-snippet>
+    </div>
 </body>
 
 </html>
