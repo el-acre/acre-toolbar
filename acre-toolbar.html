@@ -360,8 +360,8 @@ Custom property | Description | Default
                     <input class="search-input" is="iron-input" placeholder="Buscar" on-blur="_searchBlur" on-focus="_searchFocus" bind-value="{{query}}" />
                     <iron-icon class="search-button" icon="search"></iron-icon>
                     <template is="dom-if" if="[[_searchResults]]" restamp="true">
-                        <template is="dom-repeat" items=[[_searchResults]] as=searchResult>
-                            <div class="search-results">
+                        <div class="search-results">
+                            <template is="dom-repeat" items=[[_searchResults]] as=searchResult>
                                 <div class="search-result horizontal layout">
                                     <template is="dom-if" if={{searchResult.image}}>
                                         <iron-image class="image" src="[[searchResult.image]]" preload sizing="cover"></iron-image>
@@ -372,8 +372,8 @@ Custom property | Description | Default
                                         <span class="price">{{_formatPrice(searchResult.price)}}</span>
                                     </div>
                                 </div>
-                            </div>
-                        </template>
+                            </template>
+                        </div>
                     </template>
                 </div>
                 <div class="login">
@@ -610,6 +610,7 @@ Custom property | Description | Default
 
             _searchBlur: function(e) {
                 this._searchResults = [];
+                this._searching = false;
             },
 
             _searchFocus: function(e) {
