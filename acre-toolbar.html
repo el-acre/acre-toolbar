@@ -359,7 +359,7 @@ Custom property | Description | Default
                 <div class="search-bar">
                     <input class="search-input" is="iron-input" placeholder="Buscar" on-blur="_searchBlur" on-focus="_searchFocus" bind-value="{{query}}" />
                     <iron-icon class="search-button" icon="search"></iron-icon>
-                    <template is="dom-if" if="[[_searchResults]]" restamp="true">
+                    <template is="dom-if" if="[[_searchResults.length]]" restamp="true">
                         <div class="search-results">
                             <template is="dom-repeat" items=[[_searchResults]] as=searchResult>
                                 <div class="search-result horizontal layout">
