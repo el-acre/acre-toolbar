@@ -29,6 +29,7 @@ Example:
 
 Custom property | Description | Default
 ----------------|-------------|----------
+`--toolbar-container` | Mixin applied to all rows (middle, top, bottom)  | `{}`
 `--top-color` | The color at the top of the bar | `--primary-color`
 `--top-text-color` | The text color for the top of the bar | `--primary-text-color`
 `--middle-color` | The color at the middle of the bar | `--primary-color`
@@ -81,24 +82,27 @@ Custom property | Description | Default
 
             .top,
             .middle,
-            .bottom {
+            .bottom  {
                 @apply(--layout-horizontal);
+                font-size: 12px;
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+
             }
+
             /**
             * TOP
             */
 
             .top {
-                @apply(--layout-end-justified);
+                padding: 10px 10px 5px 10px;
                 background-color: var(--top-color, --primary-color);
                 color: var(--top-text-color, --primary-text-color);
-                padding: 10px 10px 5px 10px;
-                font-size: 12px;
+                @apply(--toolbar-top);
             }
 
             .top .action {
-                padding-left: 10px;
-                padding-right: 10px;
+                padding-left: 15px;
             }
 
             .top .action:hover {
@@ -109,10 +113,12 @@ Custom property | Description | Default
             */
 
             .middle {
-                @apply(--layout-center);
+                padding: 0 10px 5px 10px;
+                width:100%;
                 background-color: var(--middle-color, --primary-color);
                 color: var(--middle-text-color, --primary-text-color);
-                padding: 0 10px 5px 10px;
+                @apply(--layout-center);
+                @apply(--toolbar-middle);
             }
 
             .logo {
@@ -122,15 +128,11 @@ Custom property | Description | Default
                 margin-right: 10px;
                 @apply(--toolbar-logo);
             }
-
-            /**
-            * Search Bar
-            */
+            /*SEARCH BAR*/
 
             .search-bar {
                 height: 33px;
                 border-radius: 0;
-                font-size: 16px;
                 background: var(--search-bar-color, #fff);
                 color: var(--search-bar-text-color, #000);
                 transition: all 0.3s ease;
@@ -227,7 +229,6 @@ Custom property | Description | Default
 
             .cart .card-badge {
                 font-weight: normal;
-                font-size: 14px;
                 border-radius: 50%;
                 margin-left: 5px;
                 margin-bottom: 0px;
@@ -245,6 +246,7 @@ Custom property | Description | Default
                 color: var(--bottom-text-color, --primary-text-color);
                 padding: 0;
                 margin: 0;
+                @apply(--toolbar-bottom);
             }
 
             .dropmenu {
@@ -262,8 +264,7 @@ Custom property | Description | Default
                 list-style: none;
                 background-color: var(--bottom-color, --dark-primary-color);
                 position: relative;
-                padding: 10px 15px;
-                line-height: 27px;
+                padding: 10px;
             }
 
             .dropmenu li .menu-item-name {
@@ -307,6 +308,10 @@ Custom property | Description | Default
                 clear: both;
             }
 
+            .expand-icon {
+                @apply(--menu-expand-icon);
+            }
+
             .menu-subitems,
             .menu-display {
                 min-height: 200px;
@@ -316,7 +321,6 @@ Custom property | Description | Default
             .menu-subitems {
                 padding: 20px 20px 20px 10px;
                 color: var(--subitem-text-color, #636363);
-                font-size: 14px;
             }
 
             .menu-display iron-image {
@@ -332,7 +336,13 @@ Custom property | Description | Default
                 @apply(--menu-image);
             }
 
+            .menu-subitem {
+                padding: 5px 0;
+            }
+
             .menu-subitem .icon {
+                width: 14px;
+                height: 14px;
                 color: var(--dropdown-background-color, white);
             }
 
@@ -341,6 +351,18 @@ Custom property | Description | Default
                 cursor: pointer;
                 color: var(--subitem-text-hover-color, --primary-color);
             }
+
+            .group-container{
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+                @apply(--layout-center);
+                width:1200px;
+                @apply(--toolbar-container);
+            }
+
+            .top .group-container{
+                @apply(--layout-end-justified);
+            }
         </style>
 
         <iron-ajax id="searchRequest" auto url="[[_searchUrl]]" handle-as="json" debounce-duration="300" on-response="_handleSearchResponse" on-request="_handleSearchRequest" on_error="_searchBlur">
@@ -348,100 +370,106 @@ Custom property | Description | Default
 
         <div class="container">
             <div class="top">
-                <template is="dom-repeat" items=[[actions]] as=action index-as="index">
-                    <a class="action" href="[[action.link]]">[[action.name]]</a>
-                </template>
+                <div class="group-container">
+                    <template is="dom-repeat" items=[[actions]] as=action index-as="index">
+                        <a class="action" href="[[action.link]]">[[action.name]]</a>
+                    </template>
+                </div>
             </div>
             <div class="middle">
-                <a href="[[logo.link]]">
-                    <iron-image class="logo" src="[[logo.image]]" preload sizing="contain"></iron-image>
-                </a>
-                <div class="search-bar">
-                    <input class="search-input" is="iron-input" placeholder="Buscar" on-blur="_searchBlur" on-focus="_searchFocus" bind-value="{{query}}" />
-                    <iron-icon class="search-button" icon="search"></iron-icon>
-                    <template is="dom-if" if="[[_searchResults.length]]" restamp="true">
-                        <div class="search-results">
-                            <template is="dom-repeat" items=[[_searchResults]] as=searchResult>
-                                <div class="search-result horizontal layout">
-                                    <template is="dom-if" if={{searchResult.image}}>
-                                        <iron-image class="image" src="[[searchResult.image]]" preload sizing="cover"></iron-image>
-                                    </template>
-                                    <div class="vertical layout">
-                                        <span class="name">[[searchResult.name]]</span>
-                                        <span class="description">[[searchResult.description]]</span>
-                                        <span class="price">{{_formatPrice(searchResult.price)}}</span>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </template>
-                </div>
-                <div class="login">
-                    <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
-                        <a href="[[loginUrl]]">
-                            <paper-button class="layout horizontal center" style="margin:0">
-                                <iron-icon icon="account-box"></iron-icon>
-                                <span>Entre ou Cadastre-se</span>
-                            </paper-button>
-                        </a>
-                    </template>
-                    <template is="dom-if" if="{{loggedUser.name}}" restamp="true">
-                        <a href="[[profileUrl]]">
-                            <paper-button class="layout horizontal center" style="margin:0">
-                                <iron-icon icon="account-box"></iron-icon>
-                                <span>[[loggedUser.name]]</span>
-                            </paper-button>
-                        </a>
-                    </template>
-                </div>
-                <div class="cart">
-                    <a href="[[cartUrl]]">
-                        <paper-button class="layout horizontal center" style="margin:0">
-                            <iron-icon icon="shopping-cart"></iron-icon>
-                            <span>Carrinho</span>
-                            <span class="card-badge">[[cartItemsCount]]</span>
-                        </paper-button>
+                <div class="group-container">
+                    <a href="[[logo.link]]">
+                        <iron-image class="logo" src="[[logo.image]]" preload sizing="contain"></iron-image>
                     </a>
+                    <div class="search-bar">
+                        <input class="search-input" is="iron-input" placeholder="Buscar" on-blur="_searchBlur" on-focus="_searchFocus" bind-value="{{query}}" />
+                        <iron-icon class="search-button" icon="search"></iron-icon>
+                        <template is="dom-if" if="[[_searchResults.length]]" restamp="true">
+                            <div class="search-results">
+                                <template is="dom-repeat" items=[[_searchResults]] as=searchResult>
+                                    <div class="search-result horizontal layout">
+                                        <template is="dom-if" if={{searchResult.image}}>
+                                            <iron-image class="image" src="[[searchResult.image]]" preload sizing="cover"></iron-image>
+                                        </template>
+                                        <div class="vertical layout">
+                                            <span class="name">[[searchResult.name]]</span>
+                                            <span class="description">[[searchResult.description]]</span>
+                                            <span class="price">{{_formatPrice(searchResult.price)}}</span>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="login">
+                        <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
+                            <a href="[[loginUrl]]">
+                                <paper-button class="layout horizontal center" style="margin:0">
+                                    <iron-icon icon="account-box"></iron-icon>
+                                    <span>Entre ou Cadastre-se</span>
+                                </paper-button>
+                            </a>
+                        </template>
+                        <template is="dom-if" if="{{loggedUser.name}}" restamp="true">
+                            <a href="[[profileUrl]]">
+                                <paper-button class="layout horizontal center" style="margin:0">
+                                    <iron-icon icon="account-box"></iron-icon>
+                                    <span>[[loggedUser.name]]</span>
+                                </paper-button>
+                            </a>
+                        </template>
+                    </div>
+                    <div class="cart">
+                        <a href="[[cartUrl]]">
+                            <paper-button class="layout horizontal center" style="margin:0">
+                                <iron-icon icon="shopping-cart"></iron-icon>
+                                <span>Carrinho</span>
+                                <span class="card-badge">[[cartItemsCount]]</span>
+                            </paper-button>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="bottom">
-                <ul class="dropmenu">
-                    <template is="dom-repeat" items=[[menuItems]] as=menuItem index-as=index>
-                        <li>
-                            <a class="menu-item-name" href="[[menuItem.link]]">
+                <div class="group-container">
+                    <ul class="dropmenu">
+                        <template is="dom-repeat" items=[[menuItems]] as=menuItem index-as=index>
+                            <li>
+                                <a class="menu-item-name" href="[[menuItem.link]]">
                               [[menuItem.name]]
                               <template is="dom-if" if="{{menuItem.subitems}}">
-                                <iron-icon icon="expand-more"></iron-icon>
+                                <iron-icon class="expand-icon" icon="expand-more"></iron-icon>
                               </template>
                             </a>
-                            <template is="dom-if" if="{{menuItem.subitems}}">
-                                <ul>
-                                    <div class="layout horizontal">
-                                        <template is="dom-repeat" items=[[menuItem.subitems]] as=subitemArray index-as="index">
-                                            <div class="menu-subitems layout flex">
-                                                <template is="dom-repeat" items=[[subitemArray]] as=subitem index-as="index">
-                                                    <div class="menu-subitem layout horizontal flex">
-                                                        <a href="[[subitem.link]]">[[subitem.name]]</a>
-                                                        <iron-icon class="layout flex icon" icon="chevron-right"></iron-icon>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </template>
-                                        <template is="dom-if" if="[[menuItem.cover]]" restamp="true">
-                                            <div class="menu-display vertical layout">
-                                                <iron-image class="flex" src="[[menuItem.cover]]" preload sizing="[[menuItem.coverSizing]]"></iron-image>
-                                            </div>
-                                        </template>
-                                    </div>
-                                </ul>
-                            </template>
-                        </li>
-                    </template>
-                </ul>
+                                <template is="dom-if" if="{{menuItem.subitems}}">
+                                    <ul>
+                                        <div class="layout horizontal">
+                                            <template is="dom-repeat" items=[[menuItem.subitems]] as=subitemArray index-as="index">
+                                                <div class="menu-subitems layout flex">
+                                                    <template is="dom-repeat" items=[[subitemArray]] as=subitem index-as="index">
+                                                        <div class="menu-subitem layout horizontal flex">
+                                                            <a href="[[subitem.link]]">[[subitem.name]]</a>
+                                                            <iron-icon class="layout flex icon" icon="chevron-right"></iron-icon>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                            <template is="dom-if" if="[[menuItem.cover]]" restamp="true">
+                                                <div class="menu-display vertical layout">
+                                                    <iron-image class="flex" src="[[menuItem.cover]]" preload sizing="[[menuItem.coverSizing]]"></iron-image>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </ul>
+                                </template>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
             </div>
-             <template is="dom-if" if="[[_searching]]" restamp="true">
+            <template is="dom-if" if="[[_searching]]" restamp="true">
                 <paper-progress class="fit" style="width:100%" indeterminate></paper-progress>
-             </template>
+            </template>
         </div>
     </template>
 
