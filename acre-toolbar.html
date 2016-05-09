@@ -309,8 +309,8 @@ Custom property | Description | Default
 
             .menu-subitems,
             .menu-display {
-                height: 200px;
-                width: 200px;
+                min-height: 200px;
+                min-width: 200px;
             }
 
             .menu-subitems {
@@ -343,7 +343,7 @@ Custom property | Description | Default
             }
         </style>
 
-        <iron-ajax id="searchRequest" auto url="[[_searchUrl]]" handle-as="json" debounce-duration="300" on-response="_handleSearchResponse" on-request="_handleSearchRequest">
+        <iron-ajax id="searchRequest" auto url="[[_searchUrl]]" handle-as="json" debounce-duration="300" on-response="_handleSearchResponse" on-request="_handleSearchRequest" on_error="_searchBlur">
         </iron-ajax>
 
         <div class="container">
@@ -420,9 +420,9 @@ Custom property | Description | Default
                                         <template is="dom-repeat" items=[[menuItem.subitems]] as=subitemArray index-as="index">
                                             <div class="menu-subitems layout flex">
                                                 <template is="dom-repeat" items=[[subitemArray]] as=subitem index-as="index">
-                                                    <div class="menu-subitem flex">
+                                                    <div class="menu-subitem layout horizontal flex">
                                                         <a href="[[subitem.link]]">[[subitem.name]]</a>
-                                                        <iron-icon class="icon" icon="chevron-right"></iron-icon>
+                                                        <iron-icon class="layout flex icon" icon="chevron-right"></iron-icon>
                                                     </div>
                                                 </template>
                                             </div>
