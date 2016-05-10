@@ -288,7 +288,7 @@ Custom property | Description | Default
                 line-height: 25px;
             }
 
-            .dropmenu > li ul {
+              .dropmenu > li ul {
                 display: none;
                 position: absolute;
                 left: 0;
@@ -296,6 +296,19 @@ Custom property | Description | Default
                 min-width: 10em;
                 box-shadow: 7px 10px 19px -8px rgba(0, 0, 0, 0.63);
                 z-index: 999;
+            }
+
+             li:first-child:last-child,
+             .dropmenu > li:nth-child(n+2):nth-last-child(-n+2) ul,
+             .dropmenu > li:nth-child(n+3):nth-last-child(-n+3) ul,
+             .dropmenu > li:nth-child(n+4):nth-last-child(-n+4) ul,
+             .dropmenu > li:nth-child(n+5):nth-last-child(-n+5) ul,
+             .dropmenu > li:nth-child(n+6):nth-last-child(-n+6) ul,
+             .dropmenu > li:nth-child(n+7):nth-last-child(-n+7) ul,
+             .dropmenu > li:nth-child(n+8):nth-last-child(-n+8) ul,
+             .dropmenu > li:nth-child(n+9):nth-last-child(-n+9) ul {
+                right: 0;
+                left: initial;
             }
 
             .dropmenu > li ul li {
