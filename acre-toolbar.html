@@ -274,7 +274,7 @@ Custom property | Description | Default
                 padding: 0;
             }
 
-            .dropmenu li {
+            .dropmenu > li {
                 float: left;
                 list-style: none;
                 background-color: var(--bottom-color, --dark-primary-color);
@@ -282,13 +282,13 @@ Custom property | Description | Default
                 padding: 10px;
             }
 
-            .dropmenu li .menu-item-name {
+            .dropmenu > li .menu-item-name {
                 text-decoration: none;
                 display: block;
                 line-height: 25px;
             }
 
-            .dropmenu li ul {
+            .dropmenu > li ul {
                 display: none;
                 position: absolute;
                 left: 0;
@@ -298,21 +298,21 @@ Custom property | Description | Default
                 z-index: 999;
             }
 
-            .dropmenu li ul li {
+            .dropmenu > li ul li {
                 float: none;
             }
 
-            .dropmenu li:hover {
+            .dropmenu > li:hover {
                 background: var(--menu-item-hover-background-color, white);
                 color: var(--menu-item-hover-text-color, black);
             }
 
-            .dropmenu li:hover > .menu-item-name {
+            .dropmenu > li:hover > .menu-item-name {
                 display: block;
                 color: var(--menu-item-hover-text-color, black);
             }
 
-            .dropmenu li:hover > ul {
+            .dropmenu > li:hover > ul {
                 display: block;
                 color: var(--menu-item-hover-text-color, black);
                 background: var(--dropdown-background-color, white);
@@ -425,13 +425,13 @@ Custom property | Description | Default
                 padding: 10px;
             }
 
-            @media screen and (max-width: 480px) {
+            @media screen and (max-width: 768px) {
                 .nomobile {
                     display: none;
                 }
             }
 
-            @media screen and (min-width: 480px) {
+            @media screen and (min-width: 769px) {
                 .onlymobile {
                     display: none;
                 }
@@ -616,7 +616,7 @@ Custom property | Description | Default
                                         </a>
                                         <template is="dom-if" if="{{menuItem.subitems}}">
                                             <ul>
-                                                <div class="layout horizontal">
+                                                <li class="layout horizontal">
                                                     <template is="dom-repeat" items=[[menuItem.subitems]] as=subitemArray index-as="index">
                                                         <div class="menu-subitems layout flex">
                                                             <template is="dom-repeat" items=[[subitemArray]] as=subitem index-as="index">
@@ -632,7 +632,7 @@ Custom property | Description | Default
                                                             <iron-image class="flex" src="[[menuItem.cover]]" preload sizing="[[menuItem.coverSizing]]"></iron-image>
                                                         </div>
                                                     </template>
-                                                </div>
+                                                </li>
                                             </ul>
                                         </template>
                                     </li>
@@ -644,6 +644,7 @@ Custom property | Description | Default
                         <paper-progress class="fit" style="width:100%" indeterminate></paper-progress>
                     </template>
                 </div>
+                <content></content>
             </paper-header-panel>
         </paper-drawer-panel>
 
