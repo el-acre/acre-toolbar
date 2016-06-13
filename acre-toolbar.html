@@ -8,20 +8,34 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-toolbar/paper-toolbar.html">
-<link rel="import" href="../iron-image/iron-image.html">
-<link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../iron-icon/iron-icon.html">
-<link rel="import" href="../iron-icons/iron-icons.html">
-<link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../paper-badge/paper-badge.html">
-<link rel="import" href="../iron-ajax/iron-ajax.html">
-<link rel="import" href="../paper-progress/paper-progress.html">
-<link rel="import" href="../paper-drawer-panel/paper-drawer-panel.html">
-<link rel="import" href="../paper-header-panel/paper-header-panel.html">
-<link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import"
+    href="../polymer/polymer.html">
+<link rel="import"
+    href="../paper-toolbar/paper-toolbar.html">
+<link rel="import"
+    href="../iron-image/iron-image.html">
+<link rel="import"
+    href="../paper-input/paper-input.html">
+<link rel="import"
+    href="../iron-icon/iron-icon.html">
+<link rel="import"
+    href="../iron-icons/iron-icons.html">
+<link rel="import"
+    href="../paper-button/paper-button.html">
+<link rel="import"
+    href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import"
+    href="../paper-badge/paper-badge.html">
+<link rel="import"
+    href="../iron-ajax/iron-ajax.html">
+<link rel="import"
+    href="../paper-progress/paper-progress.html">
+<link rel="import"
+    href="../paper-drawer-panel/paper-drawer-panel.html">
+<link rel="import"
+    href="../paper-header-panel/paper-header-panel.html">
+<link rel="import"
+    href="../iron-collapse/iron-collapse.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -48,6 +62,9 @@ Custom property | Description | Default
 `--product-name-text-color` | The Search bar product name text color | `--primary-text-color`
 `--product-description-text-color` | The product description text color | `--secondary-text-color`
 `--toolbar-cart-button` | Mixin applicated to the cart button | `{}`
+`--cart-badge` | Mixin applicated to the cart badge | `{}`
+`--menu-button-icon` | Mixin applied to the menu button icon | `{}`
+`--menu-button-text` | Mixin applied to the menu button text | `{}`
 `--cart-badge-color` | The cart badge color | `--dark-primary-color`
 `--cart-badge-text-color` | The cart badge color | `---primary-text-color`
 `--toolbar-bottom` | Mixin applied to the bottom area of the toolbar | `{}`
@@ -254,6 +271,17 @@ Custom property | Description | Default
                 opacity: 1.0;
                 color: var(--cart-badge-text-color, --primary-text-color);
                 padding: 3px 7px;
+                @apply(--cart-badge);
+            }
+
+            .menu-button iron-icon{
+              width: 20px;
+              height: 20px;
+              @apply(--menu-button-icon);
+            }
+
+            .menu-button .span{
+              @apply(--menu-button-text);
             }
             /**
             * Bottom
@@ -277,7 +305,7 @@ Custom property | Description | Default
                 padding: 0;
             }
 
-            .dropmenu > li {
+            .dropmenu> li {
                 float: left;
                 list-style: none;
                 background-color: var(--bottom-color, --dark-primary-color);
@@ -285,13 +313,13 @@ Custom property | Description | Default
                 padding: 10px;
             }
 
-            .dropmenu > li .menu-item-name {
+            .dropmenu> li .menu-item-name {
                 text-decoration: none;
                 display: block;
                 line-height: 25px;
             }
 
-            .dropmenu > li ul {
+            .dropmenu> li ul {
                 display: none;
                 position: absolute;
                 left: 0;
@@ -302,33 +330,33 @@ Custom property | Description | Default
             }
 
             li:first-child:last-child,
-            .dropmenu > li:nth-child(n+2):nth-last-child(-n+2) ul,
-            .dropmenu > li:nth-child(n+3):nth-last-child(-n+3) ul,
-            .dropmenu > li:nth-child(n+4):nth-last-child(-n+4) ul,
-            .dropmenu > li:nth-child(n+5):nth-last-child(-n+5) ul,
-            .dropmenu > li:nth-child(n+6):nth-last-child(-n+6) ul,
-            .dropmenu > li:nth-child(n+7):nth-last-child(-n+7) ul,
-            .dropmenu > li:nth-child(n+8):nth-last-child(-n+8) ul,
-            .dropmenu > li:nth-child(n+9):nth-last-child(-n+9) ul {
+            .dropmenu> li:nth-child(n+2):nth-last-child(-n+2) ul,
+            .dropmenu> li:nth-child(n+3):nth-last-child(-n+3) ul,
+            .dropmenu> li:nth-child(n+4):nth-last-child(-n+4) ul,
+            .dropmenu> li:nth-child(n+5):nth-last-child(-n+5) ul,
+            .dropmenu> li:nth-child(n+6):nth-last-child(-n+6) ul,
+            .dropmenu> li:nth-child(n+7):nth-last-child(-n+7) ul,
+            .dropmenu> li:nth-child(n+8):nth-last-child(-n+8) ul,
+            .dropmenu> li:nth-child(n+9):nth-last-child(-n+9) ul {
                 right: 0;
                 left: initial;
             }
 
-            .dropmenu > li ul li {
+            .dropmenu> li ul li {
                 float: none;
             }
 
-            .dropmenu > li:hover {
+            .dropmenu> li:hover {
                 background: var(--menu-item-hover-background-color, white);
                 color: var(--menu-item-hover-text-color, black);
             }
 
-            .dropmenu > li:hover > .menu-item-name {
+            .dropmenu> li:hover> .menu-item-name {
                 display: block;
                 color: var(--menu-item-hover-text-color, black);
             }
 
-            .dropmenu > li:hover > ul {
+            .dropmenu> li:hover> ul {
                 display: block;
                 color: var(--menu-item-hover-text-color, black);
                 background: var(--dropdown-background-color, white);
@@ -379,9 +407,9 @@ Custom property | Description | Default
             }
 
             .menu-subitem:hover,
-            .menu-subitem:hover > .icon,
-            .drawer-item:hover > .name,
-            .drawer-item:hover > .expand-icon,
+            .menu-subitem:hover> .icon,
+            .drawer-item:hover> .name,
+            .drawer-item:hover> .expand-icon,
             .drawer-subitem:hover,
             .drawer-subitem:hover .icon {
                 cursor: pointer;
@@ -454,24 +482,38 @@ Custom property | Description | Default
             }
         </style>
 
-        <iron-ajax id="searchRequest" auto url="[[_searchUrl]]" handle-as="json" debounce-duration="300" on-response="_handleSearchResponse" on-request="_handleSearchRequest" on_error="_searchBlur">
+        <iron-ajax id="searchRequest"
+            auto
+            url="[[_searchUrl]]"
+            handle-as="json"
+            debounce-duration="400"
+            on-response="_handleSearchResponse"
+            on-request="_handleSearchRequest"
+            on_error="_searchBlur">
         </iron-ajax>
 
-        <paper-drawer-panel force-narrow class="drawer">
+        <paper-drawer-panel force-narrow
+            class="drawer">
             <paper-header-panel drawer>
                 <div class="drawer-header">
                     <div class="login">
-                        <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
+                        <template is="dom-if"
+                            if="{{!loggedUser.name}}"
+                            restamp="true">
                             <a href="[[loginUrl]]">
-                                <paper-button class="layout horizontal center" style="margin:0">
+                                <paper-button class="menu-button layout horizontal center"
+                                    style="margin:0">
                                     <iron-icon icon="account-box"></iron-icon>
                                     <span>Entre ou Cadastre-se</span>
                                 </paper-button>
                             </a>
                         </template>
-                        <template is="dom-if" if="{{loggedUser.name}}" restamp="true">
+                        <template is="dom-if"
+                            if="{{loggedUser.name}}"
+                            restamp="true">
                             <a href="[[profileUrl]]">
-                                <paper-button class="layout horizontal center" style="margin:0">
+                                <paper-button class="menu-button layout horizontal center"
+                                    style="margin:0">
                                     <iron-icon icon="account-box"></iron-icon>
                                     <span>[[loggedUser.name]]</span>
                                 </paper-button>
@@ -480,7 +522,8 @@ Custom property | Description | Default
                     </div>
                     <div class="cart">
                         <a href="[[cartUrl]]">
-                            <paper-button class="layout horizontal center" style="margin:0">
+                            <paper-button class="menu-button layout horizontal center"
+                                style="margin:0">
                                 <iron-icon icon="shopping-cart"></iron-icon>
                                 <span class="card-badge">[[cartItemsCount]]</span>
                             </paper-button>
@@ -488,23 +531,37 @@ Custom property | Description | Default
                     </div>
                 </div>
                 <div class="drawer-content">
-                    <template is="dom-repeat" items=[[menuItems]] as=menuItem index-as=index>
-                        <div class="drawer-item" on-click="_collapseClick">
+                    <template is="dom-repeat"
+                        items=[[menuItems]]
+                        as=menuItem
+                        index-as=index>
+                        <div class="drawer-item"
+                            on-click="_collapseClick">
                             <span class="name">[[menuItem.name]]</span>
-                            <template is="dom-if" if="{{menuItem.subitems}}">
-                                <iron-icon class="expand-icon" icon="expand-more"></iron-icon>
+                            <template is="dom-if"
+                                if="{{menuItem.subitems}}">
+                                <iron-icon class="expand-icon"
+                                    icon="expand-more"></iron-icon>
                             </template>
                             <iron-collapse opened="{{_isOpened(_itemOpened, index)}}">
                                 <div class="collapse-content">
-                                    <template is="dom-if" if="{{menuItem.subitems}}">
+                                    <template is="dom-if"
+                                        if="{{menuItem.subitems}}">
                                         <div class="layout horizontal">
-                                            <template is="dom-repeat" items=[[menuItem.subitems]] as=subitemArray index-as="index">
+                                            <template is="dom-repeat"
+                                                items=[[menuItem.subitems]]
+                                                as=subitemArray
+                                                index-as="index">
                                                 <div class="drawer-subitems layout flex">
-                                                    <template is="dom-repeat" items=[[subitemArray]] as=subitem index-as="index">
+                                                    <template is="dom-repeat"
+                                                        items=[[subitemArray]]
+                                                        as=subitem
+                                                        index-as="index">
                                                         <div class="drawer-subitem layout horizontal flex center">
                                                             <a href="[[subitem.link]]">[[subitem.name]]</a>
                                                             <div class="horizontal end-justified layout flex icon">
-                                                                <iron-icon class="icon" icon="chevron-right"></iron-icon>
+                                                                <iron-icon class="icon"
+                                                                    icon="chevron-right"></iron-icon>
                                                             </div>
                                                         </div>
                                                     </template>
@@ -523,24 +580,34 @@ Custom property | Description | Default
                     <div class="top onlymobile">
                         <div class="group-container layout horizontal justified">
                             <div class="layout horizontal center">
-                                <iron-icon icon="menu" paper-drawer-toggle></iron-icon>
+                                <iron-icon icon="menu"
+                                    paper-drawer-toggle></iron-icon>
                                 <a href="[[logo.link]]">
-                                    <iron-image class="small-logo" src="[[logo.image]]" preload sizing="contain"></iron-image>
+                                    <iron-image class="small-logo"
+                                        src="[[logo.image]]"
+                                        preload
+                                        sizing="contain"></iron-image>
                                 </a>
                             </div>
                             <div class="layout horizontal end-justified">
                                 <div class="login">
-                                    <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
+                                    <template is="dom-if"
+                                        if="{{!loggedUser.name}}"
+                                        restamp="true">
                                         <a href="[[loginUrl]]">
-                                            <paper-button class="layout horizontal center" style="margin:0">
+                                            <paper-button class="menu-button layout horizontal center"
+                                                style="margin:0">
                                                 <iron-icon icon="account-box"></iron-icon>
                                                 <span>Entre ou Cadastre-se</span>
                                             </paper-button>
                                         </a>
                                     </template>
-                                    <template is="dom-if" if="{{loggedUser.name}}" restamp="true">
+                                    <template is="dom-if"
+                                        if="{{loggedUser.name}}"
+                                        restamp="true">
                                         <a href="[[profileUrl]]">
-                                            <paper-button class="layout horizontal center" style="margin:0">
+                                            <paper-button class="menu-button layout horizontal center"
+                                                style="margin:0">
                                                 <iron-icon icon="account-box"></iron-icon>
                                                 <span>[[loggedUser.name]]</span>
                                             </paper-button>
@@ -549,7 +616,8 @@ Custom property | Description | Default
                                 </div>
                                 <div class="cart">
                                     <a href="[[cartUrl]]">
-                                        <paper-button class="layout horizontal center" style="margin:0">
+                                        <paper-button class="menu-button layout horizontal center"
+                                            style="margin:0">
                                             <iron-icon icon="shopping-cart"></iron-icon>
                                             <span class="card-badge">[[cartItemsCount]]</span>
                                         </paper-button>
@@ -560,49 +628,81 @@ Custom property | Description | Default
                     </div>
                     <div class="top nomobile">
                         <div class="group-container">
-                            <template is="dom-repeat" items=[[actions]] as=action index-as="index">
-                                <a class="action" href="[[action.link]]">[[action.name]]</a>
+                            <template is="dom-repeat"
+                                items=[[actions]]
+                                as=action
+                                index-as="index">
+                                <a class="action"
+                                    href="[[action.link]]">[[action.name]]</a>
                             </template>
                         </div>
                     </div>
                     <div class="middle">
                         <div class="group-container">
-                            <a class="nomobile" href="[[logo.link]]">
-                                <iron-image class="logo" src="[[logo.image]]" preload sizing="contain"></iron-image>
+                            <a class="nomobile"
+                                href="[[logo.link]]">
+                                <iron-image class="logo"
+                                    src="[[logo.image]]"
+                                    preload
+                                    sizing="contain"></iron-image>
                             </a>
                             <div class="search-bar">
-                                <input class="search-input" is="iron-input" placeholder="Buscar" on-blur="_searchBlur" on-focus="_searchFocus" bind-value="{{query}}" />
-                                <iron-icon class="search-button" icon="search"></iron-icon>
-                                <template is="dom-if" if="[[_searchResults.length]]" restamp="true">
-                                    <div class="search-results">
-                                        <template is="dom-repeat" items=[[_searchResults]] as=searchResult>
-                                            <div class="search-result horizontal layout">
-                                                <template is="dom-if" if=[[searchResult.image]]>
-                                                    <iron-image class="image" src="[[searchResult.image]]" preload sizing="cover"></iron-image>
-                                                </template>
-                                                <div class="vertical layout">
-                                                    <span class="name">[[searchResult.name]]</span>
-                                                    <span class="description">[[searchResult.description]]</span>
-                                                    <span class="price">{{_formatPrice(searchResult.price)}}</span>
+                                <input class="search-input"
+                                    is="iron-input"
+                                    placeholder="Buscar"
+                                    on-blur="_searchBlur"
+                                    on-focus="_searchFocus"
+                                    bind-value="{{query}}" />
+                                <iron-icon class="search-button"
+                                    icon="search"></iron-icon>
+                                <template is="dom-if"
+                                    if="[[_searchResults.length]]"
+                                    restamp="true">
+                                    <a href="[[searchResult.link]]">
+                                        <div class="search-results">
+                                            <template is="dom-repeat"
+                                                items=[[_searchResults]]
+                                                as=searchResult>
+                                                <div class="search-result horizontal layout">
+                                                    <template is="dom-if"
+                                                        if=[[searchResult.image]]>
+                                                        <iron-image class="image"
+                                                            src="[[searchResult.image]]"
+                                                            preload
+                                                            sizing="contain"></iron-image>
+                                                    </template>
+                                                    <div class="vertical layout">
+                                                        <span class="name">[[searchResult.name]]</span>
+                                                        <span class="description">[[searchResult.description]]</span>
+                                                        <span class="price">{{_formatPrice(searchResult.price)}}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </template>
-                                    </div>
+                                            </template>
+                                        </div>
+                                    </a>
                                 </template>
                             </div>
                             <div class="login nomobile">
-                                <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
+                                <template is="dom-if"
+                                    if="{{!loggedUser.name}}"
+                                    restamp="true">
                                     <a href="[[loginUrl]]">
-                                        <paper-button class="layout vertical center" style="margin:0">
-                                            <iron-icon icon="account-box"></iron-icon><br/>
+                                        <paper-button class="menu-button layout vertical center"
+                                            style="margin:0">
+                                            <iron-icon icon="account-box" style="margin-bottom:5px"></iron-icon>
+                                            <br/>
                                             <span>Entre ou Cadastre-se</span>
                                         </paper-button>
                                     </a>
                                 </template>
-                                <template is="dom-if" if="{{loggedUser.name}}" restamp="true">
+                                <template is="dom-if"
+                                    if="{{loggedUser.name}}"
+                                    restamp="true">
                                     <a href="[[profileUrl]]">
-                                        <paper-button class="layout vertical center" style="margin:0">
-                                            <iron-icon icon="account-box"></iron-icon><br/>
+                                        <paper-button class="menu-button layout vertical center"
+                                            style="margin:0">
+                                            <iron-icon icon="account-box" style="margin-bottom:5px"></iron-icon>
+                                            <br/>
                                             <span>[[loggedUser.name]]</span>
                                         </paper-button>
                                     </a>
@@ -610,9 +710,11 @@ Custom property | Description | Default
                             </div>
                             <div class="cart nomobile">
                                 <a href="[[cartUrl]]">
-                                    <paper-button class="layout vertical center" style="margin:0">
-                                        <iron-icon icon="shopping-cart"></iron-icon>
-                                        <span class="card-badge">[[cartItemsCount]]</span><br/>
+                                    <paper-button class="menu-button layout vertical center"
+                                        style="margin:0">
+                                        <iron-icon icon="shopping-cart" style="margin-bottom:5px"></iron-icon>
+                                        <span class="card-badge">[[cartItemsCount]]</span>
+                                        <br/>
                                         <span>[[cartMessage]]</span>
                                     </paper-button>
                                 </a>
@@ -622,30 +724,47 @@ Custom property | Description | Default
                     <div class="bottom nomobile">
                         <div class="group-container">
                             <ul class="dropmenu">
-                                <template is="dom-repeat" items=[[menuItems]] as=menuItem index-as=index>
+                                <template is="dom-repeat"
+                                    items=[[menuItems]]
+                                    as=menuItem
+                                    index-as=index>
                                     <li>
-                                        <a class="menu-item-name" href="[[menuItem.link]]">
+                                        <a class="menu-item-name"
+                                            href="[[menuItem.link]]">
                                           [[menuItem.name]]
                                           <template is="dom-if" if="{{menuItem.subitems}}">
                                             <iron-icon class="expand-icon" icon="expand-more"></iron-icon>
                                           </template>
                                         </a>
-                                        <template is="dom-if" if="{{menuItem.subitems}}">
+                                        <template is="dom-if"
+                                            if="{{menuItem.subitems}}">
                                             <ul>
                                                 <li class="layout horizontal">
-                                                    <template is="dom-repeat" items=[[menuItem.subitems]] as=subitemArray index-as="index">
+                                                    <template is="dom-repeat"
+                                                        items=[[menuItem.subitems]]
+                                                        as=subitemArray
+                                                        index-as="index">
                                                         <div class="menu-subitems layout flex">
-                                                            <template is="dom-repeat" items=[[subitemArray]] as=subitem index-as="index">
+                                                            <template is="dom-repeat"
+                                                                items=[[subitemArray]]
+                                                                as=subitem
+                                                                index-as="index">
                                                                 <div class="menu-subitem layout horizontal flex">
                                                                     <a href="[[subitem.link]]">[[subitem.name]]</a>
-                                                                    <iron-icon class="layout flex icon" icon="chevron-right"></iron-icon>
+                                                                    <iron-icon class="layout flex icon"
+                                                                        icon="chevron-right"></iron-icon>
                                                                 </div>
                                                             </template>
                                                         </div>
                                                     </template>
-                                                    <template is="dom-if" if="[[menuItem.cover]]" restamp="true">
+                                                    <template is="dom-if"
+                                                        if="[[menuItem.cover]]"
+                                                        restamp="true">
                                                         <div class="menu-display vertical layout">
-                                                            <iron-image class="flex" src="[[menuItem.cover]]" preload sizing="[[menuItem.coverSizing]]"></iron-image>
+                                                            <iron-image class="flex"
+                                                                src="[[menuItem.cover]]"
+                                                                preload
+                                                                sizing="[[menuItem.coverSizing]]"></iron-image>
                                                         </div>
                                                     </template>
                                                 </li>
@@ -656,8 +775,12 @@ Custom property | Description | Default
                             </ul>
                         </div>
                     </div>
-                    <template is="dom-if" if="[[_searching]]" restamp="true">
-                        <paper-progress class="fit" style="width:100%" indeterminate></paper-progress>
+                    <template is="dom-if"
+                        if="[[_searching]]"
+                        restamp="true">
+                        <paper-progress class="fit"
+                            style="width:100%"
+                            indeterminate></paper-progress>
                     </template>
                 </div>
                 <content></content>
@@ -764,15 +887,26 @@ Custom property | Description | Default
                 },
 
                 /**
-                * The cart message
-                */
-                cartMessage:{
-                  type: String,
-                  value: function(){
-                    return "Meu Carrinho"
-                  }
+                 * The cart message
+                 */
+                cartMessage: {
+                    type: String,
+                    value: function() {
+                        return "Meu Carrinho"
+                    }
                 },
 
+                /**
+                * The url to perform the search
+                * It must be in the follow format: `http(s)://urlto.search/[[searchPlaceholder]]` <br/>
+                * The results must be in the follow format: <br/>
+                * `{{
+                * link: link to natigate',
+                * image: 'image url',
+                * name: 'product name',
+                * description: 'product description',
+                * price: 'product price' }}`
+                */
                 searchUrl: {
                     type: String,
                     value: ''
@@ -828,7 +962,7 @@ Custom property | Description | Default
             //utils
             _formatPrice: function(price) {
                 if (!price) return price;
-                return "R$" + price.toFixed(2);
+                return "R$ " + price.toFixed(2);
             },
 
             _computeSearchUrl: function(searchUrl, query) {
