@@ -45,6 +45,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             height: 60px;
             margin-left: 5px;
             margin-right: 10px;
+        };
+        --search-input :{
+          font-size: 15px;
         }
     }
     /*.frame {
@@ -65,7 +68,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </style>
 
 <body unresolved style="background-color:gray">
-    <acre-toolbar id="toolbar" login-url="/login" profile-url="/profile" cart-url="/cart" search-url='http://localhost:5005/api/v1/Product?query={"name":{"$regex":"(?i:.*searchPlaceholder.*)"}}&limit=10' logo='{"image": "img/logo2.png", "link": "/"}'>
+    <acre-toolbar id="toolbar" login-url="/login" profile-url="/profile" cart-url="/cart" s
+    earch-url='http://localhost:5005/api/v1/Product?query={"name":{"$regex":"(?i:.*searchPlaceholder.*)"}}&limit=10'
+    logo='{"image": "img/logo2.png", "link": "/"}'>
     </acre-toolbar>
 
     <!-- <div class="frame">

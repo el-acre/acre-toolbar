@@ -146,8 +146,9 @@ Custom property | Description | Default
             /*SEARCH BAR*/
 
             .search-bar {
-                height: 33px;
+                height: 43px;
                 border-radius: 0;
+                margin-right: 10px;
                 background: var(--search-bar-color, #fff);
                 color: var(--search-bar-text-color, #000);
                 transition: all 0.3s ease;
@@ -170,9 +171,11 @@ Custom property | Description | Default
                 border: none;
                 outline: none;
                 padding-left: 10px;
+                font-size: 15px;
                 background: none;
                 color: var(--search-bar-text-color, #5a6674);
                 @apply(--layout-flex);
+                @apply(--search-input);
             }
 
             .search-input::-webkit-search-cancel-button {
@@ -231,7 +234,7 @@ Custom property | Description | Default
                 color: var(--product-price-text-color, --primary-color);
             }
 
-            .login paper-button {
+            paper-button {
                 --paper-button: {
                     text-transform: none;
                 }
@@ -245,7 +248,7 @@ Custom property | Description | Default
             .cart .card-badge {
                 font-weight: normal;
                 border-radius: 50%;
-                margin-left: 5px;
+                margin-left: 0;
                 margin-bottom: 0px;
                 background-color: var(--cart-badge-color, --dark-primary-color);
                 opacity: 1.0;
@@ -288,7 +291,7 @@ Custom property | Description | Default
                 line-height: 25px;
             }
 
-              .dropmenu > li ul {
+            .dropmenu > li ul {
                 display: none;
                 position: absolute;
                 left: 0;
@@ -298,15 +301,15 @@ Custom property | Description | Default
                 z-index: 999;
             }
 
-             li:first-child:last-child,
-             .dropmenu > li:nth-child(n+2):nth-last-child(-n+2) ul,
-             .dropmenu > li:nth-child(n+3):nth-last-child(-n+3) ul,
-             .dropmenu > li:nth-child(n+4):nth-last-child(-n+4) ul,
-             .dropmenu > li:nth-child(n+5):nth-last-child(-n+5) ul,
-             .dropmenu > li:nth-child(n+6):nth-last-child(-n+6) ul,
-             .dropmenu > li:nth-child(n+7):nth-last-child(-n+7) ul,
-             .dropmenu > li:nth-child(n+8):nth-last-child(-n+8) ul,
-             .dropmenu > li:nth-child(n+9):nth-last-child(-n+9) ul {
+            li:first-child:last-child,
+            .dropmenu > li:nth-child(n+2):nth-last-child(-n+2) ul,
+            .dropmenu > li:nth-child(n+3):nth-last-child(-n+3) ul,
+            .dropmenu > li:nth-child(n+4):nth-last-child(-n+4) ul,
+            .dropmenu > li:nth-child(n+5):nth-last-child(-n+5) ul,
+            .dropmenu > li:nth-child(n+6):nth-last-child(-n+6) ul,
+            .dropmenu > li:nth-child(n+7):nth-last-child(-n+7) ul,
+            .dropmenu > li:nth-child(n+8):nth-last-child(-n+8) ul,
+            .dropmenu > li:nth-child(n+9):nth-last-child(-n+9) ul {
                 right: 0;
                 left: initial;
             }
@@ -520,39 +523,39 @@ Custom property | Description | Default
                     <div class="top onlymobile">
                         <div class="group-container layout horizontal justified">
                             <div class="layout horizontal center">
-                              <iron-icon icon="menu" paper-drawer-toggle></iron-icon>
-                              <a href="[[logo.link]]">
+                                <iron-icon icon="menu" paper-drawer-toggle></iron-icon>
+                                <a href="[[logo.link]]">
                                     <iron-image class="small-logo" src="[[logo.image]]" preload sizing="contain"></iron-image>
-                              </a>
-                            </div>
-                            <div class="layout horizontal end-justified">
-                            <div class="login">
-                                <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
-                                    <a href="[[loginUrl]]">
-                                        <paper-button class="layout horizontal center" style="margin:0">
-                                            <iron-icon icon="account-box"></iron-icon>
-                                            <span>Entre ou Cadastre-se</span>
-                                        </paper-button>
-                                    </a>
-                                </template>
-                                <template is="dom-if" if="{{loggedUser.name}}" restamp="true">
-                                    <a href="[[profileUrl]]">
-                                        <paper-button class="layout horizontal center" style="margin:0">
-                                            <iron-icon icon="account-box"></iron-icon>
-                                            <span>[[loggedUser.name]]</span>
-                                        </paper-button>
-                                    </a>
-                                </template>
-                            </div>
-                            <div class="cart">
-                                <a href="[[cartUrl]]">
-                                    <paper-button class="layout horizontal center" style="margin:0">
-                                        <iron-icon icon="shopping-cart"></iron-icon>
-                                        <span class="card-badge">[[cartItemsCount]]</span>
-                                    </paper-button>
                                 </a>
                             </div>
-                        </div>
+                            <div class="layout horizontal end-justified">
+                                <div class="login">
+                                    <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
+                                        <a href="[[loginUrl]]">
+                                            <paper-button class="layout horizontal center" style="margin:0">
+                                                <iron-icon icon="account-box"></iron-icon>
+                                                <span>Entre ou Cadastre-se</span>
+                                            </paper-button>
+                                        </a>
+                                    </template>
+                                    <template is="dom-if" if="{{loggedUser.name}}" restamp="true">
+                                        <a href="[[profileUrl]]">
+                                            <paper-button class="layout horizontal center" style="margin:0">
+                                                <iron-icon icon="account-box"></iron-icon>
+                                                <span>[[loggedUser.name]]</span>
+                                            </paper-button>
+                                        </a>
+                                    </template>
+                                </div>
+                                <div class="cart">
+                                    <a href="[[cartUrl]]">
+                                        <paper-button class="layout horizontal center" style="margin:0">
+                                            <iron-icon icon="shopping-cart"></iron-icon>
+                                            <span class="card-badge">[[cartItemsCount]]</span>
+                                        </paper-button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="top nomobile">
@@ -574,7 +577,7 @@ Custom property | Description | Default
                                     <div class="search-results">
                                         <template is="dom-repeat" items=[[_searchResults]] as=searchResult>
                                             <div class="search-result horizontal layout">
-                                                <template is="dom-if" if={{searchResult.image}}>
+                                                <template is="dom-if" if=[[searchResult.image]]>
                                                     <iron-image class="image" src="[[searchResult.image]]" preload sizing="cover"></iron-image>
                                                 </template>
                                                 <div class="vertical layout">
@@ -590,16 +593,16 @@ Custom property | Description | Default
                             <div class="login nomobile">
                                 <template is="dom-if" if="{{!loggedUser.name}}" restamp="true">
                                     <a href="[[loginUrl]]">
-                                        <paper-button class="layout horizontal center" style="margin:0">
-                                            <iron-icon icon="account-box"></iron-icon>
+                                        <paper-button class="layout vertical center" style="margin:0">
+                                            <iron-icon icon="account-box"></iron-icon><br/>
                                             <span>Entre ou Cadastre-se</span>
                                         </paper-button>
                                     </a>
                                 </template>
                                 <template is="dom-if" if="{{loggedUser.name}}" restamp="true">
                                     <a href="[[profileUrl]]">
-                                        <paper-button class="layout horizontal center" style="margin:0">
-                                            <iron-icon icon="account-box"></iron-icon>
+                                        <paper-button class="layout vertical center" style="margin:0">
+                                            <iron-icon icon="account-box"></iron-icon><br/>
                                             <span>[[loggedUser.name]]</span>
                                         </paper-button>
                                     </a>
@@ -607,10 +610,10 @@ Custom property | Description | Default
                             </div>
                             <div class="cart nomobile">
                                 <a href="[[cartUrl]]">
-                                    <paper-button class="layout horizontal center" style="margin:0">
+                                    <paper-button class="layout vertical center" style="margin:0">
                                         <iron-icon icon="shopping-cart"></iron-icon>
-                                        <span>Carrinho</span>
-                                        <span class="card-badge">[[cartItemsCount]]</span>
+                                        <span class="card-badge">[[cartItemsCount]]</span><br/>
+                                        <span>[[cartMessage]]</span>
                                     </paper-button>
                                 </a>
                             </div>
@@ -758,6 +761,16 @@ Custom property | Description | Default
                 cartItemsCount: {
                     type: Number,
                     value: 0
+                },
+
+                /**
+                * The cart message
+                */
+                cartMessage:{
+                  type: String,
+                  value: function(){
+                    return "Meu Carrinho"
+                  }
                 },
 
                 searchUrl: {
