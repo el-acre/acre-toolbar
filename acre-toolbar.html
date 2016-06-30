@@ -50,32 +50,33 @@ Custom property | Description | Default
 `--toolbar-logo` | Mixin applied to the logo  | `{}`
 `--toolbar-mobile-logo` | Mixin applied to the logo in mobile view  | `{}`
 `--toolbar-top` | Mixin applied to the top area of the toolbar | `{}`
-`--top-color` | The color at the top of the bar | `--primary-color`
-`--top-text-color` | The text color for the top of the bar | `--primary-text-color`
+`--top-color` | The color at the top of the bar | `--dark-primary-color`
+`--top-text-color` | The text color for the top of the bar | `--light-text-color`
 `--toolbar-middle` | Mixin applied to the middle area of the toolbar | `{}`
-`--middle-color` | The color at the middle of the bar | `--primary-color`
-`--middle-text-color` | The text color for the middle of the bar | `--primary-text-color`
+`--middle-color` | The color at the middle of the bar | `--default-primary-color`
+`--middle-text-color` | The text color for the middle of the bar | --light-text-color`
 `--search-input` | Mixin applied to the search input container | `{}`
-`--search-bar-color` | The search bar background color | `#fff`
-`--search-bar-text-color` | The search bar text color | `#000`
+`--search-bar-color` | The search bar background color | `--dark-primary-color`
+`--search-bar-text-color` | The search bar text color | `--light-text-color`
 `--search-result` | Mixin applied to the search result | `{}`
 `--search-result-image` | Mixin applied to the search result image | `{}`
 `--search-result-name` | Mixin applied to the search result name | `{}`
 `--search-result-price` | Mixin applied to the search result price | `{}`
 `--search-result-description` | Mixin applied to the search result description | `{}`
-`--product-price-text-color` | The Search bar product price color | `--primary-color`
+`--product-price-text-color` | The Search bar product price color | `--default-primary-color`
 `--product-name-text-color` | The Search bar product name text color | `--primary-text-color`
 `--product-description-text-color` | The product description text color | `--secondary-text-color`
 `--toolbar-cart-button` | Mixin applicated to the cart button | `{}`
 `--cart-badge` | Mixin applicated to the cart badge | `{}`
 `--menu-button-icon` | Mixin applied to the menu button icon | `{}`
 `--menu-button-text` | Mixin applied to the menu button text | `{}`
-`--cart-badge-color` | The cart badge color | `--dark-primary-color`
-`--cart-badge-text-color` | The cart badge color | `---primary-text-color`
+`--cart-badge-color` | The cart badge color | `--accent-color`
+`--cart-badge-text-color` | The cart badge color | `--primary-text-color`
 `--toolbar-bottom` | Mixin applied to the bottom area of the toolbar | `{}`
-`--bottom-color` | The color at the bottom of the bar | `--primary-color`
+`--bottom-color` | The color at the bottom of the bar | `--accent-color`
 `--bottom-text-color` | The text color for the bottom of the bar | `--primary-text-color`
 `--menu-item` | Mixin applied to the menu item | `{}`
+`--menu-item-text-color` | The color of the menu item | `--dark-primary-color`
 `--menu-item-hover-background-color` | The background color user when the user hover menu item | `#fff`
 `--menu-item-hover-text-color` | The color text used when the user hover menu item | `#000`
 `--menu-expand-icon` | Mixin applied to the expand icon in the menu bar | `{}`
@@ -83,8 +84,8 @@ Custom property | Description | Default
 `--menu-image` | Mixin applied to the menu image | `{}`
 `--menu-image-container` | Mixin applied to the menu image container | `{}`
 `--dropdown-background-color` | The menu item dropdown background color | `#fff`
-`--subitem-text-hover-color` | The color user when the user hover the submenu item | `--primary-color`
-`--drawer-color` | The drawer color | `--primary-color`
+`--subitem-text-hover-color` | The color user when the user hover the submenu item | `--default-primary-color`
+`--drawer-color` | The drawer color | `--default-primary-color`
 `--drawer-item-text-color` | The drawer item text color color | `--primary-text-color`
 
 @demo demo/index.html
@@ -128,8 +129,8 @@ Custom property | Description | Default
 
             .top {
                 padding: 10px 10px 5px 10px;
-                background-color: var(--top-color, --primary-color);
-                color: var(--top-text-color, --primary-text-color);
+                background-color: var(--top-color, --dark-primary-color);
+                color: var(--top-text-color, --light-text-color);
                 @apply(--toolbar-top);
             }
 
@@ -153,8 +154,8 @@ Custom property | Description | Default
 
             .middle {
                 padding: 0 10px 5px 10px;
-                background-color: var(--middle-color, --primary-color);
-                color: var(--middle-text-color, --primary-text-color);
+                background-color: var(--middle-color, --default-primary-color);
+                color: var(--middle-text-color, --light-text-color);
                 @apply(--layout-center);
                 @apply(--toolbar-middle);
             }
@@ -172,8 +173,8 @@ Custom property | Description | Default
                 height: 43px;
                 border-radius: 0;
                 margin-right: 10px;
-                background: var(--search-bar-color, #fff);
-                color: var(--search-bar-text-color, #000);
+                background-color: var(--search-bar-color, --dark-primary-color);
+                color: var(--search-bar-text-color, --light-text-color);
                 transition: all 0.3s ease;
                 -webkit-transition: all 0.3s ease;
                 @apply(--layout-horizontal);
@@ -196,7 +197,7 @@ Custom property | Description | Default
                 padding-left: 10px;
                 font-size: 15px;
                 background: none;
-                color: var(--search-bar-text-color, #5a6674);
+                color: var(--search-bar-text-color, --light-text-color);
                 @apply(--layout-flex);
                 @apply(--search-input);
             }
@@ -229,7 +230,6 @@ Custom property | Description | Default
                 width: 100px;
                 margin-right: 10px;
                 @apply(--search-result-image);
-
             }
 
             .search-result:hover {
@@ -259,7 +259,7 @@ Custom property | Description | Default
                 font-weight: bold;
                 font-size: 20px;
                 margin: 0;
-                color: var(--product-price-text-color, --primary-color);
+                color: var(--product-price-text-color, --default-primary-color);
                 @apply(--search-result-price);
             }
 
@@ -267,6 +267,10 @@ Custom property | Description | Default
                 --paper-button: {
                     text-transform: none;
                 }
+            }
+
+            paper-button iron-icon{
+                margin-bottom: 10px; 
             }
 
             .cart {
@@ -279,28 +283,28 @@ Custom property | Description | Default
                 border-radius: 50%;
                 margin-left: 0;
                 margin-bottom: 0px;
-                background-color: var(--cart-badge-color, --dark-primary-color);
+                background-color: var(--cart-badge-color, --accent-color);
                 opacity: 1.0;
                 color: var(--cart-badge-text-color, --primary-text-color);
                 padding: 3px 7px;
                 @apply(--cart-badge);
             }
 
-            .menu-button iron-icon{
-              width: 20px;
-              height: 20px;
-              @apply(--menu-button-icon);
+            .menu-button iron-icon {
+                width: 20px;
+                height: 20px;
+                @apply(--menu-button-icon);
             }
 
-            .menu-button .span{
-              @apply(--menu-button-text);
+            .menu-button .span {
+                @apply(--menu-button-text);
             }
             /**
             * Bottom
             */
 
             .bottom {
-                background-color: var(--bottom-color, --dark-primary-color);
+                background-color: var(--bottom-color, --accent-color);
                 color: var(--bottom-text-color, --primary-text-color);
                 padding: 0;
                 margin: 0;
@@ -320,7 +324,8 @@ Custom property | Description | Default
             .dropmenu> li {
                 float: left;
                 list-style: none;
-                background-color: var(--bottom-color, --dark-primary-color);
+                color: var(--menu-item-text-color, --dark-primary-color);
+                background-color: var(--bottom-color, --accent-color);
                 position: relative;
                 padding: 10px;
                 @apply(--menu-item);
@@ -426,7 +431,7 @@ Custom property | Description | Default
             .drawer-subitem:hover,
             .drawer-subitem:hover .icon {
                 cursor: pointer;
-                color: var(--subitem-text-hover-color, --primary-color);
+                color: var(--subitem-text-hover-color, --default-primary-color);
             }
 
             .group-container {
@@ -448,7 +453,7 @@ Custom property | Description | Default
 
             .drawer-header {
                 padding: 10px;
-                background-color: var(--drawer-color, --primary-color);
+                background-color: var(--drawer-color, --default-primary-color);
                 color: white;
                 @apply(--layout-horizontal);
                 @apply(--layout-justified);
@@ -480,6 +485,12 @@ Custom property | Description | Default
             .drawer-subitems {
                 margin-left: 10px;
                 padding: 10px;
+            }
+
+            .progressBar{
+              position: absolute;
+              background-color: var(--progress-bar-color, --dark-primary-color);
+              @apply(--progress-bar);
             }
 
             @media screen and (max-width: 768px) {
@@ -517,7 +528,7 @@ Custom property | Description | Default
                                 <paper-button class="menu-button layout horizontal center"
                                     style="margin:0">
                                     <iron-icon icon="account-box"></iron-icon>
-                                    <span>Entre ou Cadastre-se</span>
+                                    <span>[[loginMessage]]</span>
                                 </paper-button>
                             </a>
                         </template>
@@ -537,8 +548,10 @@ Custom property | Description | Default
                         <a href="[[cartUrl]]">
                             <paper-button class="menu-button layout horizontal center"
                                 style="margin:0">
-                                <iron-icon icon="shopping-cart"></iron-icon>
-                                <span class="card-badge">[[cartItemsCount]]</span>
+                                <div class="layout horizontal center">
+                                    <iron-icon icon="shopping-cart"></iron-icon>
+                                    <span class="card-badge">[[cartItemsCount]]</span>
+                                </div>
                             </paper-button>
                         </a>
                     </div>
@@ -629,10 +642,12 @@ Custom property | Description | Default
                                 </div>
                                 <div class="cart">
                                     <a href="[[cartUrl]]">
-                                        <paper-button class="menu-button layout horizontal center"
+                                          <paper-button class="menu-button layout horizontal center"
                                             style="margin:0">
-                                            <iron-icon icon="shopping-cart"></iron-icon>
-                                            <span class="card-badge">[[cartItemsCount]]</span>
+                                            <div class="layout horizontal center">
+                                                <iron-icon icon="shopping-cart"></iron-icon>
+                                                <span class="card-badge">[[cartItemsCount]]</span>
+                                            </div>
                                         </paper-button>
                                     </a>
                                 </div>
@@ -662,7 +677,7 @@ Custom property | Description | Default
                             <div class="search-bar">
                                 <input class="search-input"
                                     is="iron-input"
-                                    placeholder="Buscar"
+                                    placeholder="[[searchPlaceholder]]"
                                     on-blur="_searchBlur"
                                     on-focus="_searchFocus"
                                     bind-value="{{query}}" />
@@ -671,28 +686,28 @@ Custom property | Description | Default
                                 <template is="dom-if"
                                     if="[[_searchResults.length]]"
                                     restamp="true">
-                                        <div class="search-results">
-                                            <template is="dom-repeat"
-                                                items=[[_searchResults]]
-                                                as=searchResult>
-                                                <a href="[[searchResult.link]]">
-                                                    <div class="search-result horizontal layout">
-                                                        <template is="dom-if"
-                                                                  if=[[searchResult.image]]>
-                                                            <iron-image class="image"
-                                                                        src="[[searchResult.image]]"
-                                                                        preload
-                                                                        sizing="contain"></iron-image>
-                                                        </template>
-                                                        <div class="vertical layout">
-                                                            <span class="name">[[searchResult.name]]</span>
-                                                            <span class="description">[[searchResult.description]]</span>
-                                                            <span class="price">{{_formatPrice(searchResult.price)}}</span>
-                                                        </div>
+                                    <div class="search-results">
+                                        <template is="dom-repeat"
+                                            items=[[_searchResults]]
+                                            as=searchResult>
+                                            <a href="[[searchResult.link]]">
+                                                <div class="search-result horizontal layout">
+                                                    <template is="dom-if"
+                                                        if=[[searchResult.image]]>
+                                                        <iron-image class="image"
+                                                            src="[[searchResult.image]]"
+                                                            preload
+                                                            sizing="contain"></iron-image>
+                                                    </template>
+                                                    <div class="vertical layout">
+                                                        <span class="name">[[searchResult.name]]</span>
+                                                        <span class="description">[[searchResult.description]]</span>
+                                                        <span class="price">{{_formatPrice(searchResult.price)}}</span>
                                                     </div>
-                                                </a>
-                                            </template>
-                                        </div>
+                                                </div>
+                                            </a>
+                                        </template>
+                                    </div>
                                 </template>
                             </div>
                             <div class="login nomobile">
@@ -702,9 +717,8 @@ Custom property | Description | Default
                                     <a href="[[loginUrl]]">
                                         <paper-button class="menu-button layout vertical center"
                                             style="margin:0">
-                                            <iron-icon icon="account-box" style="margin-bottom:5px"></iron-icon>
-                                            <br/>
-                                            <span>Entre ou Cadastre-se</span>
+                                            <iron-icon icon="account-box"></iron-icon>
+                                            <span>[[loginMessage]]</span>
                                         </paper-button>
                                     </a>
                                 </template>
@@ -714,8 +728,7 @@ Custom property | Description | Default
                                     <a href="[[profileUrl]]">
                                         <paper-button class="menu-button layout vertical center"
                                             style="margin:0">
-                                            <iron-icon icon="account-box" style="margin-bottom:5px"></iron-icon>
-                                            <br/>
+                                            <iron-icon icon="account-box"></iron-icon>
                                             <span>[[loggedUser.name]]</span>
                                         </paper-button>
                                     </a>
@@ -723,12 +736,13 @@ Custom property | Description | Default
                             </div>
                             <div class="cart nomobile">
                                 <a href="[[cartUrl]]">
-                                    <paper-button class="menu-button layout vertical center"
+                                        <paper-button class="menu-button layout vertical center"
                                         style="margin:0">
-                                        <iron-icon icon="shopping-cart" style="margin-bottom:5px"></iron-icon>
-                                        <span class="card-badge">[[cartItemsCount]]</span>
-                                        <br/>
-                                        <span>[[cartMessage]]</span>
+                                        <div class="layout horizontal center">
+                                            <iron-icon icon="shopping-cart"></iron-icon>
+                                            <span class="card-badge">[[cartItemsCount]]</span>
+                                        </div>
+                                         <span>[[cartMessage]]</span>
                                     </paper-button>
                                 </a>
                             </div>
@@ -791,7 +805,7 @@ Custom property | Description | Default
                     <template is="dom-if"
                         if="[[_searching]]"
                         restamp="true">
-                        <paper-progress class="fit"
+                        <paper-progress class="fit progressBar"
                             style="width:100%"
                             indeterminate></paper-progress>
                     </template>
@@ -867,6 +881,11 @@ Custom property | Description | Default
                     }
                 },
 
+                loginMessage:{
+                    type: String,
+                    value: 'Entrar'
+                },
+
                 /**
                  * The login url
                  */
@@ -910,19 +929,27 @@ Custom property | Description | Default
                 },
 
                 /**
-                * The url to perform the search
-                * It must be in the follow format: `http(s)://urlto.search/[[searchPlaceholder]]` <br/>
-                * The results must be in the follow format: <br/>
-                * `{{
-                * link: link to natigate',
-                * image: 'image url',
-                * name: 'product name',
-                * description: 'product description',
-                * price: 'product price' }}`
-                */
+                 * The url to perform the search
+                 * It must be in the follow format: `http(s)://urlto.search/[[searchPlaceholder]]` <br/>
+                 * The results must be in the follow format: <br/>
+                 * `{{
+                 * link: link to natigate',
+                 * image: 'image url',
+                 * name: 'product name',
+                 * description: 'product description',
+                 * price: 'product price' }}`
+                 */
                 searchUrl: {
                     type: String,
                     value: ''
+                },
+
+                /**
+                 * The search placeholder
+                 */
+                searchPlaceholder:{
+                    type: String,
+                    value: "Buscar"
                 },
 
                 _searchResults: {
@@ -992,9 +1019,9 @@ Custom property | Description | Default
                 this._searching = false;
             },
 
-            _searchBlur: function (e) {
+            _searchBlur: function(e) {
                 var _this = this;
-                setTimeout(function () {
+                setTimeout(function() {
                     _this._searchResults = [];
                 }, 500);
                 this._searching = false;
