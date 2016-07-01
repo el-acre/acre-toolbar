@@ -269,8 +269,8 @@ Custom property | Description | Default
                 }
             }
 
-            paper-button iron-icon{
-                margin-bottom: 10px; 
+            paper-button iron-icon {
+                margin-bottom: 10px;
             }
 
             .cart {
@@ -487,10 +487,10 @@ Custom property | Description | Default
                 padding: 10px;
             }
 
-            .progressBar{
-              position: absolute;
-              background-color: var(--progress-bar-color, --dark-primary-color);
-              @apply(--progress-bar);
+            .progressBar {
+                position: absolute;
+                background-color: var(--progress-bar-color, --dark-primary-color);
+                @apply(--progress-bar);
             }
 
             @media screen and (max-width: 768px) {
@@ -525,10 +525,12 @@ Custom property | Description | Default
                             if="{{!loggedUser.name}}"
                             restamp="true">
                             <a href="[[loginUrl]]">
-                                <paper-button class="menu-button layout horizontal center"
+                                <paper-button class="menu-button"
                                     style="margin:0">
-                                    <iron-icon icon="account-box"></iron-icon>
-                                    <span>[[loginMessage]]</span>
+                                    <div class="layout vertical center">
+                                        <iron-icon icon="account-box"></iron-icon>
+                                        <span>[[loginMessage]]</span>
+                                    </div>
                                 </paper-button>
                             </a>
                         </template>
@@ -536,22 +538,25 @@ Custom property | Description | Default
                             if="{{loggedUser.name}}"
                             restamp="true">
                             <a href="[[profileUrl]]">
-                                <paper-button class="menu-button layout horizontal center"
+                                <paper-button class="menu-button"
                                     style="margin:0">
-                                    <iron-icon icon="account-box"></iron-icon>
-                                    <span>[[loggedUser.name]]</span>
+                                    <div class="layout vertical center">
+                                        <iron-icon icon="account-box"></iron-icon>
+                                        <span>[[loggedUser.name]]</span>
+                                    </div>
                                 </paper-button>
                             </a>
                         </template>
                     </div>
                     <div class="cart">
                         <a href="[[cartUrl]]">
-                            <paper-button class="menu-button layout horizontal center"
+                            <paper-button class="menu-button layout vertical center"
                                 style="margin:0">
-                                <div class="layout horizontal center">
+                                <div class="layout horizontal center-justified">
                                     <iron-icon icon="shopping-cart"></iron-icon>
                                     <span class="card-badge">[[cartItemsCount]]</span>
                                 </div>
+                                <span>[[cartMessage]]</span>
                             </paper-button>
                         </a>
                     </div>
@@ -621,10 +626,12 @@ Custom property | Description | Default
                                         if="{{!loggedUser.name}}"
                                         restamp="true">
                                         <a href="[[loginUrl]]">
-                                            <paper-button class="menu-button layout horizontal center"
+                                            <paper-button class="menu-button"
                                                 style="margin:0">
-                                                <iron-icon icon="account-box"></iron-icon>
-                                                <span>Entre ou Cadastre-se</span>
+                                                <div class="layout vertical center">
+                                                    <iron-icon icon="account-box"></iron-icon>
+                                                    <span>[[loginMessage]]</span>
+                                                </div>
                                             </paper-button>
                                         </a>
                                     </template>
@@ -632,22 +639,25 @@ Custom property | Description | Default
                                         if="{{loggedUser.name}}"
                                         restamp="true">
                                         <a href="[[profileUrl]]">
-                                            <paper-button class="menu-button layout horizontal center"
+                                            <paper-button class="menu-button"
                                                 style="margin:0">
-                                                <iron-icon icon="account-box"></iron-icon>
-                                                <span>[[loggedUser.name]]</span>
+                                                <div class="layout vertical center">
+                                                    <iron-icon icon="account-box"></iron-icon>
+                                                    <span>[[loggedUser.name]]</span>
+                                                </div>
                                             </paper-button>
                                         </a>
                                     </template>
                                 </div>
                                 <div class="cart">
                                     <a href="[[cartUrl]]">
-                                          <paper-button class="menu-button layout horizontal center"
+                                        <paper-button class="menu-button layout vertical center"
                                             style="margin:0">
-                                            <div class="layout horizontal center">
+                                            <div class="layout horizontal center-justified">
                                                 <iron-icon icon="shopping-cart"></iron-icon>
                                                 <span class="card-badge">[[cartItemsCount]]</span>
                                             </div>
+                                            <span>[[cartMessage]]</span>
                                         </paper-button>
                                     </a>
                                 </div>
@@ -715,10 +725,12 @@ Custom property | Description | Default
                                     if="{{!loggedUser.name}}"
                                     restamp="true">
                                     <a href="[[loginUrl]]">
-                                        <paper-button class="menu-button layout vertical center"
+                                        <paper-button class="menu-button"
                                             style="margin:0">
-                                            <iron-icon icon="account-box"></iron-icon>
-                                            <span>[[loginMessage]]</span>
+                                            <div class="layout vertical center">
+                                                <iron-icon icon="account-box"></iron-icon>
+                                                <span>[[loginMessage]]</span>
+                                            </div>
                                         </paper-button>
                                     </a>
                                 </template>
@@ -726,23 +738,25 @@ Custom property | Description | Default
                                     if="{{loggedUser.name}}"
                                     restamp="true">
                                     <a href="[[profileUrl]]">
-                                        <paper-button class="menu-button layout vertical center"
+                                        <paper-button class="menu-button"
                                             style="margin:0">
-                                            <iron-icon icon="account-box"></iron-icon>
-                                            <span>[[loggedUser.name]]</span>
+                                            <div class="layout vertical center">
+                                                <iron-icon icon="account-box"></iron-icon>
+                                                <span>[[loggedUser.name]]</span>
+                                            </div>
                                         </paper-button>
                                     </a>
                                 </template>
                             </div>
                             <div class="cart nomobile">
                                 <a href="[[cartUrl]]">
-                                        <paper-button class="menu-button layout vertical center"
+                                    <paper-button class="menu-button layout vertical center"
                                         style="margin:0">
-                                        <div class="layout horizontal center">
+                                        <div class="layout horizontal center-justified">
                                             <iron-icon icon="shopping-cart"></iron-icon>
                                             <span class="card-badge">[[cartItemsCount]]</span>
                                         </div>
-                                         <span>[[cartMessage]]</span>
+                                        <span>[[cartMessage]]</span>
                                     </paper-button>
                                 </a>
                             </div>
@@ -881,7 +895,7 @@ Custom property | Description | Default
                     }
                 },
 
-                loginMessage:{
+                loginMessage: {
                     type: String,
                     value: 'Entrar'
                 },
@@ -947,7 +961,7 @@ Custom property | Description | Default
                 /**
                  * The search placeholder
                  */
-                searchPlaceholder:{
+                searchPlaceholder: {
                     type: String,
                     value: "Buscar"
                 },
