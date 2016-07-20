@@ -1,0 +1,345 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import"
+    href="../polymer/polymer.html">
+<link rel="import"
+    href="../paper-toolbar/paper-toolbar.html">
+<link rel="import"
+    href="../iron-image/iron-image.html">
+<link rel="import"
+    href="../paper-input/paper-input.html">
+<link rel="import"
+    href="../iron-icon/iron-icon.html">
+<link rel="import"
+    href="../iron-icons/iron-icons.html">
+<link rel="import"
+    href="../paper-button/paper-button.html">
+<link rel="import"
+    href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import"
+    href="../paper-badge/paper-badge.html">
+<link rel="import"
+    href="../iron-ajax/iron-ajax.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <acre-search-box></acre-search-box>
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--search-input` | Mixin applied to the search input container | `{}`
+`--search-bar-color` | The search bar background color | `--dark-primary-color`
+`--search-bar-text-color` | The search bar text color | `--light-text-color`
+`--search-result` | Mixin applied to the search result | `{}`
+`--search-result-image` | Mixin applied to the search result image | `{}`
+`--search-result-name` | Mixin applied to the search result name | `{}`
+`--search-result-price` | Mixin applied to the search result price | `{}`
+`--search-result-description` | Mixin applied to the search result description | `{}`
+`--product-price-text-color` | The Search bar product price color | `--default-primary-color`
+`--product-name-text-color` | The Search bar product name text color | `--primary-text-color`
+`--product-description-text-color` | The product description text color | `--secondary-text-color`
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="acre-search-box">
+  <template>
+    <style include="iron-flex iron-flex-alignment" />
+    <style>
+      :host {
+        display: block;
+      }
+
+      a,
+      a:link,
+      a:visited,
+      a:hover,
+      a:focus,
+      a:active {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /*SEARCH BAR*/
+
+      .search-bar {
+        height: 43px;
+        border-radius: 0;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        background-color: var(--search-bar-color, --dark-primary-color);
+        color: var(--search-bar-text-color, --light-text-color);
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        @apply(--layout-flex);
+        @apply(--search-input);
+        position: relative;
+      }
+
+      .search-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 15px;
+        padding-left: 10px;
+        color: var(--search-bar-text-color, --light-text-color);
+        @apply(--layout-flex);
+        @apply(--search-input);
+      }
+
+      .search-button {
+        padding-right: 10px;
+      }
+
+      .search-input::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      .search-bar .search-results {
+        min-height: 30px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        display: block;
+        background-color: white;
+        z-index: 10;
+        box-shadow: 7px 10px 19px -8px rgba(0, 0, 0, 0.63);
+      }
+
+      .search-result {
+        padding: 10px;
+        border-bottom: 1px #ececec solid;
+        @apply(--search-result);
+      }
+
+      .search-result .image {
+        height: 70px;
+        width: 100px;
+        margin-right: 10px;
+        @apply(--search-result-image);
+      }
+
+      .search-result:hover {
+        background-color: #F7F7F7;
+        cursor: pointer;
+      }
+
+      .search-result .name {
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--product-name-text-color, --primary-text-color);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 24px;
+        @apply(--search-result-name);
+      }
+
+      .search-result .description {
+        color: var(--product-description-text-color, --secondary-text-color);
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 20px;
+        @apply(--search-result-description);
+      }
+
+      .search-result .price {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 0;
+        color: var(--product-price-text-color, --default-primary-color);
+        @apply(--search-result-price);
+      }
+    </style>
+
+    <iron-media-query query="max-width: 767px"
+        query-matches="{{smallScreen}}"></iron-media-query>
+
+    <iron-ajax id="searchRequest"
+        auto
+        url="[[_searchUrl]]"
+        handle-as="json"
+        debounce-duration="[[searchDebounce]]"
+        on-response="_handleSearchResponse"
+        on-request="_handleSearchRequest"
+        on-error="_searchBlur">
+    </iron-ajax>
+
+    <div class="search-bar">
+      <input class="search-input"
+          is="iron-input"
+          placeholder="[[searchPlaceholder]]"
+          on-blur="_searchBlur"
+          on-focus="_searchFocus"
+          bind-value="{{query}}" />
+      <iron-icon class="search-button"
+          icon="search"></iron-icon>
+      <template is="dom-if"
+          if="[[_searchResults.length]]"
+          restamp="true">
+        <div class="search-results">
+          <template is="dom-repeat"
+              items=[[_searchResults]]
+              as=searchResult>
+            <a href="[[searchResult.link]]">
+              <div class="search-result horizontal layout">
+                <template is="dom-if"
+                    if=[[searchResult.image]]>
+                  <iron-image class="image"
+                      src="[[searchResult.image]]"
+                      preload
+                      sizing="contain"></iron-image>
+                </template>
+                <div class="vertical layout">
+                  <span class="name">[[searchResult.name]]</span>
+                  <span class="description">[[searchResult.description]]</span>
+                  <span class="price">{{_formatPrice(searchResult.price)}}</span>
+                </div>
+              </div>
+            </a>
+          </template>
+        </div>
+      </template>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'acre-search-box',
+
+      properties: {
+
+        /**
+         * The url to perform the search
+         * It must be in the follow format: `http(s)://urlto.search/[[searchPlaceholder]]` <br/>
+         * The results must be in the follow format: <br/>
+         * `{{
+         * link: link to natigate',
+         * image: 'image url',
+         * name: 'product name',
+         * description: 'product description',
+         * price: 'product price' }}`
+         */
+        searchUrl: {
+          type: String,
+          value: ''
+        },
+
+        /**
+         * The debounce time to execute the search action
+         */
+        searchDebounce: {
+          type: Number,
+          value: 300
+        },
+
+        /**
+         * The search placeholder
+         */
+        searchPlaceholder: {
+          type: String,
+          value: "Buscar"
+        },
+
+        _searchResults: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        },
+
+        _searchUrl: {
+          type: String,
+          computed: '_computeSearchUrl(searchUrl, query)'
+        },
+
+        _searching: {
+          type: Boolean,
+          value: false,
+        },
+      },
+
+      // Element Lifecycle
+
+      ready: function() {
+        // `ready` is called after all elements have been configured, but
+        // propagates bottom-up. This element's children are ready, but parents
+        // are not.
+        //
+        // This is the point where you should make modifications to the DOM (when
+        // necessary), or kick off any processes the element wants to perform.
+      },
+
+      attached: function() {
+        // `attached` fires once the element and its parents have been inserted
+        // into a document.
+        //
+        // This is a good place to perform any work related to your element's
+        // visual state or active behavior (measuring sizes, beginning animations,
+        // loading resources, etc).
+      },
+
+      detached: function() {
+        // The analog to `attached`, `detached` fires when the element has been
+        // removed from a document.
+        //
+        // Use this to clean up anything you did in `attached`.
+      },
+
+      // Element Behavior
+
+      //utils
+      _formatPrice: function(price) {
+        if (!price) return price;
+        return "R$ " + price.toFixed(2);
+      },
+
+      _computeSearchUrl: function(searchUrl, query) {
+        if (!query) return "";
+        return searchUrl.replace("searchPlaceholder", query);
+      },
+
+      _handleSearchRequest: function(e) {
+        this._searching = true;
+        this.fire('acre-search-box-searching', this.query);
+      },
+
+      _handleSearchResponse: function(e) {
+        this._searchResults = e.detail.xhr.response;
+        this._searching = false;
+        this.fire('acre-search-box-search-end', this.query);
+      },
+
+      _searchBlur: function(e) {
+        var _this = this;
+        setTimeout(function() {
+          _this._searchResults = [];
+        }, 500);
+        this._searching = false;
+      },
+
+      _searchFocus: function(e) {
+        if (this.query)
+          this.$.searchRequest.generateRequest();
+      },
+    });
+  </script>
+</dom-module>

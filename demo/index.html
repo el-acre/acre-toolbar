@@ -10,189 +10,201 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport"
-            content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-        <title>acre-toolbar Demo</title>
-        <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-        <script type="text/javascript">
-            window.Polymer = {
-                dom: 'shadow',
-                lazyRegister: false
-            };
-        </script>
-        <link rel="import"
-            href="../acre-toolbar.html">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>acre-toolbar Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
 
-        <link rel="import"
-            href="../../iron-demo-helpers/demo-snippet.html">
-        <link rel="import"
-            href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-        <style is="custom-style"
-            include="demo-pages-shared-styles">
+    <script type="text/javascript">
+      window.Polymer = {
+        dom: 'shadow',
+        lazyRegister: false
+      };
+    </script>
 
-        </style>
-    </head>
-    <style is="custom-style">
-        :root {
-            font-family: "Open Sans", sans-serif;
-            --dark-primary-color: #4A2D7F;
-            --default-primary-color: #583694;
-            --light-primary-color: #D1C4E9;
-            --text-primary-color: #FFFFFF;
-            --accent-color: #FBD100;
-            --primary-background-color: #D1C4E9;
-            --primary-text-color: #212121;
-            --secondary-text-color: #727272;
-            --disabled-text-color: #BDBDBD;
-            --light-text-color: white;
-            --divider-color: #B6B6B6;
-                
-        }
+    <link rel="import"
+        href="../acre-toolbar-container.html">
+    <link rel="import"
+        href="../acre-search-box.html">
+    <link rel="import"
+        href="../acre-menu-bar.html">
 
-         acre-toolbar {
-        --menu-subitems-container: {
-            min-width: 150px;
-        }
-        --toolbar-top:{
-          color: #CFC0E6;
-        }
-        --toolbar-middle: {
-            padding: 5px 10px;
-        }
-        --toolbar-logo: {
-            width: 160px;
-            height: 100px;
-            margin-left: 5px;
-            margin-right: 10px;
-        }
-        --search-input: {
-            font-size: 15px;
-            height: 55px;
-            color: #F9CF07;
-        }
-        --menu-button-icon: {
-            color: white;
-        }
-        --cart-badge: {
-            margin-bottom: 8px;
-        }
-        --menu-item: {
-            padding: 10px 20px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-        --menu-expand-icon: {
-            display: none;
-        }
-        --menu-subitems-container: {
-            padding: 10px;
-            text-transform: none;
-            font-weight: normal;
-        }
-        --progress-bar:{
-            color: #4A2D7F;
-        }
+  </head>
+  <style is="custom-style">
+    :root {
+      font-family: "Open Sans", sans-serif;
+      --dark-primary-color: #4A2D7F;
+      --default-primary-color: #583694;
+      --light-primary-color: #D1C4E9;
+      --text-primary-color: #FFFFFF;
+      --accent-color: #FBD100;
+      --primary-background-color: #D1C4E9;
+      --primary-text-color: #212121;
+      --secondary-text-color: #727272;
+      --disabled-text-color: #BDBDBD;
+      --light-text-color: white;
+      --divider-color: #B6B6B6;
     }
-    </style>
 
-    <body unresolved
-        style="background-color:gray">
-        <acre-toolbar id="toolbar"
-            login-url="/login"
-            login-message="Entrar"
-            profile-url="/profile"
-            cart-url="/cart"
-            cart-message="Meu Carrinho"
-            search-url='http://localhost:3000/api/v1/Product?query={"name":{"$regex":"(?i:.*searchPlaceholder.*)"}}&limit=10'
-            logo='{"image": "http://www.mbsquoteline.com/newsletter/clientfileupload/files/medium/Generic_logo.jpg",
+    acre-toolbar-container {
+      --menu-subitems-container: {
+        min-width: 150px;
+      }
+      --toolbar-top: {
+        color: #CFC0E6;
+      }
+      --toolbar-middle: {
+        padding: 5px 10px;
+      }
+      --toolbar-logo: {
+        width: 160px;
+        height: 100px;
+        margin-left: 5px;
+        margin-right: 10px;
+      }
+      --search-input: {
+        font-size: 15px;
+        height: 55px;
+        color: #F9CF07;
+      }
+      --menu-button-icon: {
+        color: white;
+      }
+      --cart-badge: {
+        margin-bottom: 8px;
+      }
+      --menu-item: {
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+      --menu-expand-icon: {
+        display: none;
+      }
+      --menu-subitems-container: {
+        padding: 10px;
+        text-transform: none;
+        font-weight: normal;
+      }
+      --progress-bar: {
+        color: #4A2D7F;
+      }
+    }
+
+    .content-demo {
+      min-height: 150vh;
+      background-color: blue;
+    }
+  </style>
+
+  <body unresolved
+      style="background-color:gray">
+    <acre-toolbar-container id="toolbar"
+        logo='{"image": "http://www.mbsquoteline.com/newsletter/clientfileupload/files/medium/Generic_logo.jpg",
              "link": "/"}'>
-        </acre-toolbar>
+      <div class="toolbar-top">
+        TOP COISAS HERE
+      </div>
+      <div class="toolbar-search">
+        <acre-search-box search-url="http://sm.metheora.com/busca?q=searchPlaceholder"></acre-search-box>
+      </div>
+      <div class="toolbar-actions">
+        ACTIONS HERE
+      </div>
+      <div class="toolbar-menu">
+        <acre-menu-bar id="menu-bar"><acre-menu-bar>
+      </div>
+    </acre-toolbar-container>
 
-        <script type="text/javascript">
-            var element = document.getElementById('toolbar');
+    <div class="content-demo"></div>
 
-            // element.loggedUser = {
-            //     name: 'Victor Hugo Marques'
-            // };
+    <script type="text/javascript">
+      var element = document.getElementById('toolbar');
 
-            element.actions = [{
-                name: 'Nossas Lojas',
-                link: ''
-            }, {
-                name: 'Tenha sua Loja',
-                link: ''
-            }, {
-                name: 'Atendimento (SAC): (55) 5555-5555',
-                link: ''
-            }, ];
+      // element.loggedUser = {
+      //     name: 'Victor Hugo Marques'
+      // };
 
-            element.menuItems = [{
-                name: "Aço",
-                link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-                cover: 'http://www.wcm.ind.br/images/institucional.png',
-                coverSizing: 'contain',
-                opened: true,
-                subitems: [
-                    [{
-                        name: 'Armário de Aço',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=38'
-                    }, {
-                        name: 'Estante de Aço',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=28'
-                    }, {
-                        name: 'Reforço de estante par X',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=29'
-                    }, {
-                        name: 'Roupeiro de aço',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=75'
-                    }]
-                ]
-            }, {
-                name: "Cadeiras",
-                link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
-                cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
-                coverSizing: 'contain',
-                subitems: [
-                    [{
-                        name: 'Cadeira Caixa',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=48'
-                    }, {
-                        name: 'Cadeira Empilhavel',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=46'
-                    }, {
-                        name: 'Cadeira Universitária',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
-                    }, {
-                        name: 'Cadeira Secretária Fixa',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
-                    }, {
-                        name: 'Poltrona Diretor',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=36'
-                    }, {
-                        name: 'Poltrona Presidente',
-                        link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=7'
-                    }, ]
-                ]
-            }, {
-                name: "Escritório"
-            }, {
-                name: "Residência"
-            }, {
-                name: "Informática"
-            }, {
-                name: "Multiuso"
-            }, {
-                name: "Ventiladores"
-            }, {
-                name: "Arcondicionado"
-            }, {
-                name: "Refrigeração"
-            }, ]
-        </script>
+      element.actions = [{
+        name: 'Nossas Lojas',
+        link: ''
+      }, {
+        name: 'Tenha sua Loja',
+        link: ''
+      }, {
+        name: 'Atendimento (SAC): (55) 5555-5555',
+        link: ''
+      }, ];
+
+      var menubar= document.getElementById('menu-bar')
+
+      menubar.menuItems = [{
+        name: "Aço",
+        link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
+        cover: 'http://www.wcm.ind.br/images/institucional.png',
+        coverSizing: 'contain',
+        opened: true,
+        subitems: [
+          [{
+            name: 'Armário de Aço',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=38'
+          }, {
+            name: 'Estante de Aço',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=28'
+          }, {
+            name: 'Reforço de estante par X',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=29'
+          }, {
+            name: 'Roupeiro de aço',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=75'
+          }]
+        ]
+      }, {
+        name: "Cadeiras",
+        link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
+        cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
+        coverSizing: 'contain',
+        subitems: [
+          [{
+            name: 'Cadeira Caixa',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=48'
+          }, {
+            name: 'Cadeira Empilhavel',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=46'
+          }, {
+            name: 'Cadeira Universitária',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
+          }, {
+            name: 'Cadeira Secretária Fixa',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
+          }, {
+            name: 'Poltrona Diretor',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=36'
+          }, {
+            name: 'Poltrona Presidente',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=7'
+          }, ]
+        ]
+      }, {
+        name: "Escritório"
+      }, {
+        name: "Residência"
+      }, {
+        name: "Informática"
+      }, {
+        name: "Multiuso"
+      }, {
+        name: "Ventiladores"
+      }, {
+        name: "Arcondicionado"
+      }, {
+        name: "Refrigeração"
+      }, ]
+    </script>
 
 
-    </body>
+  </body>
 
 </html>
