@@ -1,0 +1,118 @@
+<link rel="import"
+    href="../polymer/polymer.html">
+<link rel="import"
+    href="../iron-image/iron-image.html">
+<link rel="import"
+    href="../iron-icon/iron-icon.html">
+<link rel="import"
+    href="../iron-icons/iron-icons.html">
+<link rel="import"
+    href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import"
+    href="../paper-icon-button/paper-icon-button.html">
+
+
+<dom-module id="acre-cart-product">
+  <template>
+    <style include="iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+      }
+
+      a,
+      a:link,
+      a:visited,
+      a:hover,
+      a:focus,
+      a:active {
+        color: inherit;
+        text-decoration: none!important;
+      }
+
+      .cart-product {
+        height: 50px;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .cart-product:not(:last-of-type) {
+        border-bottom: 1px solid #c7c7c7;
+      }
+
+      .cart-product:hover {
+        background-color: #F7F7F7;
+        cursor: pointer;
+      }
+
+      .cart-product .image {
+        height: 50px;
+        width: 30px;
+        @apply(--cart-product-image);
+      }
+
+      .cart-product .name {
+        color: var(--product-name-text-color, --primary-text-color);
+        @apply(--cart-product-name);
+      }
+
+      .cart-product .quantity {
+        text-align: center;
+        color: var(--product-quantity-text-color, --default-primary-color);
+        @apply(--cart-product-quantity);
+      }
+
+      .cart-product .price {
+        font-weight: bolder;
+        color: var(--product-price-text-color, --default-primary-color);
+        @apply(--cart-product-price);
+      }
+    </style>
+
+    <div class="layout horizontal center cart-product">
+      <a class="layout flex horizontal center"
+          href="[[product.url]]">
+        <iron-image class="image flex"
+            src="[[product.image]]"
+            preload
+            sizing="contain"></iron-image>
+        <span class="name flex">[[product.name]]</span>
+        <span class="quantity flex">[[product.quantity]]</span>
+        <span class="price flex">[[_formatPrice(product.price)]]</span>
+      </a>
+      <paper-icon-button class="flex-1"
+          on-click="removeClick"
+          icon="clear"></paper-icon-button>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'acre-cart-product',
+
+      properties: {
+
+        product: {
+          type: Object,
+          value: function() {
+            return {};
+          }
+        },
+      },
+
+      //utils
+      _formatPrice: function(price) {
+        if (!price) return price;
+        return "R$ " + price.toFixed(2);
+      },
+
+      // events
+      removeClick: function() {
+        this.fire('acre-cart-product-remove-click', {
+          product: this.product
+        });
+      }
+
+    });
+  </script>
+</dom-module>

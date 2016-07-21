@@ -1,0 +1,158 @@
+<link rel="import"
+    href="../polymer/polymer.html">
+<link rel="import"
+    href="../iron-image/iron-image.html">
+<link rel="import"
+    href="../iron-icon/iron-icon.html">
+<link rel="import"
+    href="../iron-icons/iron-icons.html">
+<link rel="import"
+    href="../paper-button/paper-button.html">
+<link rel="import"
+    href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import"
+    href="../paper-badge/paper-badge.html">
+<link rel="import"
+    href="../paper-icon-button/paper-icon-button.html">
+<link rel="import"
+    href="acre-cart-presenter.html">
+
+
+<dom-module id="acre-cart-dropdown">
+  <template>
+    <style include="iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      paper-button {
+        --paper-button: {
+          text-transform: none;
+        }
+      }
+
+      paper-button iron-icon {
+        margin-bottom: 10px;
+      }
+
+      .card-badge {
+        font-weight: normal;
+        border-radius: 10px;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        background-color: var(--cart-badge-color, --accent-color);
+        color: var(--cart-badge-text-color, --primary-text-color);
+        @apply(--cart-badge);
+      }
+
+      .menu-button iron-icon {
+        width: 20px;
+        height: 20px;
+        @apply(--menu-button-icon);
+      }
+
+      .menu-button .span {
+        @apply(--menu-button-text);
+      }
+
+      .cart-button {
+        position: relative;
+      }
+
+      .cart-button> ul {
+        z-index: 1;
+        display: none;
+        position: absolute;
+        right: 0;
+        padding: 0;
+        margin-top: 0;
+        width: 500px;
+        max-height: 355px;
+        background-color: white;
+        box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+        @apply(--cart-dropdown);
+      }
+
+      .cart-button:hover {
+        background-color: var(--cart-button-hover-color, --dark-primary-color);
+      }
+
+      .cart-button:hover> ul {
+        display: block;
+        color: var(--menu-item-hover-text-color, black);
+        background: var(--dropdown-background-color, white);
+      }
+
+      .cart-button> ul:hover {
+        display: block;
+      }
+    </style>
+    <div class="cart-button">
+      <a href="[[cartUrl]]">
+        <paper-button class="menu-button layout vertical center"
+            style="margin:0">
+          <div class="layout horizontal center-justified">
+            <iron-icon icon="shopping-cart"></iron-icon>
+            <div class="layout horizontal center-justified card-badge">
+              <span class="layout self-center">{{itemsQuantity}}</span>
+            </div>
+          </div>
+          <span>[[cartMessage]]</span>
+        </paper-button>
+      </a>
+      <ul hidden$="[[!cartItems.length]]">
+        <acre-cart-presenter id="cartPresenter"
+            cart-items="{{cartItems}}"
+            cart-url=[[cartUrl]]
+            items-quantity={{itemsQuantity}}
+            max-visible-items="3"
+            checkout-url=[[checkoutUrl]]
+            show-cart-message=[[showCartMessage]]
+            total-items=[[cartItems.length]]
+            checkout-message=[[checkoutMessage]]></acre-cart-presenter>
+      </ul>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'acre-cart-dropdown',
+
+      properties: {
+        /**
+         * The cart message
+         */
+        cartMessage: {
+          type: String,
+          value: "Meu Carrinho"
+        },
+
+        cartItems: {
+          type: Object,
+          value: function() {
+            return [];
+          }
+        },
+      },
+
+      // Element Behavior
+      addItem: function(item) {
+        this.$.cartPresenter.addItem(item);
+      },
+
+      removeItem: function(item) {
+        this.$.cartPresenter.removeItem(item);
+      },
+
+      changeItemQuantity: function(itemId, quantity) {
+        this.$.cartPresenter.changeItemQuantity(itemId, quantity);
+      },
+
+    });
+  </script>
+</dom-module>
