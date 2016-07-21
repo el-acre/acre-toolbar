@@ -210,7 +210,9 @@ Custom property | Description | Default
             <div class="layout flex">
               <content select=".toolbar-search"></content>
             </div>
-            <content select=".toolbar-actions"></content>
+            <div style="margin-left:10px;">
+              <content select=".toolbar-actions"></content>
+            </div>
           </div>
         </div>
       </app-toolbar>
@@ -225,16 +227,12 @@ Custom property | Description | Default
         reveals
         hidden$="[[!smallScreen]]">
       <app-toolbar>
-        <iron-pages selected="[[toolbarStep]]">
-          <paper-icon-button icon="menu"></paper-icon-button>
-          <paper-icon-button on-click="hideSearch"
-              icon="arrow-back"></paper-icon-button>
-        </iron-pages>
 
-        <div class="layout horizontal center"
-            main-title>
-          <iron-pages selected="[[toolbarStep]]"
-              style="width:100%">
+        <template is="dom-if"
+            if="[[!searchVisible]]"
+            restamp="true">
+          <div class="layout horizontal flex center">
+            <paper-icon-button icon="menu"></paper-icon-button>
             <div class="layout horizontal flex">
               <a href="[[logo.link]]"
                   style="position: inherit!important">
@@ -244,18 +242,24 @@ Custom property | Description | Default
                     sizing="contain"></iron-image>
               </a>
             </div>
-
+            <paper-icon-button on-click="showSearch"
+                icon="search"></paper-icon-button>
+          </div>
+        </template>
+        <template is="dom-if"
+            if="[[searchVisible]]"
+            restamp="true">
+          <div class="layout horizontal flex center">
+            <paper-icon-button on-click="hideSearch"
+                icon="arrow-back"></paper-icon-button>
             <div class="layout flex"
-                style="position:inherit!important">
+                main-title>
               <content select=".toolbar-search-mobile"></content>
             </div>
-          </iron-pages>
-        </div>
-        <paper-icon-button on-click="showSearch"
-            hidden$="[[searchHidden]]"
-            icon="search"></paper-icon-button>
-        <paper-icon-button icon="shopping-cart"></paper-icon-button>
+          </div>
+        </template>
 
+        <paper-icon-button icon="shopping-cart"></paper-icon-button>
 
       </app-toolbar>
     </app-header>
@@ -291,9 +295,10 @@ Custom property | Description | Default
           }
         },
 
-        toolbarStep: {
-          type: Number,
-          value: 0
+        searchVisible: {
+          type: Boolean,
+          value: false,
+          notify: true,
         },
 
         _smallScreenCss: {
@@ -338,13 +343,11 @@ Custom property | Description | Default
       },
 
       showSearch: function() {
-        this.toolbarStep = 1;
-        this.set('searchHidden', true);
+        this.set('searchVisible', true);
       },
 
       hideSearch: function() {
-        this.toolbarStep = 0;
-        this.set('searchHidden', false);
+        this.set('searchVisible', false);
       },
 
     });
