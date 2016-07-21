@@ -30,9 +30,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         href="../acre-search-box.html">
     <link rel="import"
         href="../acre-menu-bar.html">
-
     <link rel="import"
         href="../acre-cart-dropdown.html">
+    <link rel="import"
+        href="../acre-cart-data.html">
 
   </head>
   <style is="custom-style">
@@ -104,182 +105,197 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
 
-  <body unresolved>
+  <body>
 
-    <acre-toolbar-container id="toolbar"
-        logo='{"image": "http://www.mbsquoteline.com/newsletter/clientfileupload/files/medium/Generic_logo.jpg",
-             "link": "/"}'>
-      <div class="toolbar-top">
-        TOP COISAS HERE
+    <template is="dom-bind">
+
+      <acre-cart-data id="acre-cart-data"
+          cart-items="{{cartItems}}"
+          items-quantity="{{itemsQuantity}}"
+          items-sum-quantity="{{itemsSumQuantity}}"></acre-cart-data>
+
+      <acre-toolbar-container id="toolbar"
+          logo='{"image": "http://www.mbsquoteline.com/newsletter/clientfileupload/files/medium/Generic_logo.jpg","link": "/"}'>
+
+        <div class="toolbar-top">
+          <span style="color:yellow">  999-999-999</span>
+        </div>
+
+        <div class="toolbar-search">
+          <acre-search-box search-url="http://sm.metheora.com/busca?q=searchPlaceholder"></acre-search-box>
+        </div>
+
+        <div class="toolbar-actions">
+          <acre-cart-dropdown cart-items="[[cartItems]]"
+              items-quantity="[[itemsQuantity]]"
+              items-sum-quantity="[[itemsSumQuantity]]"
+              id="acre-cart"></acre-cart-dropdown>
+        </div>
+
+        <div class="toolbar-menu">
+          <acre-menu-bar id="menu-bar">
+            <acre-menu-bar>
+        </div>
+      </acre-toolbar-container>
+
+
+
+      <div class="content-demo">
+
+        <button id="add_item1"
+            type="button"
+            name="button">ADD ITEM 1</button>
+        <button id="add_item1_5"
+            type="button"
+            name="button">ADD ITEM 1 -- 5</button>
+        <button id="remove_item1_2"
+            type="button"
+            name="button">REMOVE ITEM 1 -- 5</button>
+        <button id="add_item2"
+            type="button"
+            name="button">ADD ITEM 2</button>
+        <button id="add_item3"
+            type="button"
+            name="button">ADD ITEM 3</button>
+        <button id="add_item4"
+            type="button"
+            name="button">ADD ITEM 4</button>
       </div>
-      <div class="toolbar-search">
-        <acre-search-box search-url="http://sm.metheora.com/busca?q=searchPlaceholder"></acre-search-box>
-      </div>
-      <div class="toolbar-actions">
-        <acre-cart-dropdown id="acre-cart"></acre-cart-dropdown>
-      </div>
-      <div class="toolbar-menu">
-        <acre-menu-bar id="menu-bar">
-          <acre-menu-bar>
-      </div>
-    </acre-toolbar-container>
+
+      <script type="text/javascript">
+        var element = document.getElementById('toolbar');
+        var cart = document.getElementById('acre-cart');
+        var cart_data = document.getElementById('acre-cart-data');
+        var menubar = document.getElementById('menu-bar');
+
+        document.addEventListener('acre-cart-product-remove-click', function(e) {
+          console.log('Product remve click');
+          console.log(e.detail.product);
+          cart_data.removeItem(e.detail.product);
+        });
+
+        document.getElementById('add_item1').addEventListener('click', function() {
+          cart_data.addItem(items[0]);
+        });
+        document.getElementById('add_item1_5').addEventListener('click', function() {
+          cart_data.changeItemQuantity(items[0].id, 5);
+        });
+        document.getElementById('remove_item1_2').addEventListener('click', function() {
+          cart_data.changeItemQuantity(items[0].id, 0);
+        });
+
+        document.getElementById('add_item2').addEventListener('click', function() {
+          cart_data.addItem(items[1]);
+        });
+        document.getElementById('add_item3').addEventListener('click', function() {
+          cart_data.addItem(items[2]);
+        });
+        document.getElementById('add_item4').addEventListener('click', function() {
+          cart_data.addItem(items[3]);
+        });
+
+        var items = [{
+          id: 1,
+          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+          name: 'Produto 1',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 2,
+          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+          name: 'Produto 2',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 3,
+          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+          name: 'Produto 3',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 4,
+          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+          name: 'Produto 4',
+          price: 222,
+          quantity: 1
+        }];
+
+        element.actions = [{
+          name: 'Nossas Lojas',
+          link: ''
+        }, {
+          name: 'Tenha sua Loja',
+          link: ''
+        }, {
+          name: 'Atendimento (SAC): (55) 5555-5555',
+          link: ''
+        }, ];
 
 
-    <div class="content-demo">
-
-      <button id="add_item1"
-          type="button"
-          name="button">ADD ITEM 1</button>
-      <button id="add_item1_5"
-          type="button"
-          name="button">ADD ITEM 1 -- 5</button>
-      <button id="remove_item1_2"
-          type="button"
-          name="button">REMOVE ITEM 1 -- 5</button>
-      <button id="add_item2"
-          type="button"
-          name="button">ADD ITEM 2</button>
-      <button id="add_item3"
-          type="button"
-          name="button">ADD ITEM 3</button>
-      <button id="add_item4"
-          type="button"
-          name="button">ADD ITEM 4</button>
-    </div>
-
-    <script type="text/javascript">
-      var element = document.getElementById('toolbar');
-      var cart = document.getElementById('acre-cart');
-      var menubar = document.getElementById('menu-bar');
-
-      document.addEventListener('acre-cart-product-remove-click', function(e) {
-        console.log('Product remve click');
-        console.log(e.detail.product);
-        cart.removeItem(e.detail.product);
-      });
-
-      document.getElementById('add_item1').addEventListener('click', function() {
-        cart.addItem(items[0]);
-      });
-      document.getElementById('add_item1_5').addEventListener('click', function() {
-        cart.changeItemQuantity(items[0].id, 5);
-      });
-      document.getElementById('remove_item1_2').addEventListener('click', function() {
-        cart.changeItemQuantity(items[0].id, 0);
-      });
-
-      document.getElementById('add_item2').addEventListener('click', function() {
-        cart.addItem(items[1]);
-      });
-      document.getElementById('add_item3').addEventListener('click', function() {
-        cart.addItem(items[2]);
-      });
-      document.getElementById('add_item4').addEventListener('click', function() {
-        cart.addItem(items[3]);
-      });
-
-      var items = [{
-        id: 1,
-        image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
-        name: 'Produto 1',
-        price: 222,
-        quantity: 1
-      }, {
-        id: 2,
-        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-        name: 'Produto 2',
-        price: 222,
-        quantity: 1
-      }, {
-        id: 3,
-        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-        name: 'Produto 3',
-        price: 222,
-        quantity: 1
-      }, {
-        id: 4,
-        image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
-        name: 'Produto 4',
-        price: 222,
-        quantity: 1
-      }];
-
-      element.actions = [{
-        name: 'Nossas Lojas',
-        link: ''
-      }, {
-        name: 'Tenha sua Loja',
-        link: ''
-      }, {
-        name: 'Atendimento (SAC): (55) 5555-5555',
-        link: ''
-      }, ];
-
-
-      menubar.menuItems = [{
-        name: "Aço",
-        link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-        cover: 'http://www.wcm.ind.br/images/institucional.png',
-        coverSizing: 'contain',
-        opened: true,
-        subitems: [
-          [{
-            name: 'Armário de Aço',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=38'
-          }, {
-            name: 'Estante de Aço',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=28'
-          }, {
-            name: 'Reforço de estante par X',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=29'
-          }, {
-            name: 'Roupeiro de aço',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=75'
-          }]
-        ]
-      }, {
-        name: "Cadeiras",
-        link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
-        cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
-        coverSizing: 'contain',
-        subitems: [
-          [{
-            name: 'Cadeira Caixa',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=48'
-          }, {
-            name: 'Cadeira Empilhavel',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=46'
-          }, {
-            name: 'Cadeira Universitária',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
-          }, {
-            name: 'Cadeira Secretária Fixa',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
-          }, {
-            name: 'Poltrona Diretor',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=36'
-          }, {
-            name: 'Poltrona Presidente',
-            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=7'
-          }, ]
-        ]
-      }, {
-        name: "Escritório"
-      }, {
-        name: "Residência"
-      }, {
-        name: "Informática"
-      }, {
-        name: "Multiuso"
-      }, {
-        name: "Ventiladores"
-      }, {
-        name: "Arcondicionado"
-      }, {
-        name: "Refrigeração"
-      }, ]
-    </script>
-
+        menubar.menuItems = [{
+          name: "Aço",
+          link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
+          cover: 'http://www.wcm.ind.br/images/institucional.png',
+          coverSizing: 'contain',
+          opened: true,
+          subitems: [
+            [{
+              name: 'Armário de Aço',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=38'
+            }, {
+              name: 'Estante de Aço',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=28'
+            }, {
+              name: 'Reforço de estante par X',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=29'
+            }, {
+              name: 'Roupeiro de aço',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=75'
+            }]
+          ]
+        }, {
+          name: "Cadeiras",
+          link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
+          cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
+          coverSizing: 'contain',
+          subitems: [
+            [{
+              name: 'Cadeira Caixa',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=48'
+            }, {
+              name: 'Cadeira Empilhavel',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=46'
+            }, {
+              name: 'Cadeira Universitária',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
+            }, {
+              name: 'Cadeira Secretária Fixa',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
+            }, {
+              name: 'Poltrona Diretor',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=36'
+            }, {
+              name: 'Poltrona Presidente',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=7'
+            }, ]
+          ]
+        }, {
+          name: "Escritório"
+        }, {
+          name: "Residência"
+        }, {
+          name: "Informática"
+        }, {
+          name: "Multiuso"
+        }, {
+          name: "Ventiladores"
+        }, {
+          name: "Arcondicionado"
+        }, {
+          name: "Refrigeração"
+        }, ]
+      </script>
+    </template>
   </body>
 
 </html>

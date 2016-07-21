@@ -99,7 +99,7 @@
           <div class="layout horizontal center-justified">
             <iron-icon icon="shopping-cart"></iron-icon>
             <div class="layout horizontal center-justified card-badge">
-              <span class="layout self-center">{{itemsQuantity}}</span>
+              <span class="layout self-center">[[itemsQuantity]]</span>
             </div>
           </div>
           <span>[[cartMessage]]</span>
@@ -107,13 +107,14 @@
       </a>
       <ul hidden$="[[!cartItems.length]]">
         <acre-cart-presenter id="cartPresenter"
-            cart-items="{{cartItems}}"
-            cart-url=[[cartUrl]]
-            items-quantity={{itemsQuantity}}
+            cart-items="[[cartItems]]"
+            items-sum-quantity=[[itemsSumQuantity]]
+            items-quantity=[[itemsQuantity]]
+
             max-visible-items="3"
+            cart-url=[[cartUrl]]
             checkout-url=[[checkoutUrl]]
             show-cart-message=[[showCartMessage]]
-            total-items=[[cartItems.length]]
             checkout-message=[[checkoutMessage]]></acre-cart-presenter>
       </ul>
     </div>
@@ -138,19 +139,6 @@
             return [];
           }
         },
-      },
-
-      // Element Behavior
-      addItem: function(item) {
-        this.$.cartPresenter.addItem(item);
-      },
-
-      removeItem: function(item) {
-        this.$.cartPresenter.removeItem(item);
-      },
-
-      changeItemQuantity: function(itemId, quantity) {
-        this.$.cartPresenter.changeItemQuantity(itemId, quantity);
       },
 
     });
