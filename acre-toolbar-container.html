@@ -26,6 +26,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import"
     href="../iron-image/iron-image.html">
+<link rel="import"
+    href="../iron-pages/iron-pages.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -151,6 +153,12 @@ Custom property | Description | Default
         margin-right: 10px;
         @apply(--toolbar-logo);
       }
+
+      .logo.smallScreen {
+        height: 45px;
+        width: 100px;
+        @apply(--toolbar-logo-small);
+      }
       /**
       * BOTTOM
       */
@@ -162,12 +170,16 @@ Custom property | Description | Default
         margin: 0;
         @apply(--toolbar-bottom);
       }
+      /**
+      * MOBILE
+      */
     </style>
 
     <iron-media-query query="max-width: 767px"
         query-matches="{{smallScreen}}"></iron-media-query>
 
-    <app-header condenses
+    <app-header hidden$="[[smallScreen]]"
+        condenses
         reveals
         fixed
         effects="waterfall">
@@ -184,12 +196,9 @@ Custom property | Description | Default
                   href="[[action.link]]">[[action.name]]</a>
             </template>
           </div>
-
         </div>
         <div class="middle"
             bottom-item>
-          <paper-icon-button hidden$="[[!smallScreen]]"
-              icon="menu"></paper-icon-button>
           <a href="[[logo.link]]">
             <iron-image class="logo"
                 src="[[logo.image]]"
@@ -210,6 +219,45 @@ Custom property | Description | Default
           sticky>
         <content select=".toolbar-menu"></content>
       </div>
+    </app-header>
+
+    <app-header condenses
+        reveals
+        hidden$="[[!smallScreen]]">
+      <app-toolbar>
+        <iron-pages selected="[[toolbarStep]]">
+          <paper-icon-button icon="menu"></paper-icon-button>
+          <paper-icon-button on-click="hideSearch"
+              icon="arrow-back"></paper-icon-button>
+        </iron-pages>
+
+        <div class="layout horizontal center"
+            main-title>
+          <iron-pages selected="[[toolbarStep]]"
+              style="width:100%">
+            <div class="layout horizontal flex">
+              <a href="[[logo.link]]"
+                  style="position: inherit!important">
+                <iron-image class$="logo {{_smallScreenCss}}"
+                    src="[[logo.image]]"
+                    preload
+                    sizing="contain"></iron-image>
+              </a>
+            </div>
+
+            <div class="layout flex"
+                style="position:inherit!important">
+              <content select=".toolbar-search-mobile"></content>
+            </div>
+          </iron-pages>
+        </div>
+        <paper-icon-button on-click="showSearch"
+            hidden$="[[searchHidden]]"
+            icon="search"></paper-icon-button>
+        <paper-icon-button icon="shopping-cart"></paper-icon-button>
+
+
+      </app-toolbar>
     </app-header>
 
   </template>
@@ -242,6 +290,24 @@ Custom property | Description | Default
             return []
           }
         },
+
+        toolbarStep: {
+          type: Number,
+          value: 0
+        },
+
+        _smallScreenCss: {
+          computed: '_computeSmallScreenCss(smallScreen)'
+        },
+
+
+      },
+
+      // Computed
+      _computeSmallScreenCss: function(smallScreen) {
+        if (smallScreen) {
+          return 'smallScreen'
+        }
       },
 
       // Element Lifecycle
@@ -269,6 +335,16 @@ Custom property | Description | Default
         // removed from a document.
         //
         // Use this to clean up anything you did in `attached`.
+      },
+
+      showSearch: function() {
+        this.toolbarStep = 1;
+        this.set('searchHidden', true);
+      },
+
+      hideSearch: function() {
+        this.toolbarStep = 0;
+        this.set('searchHidden', false);
       },
 
     });

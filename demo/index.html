@@ -51,50 +51,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       --disabled-text-color: #BDBDBD;
       --light-text-color: #fdfdfd;
       --divider-color: #B6B6B6;
-    }
 
-    acre-toolbar-container {
-      --menu-subitems-container: {
-        min-width: 150px;
+      --search-input: {
+          font-size: 15px;
+          height: 55px;
+          color: var(--accent-color);
       }
-      --toolbar-top: {
-        color: #CFC0E6;
+
+      --toolbar-top:{
+        color: var(--secondary-text-color);
       }
       --toolbar-middle: {
-        padding: 5px 10px;
+          padding: 5px 10px;
+          color: var(--secondary-text-color);
       }
       --toolbar-logo: {
-        width: 160px;
-        height: 100px;
-        margin-left: 5px;
-        margin-right: 10px;
+          width: 160px;
+          height: 100px;
+          margin-left: 5px;
+          margin-right: 10px;
       }
-      --search-input: {
-        font-size: 15px;
-        height: 55px;
-        color: #F9CF07;
-      }
+
       --menu-button-icon: {
-        color: white;
+          color: white;
       }
       --cart-badge: {
-        margin-bottom: 8px;
+          margin-bottom: 8px;
       }
       --menu-item: {
-        padding: 10px 20px;
-        text-transform: uppercase;
-        font-weight: bold;
+          padding: 10px 20px;
+          text-transform: uppercase;
+          font-weight: bold;
       }
       --menu-expand-icon: {
-        display: none;
+          display: none;
       }
       --menu-subitems-container: {
-        padding: 10px;
-        text-transform: none;
-        font-weight: normal;
-      }
-      --progress-bar: {
-        color: #4A2D7F;
+          padding: 10px;
+          text-transform: none;
+          font-weight: normal;
       }
     }
 
@@ -115,13 +110,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           items-sum-quantity="{{itemsSumQuantity}}"></acre-cart-data>
 
       <acre-toolbar-container id="toolbar"
-          logo='{"image": "http://www.mbsquoteline.com/newsletter/clientfileupload/files/medium/Generic_logo.jpg","link": "/"}'>
+          logo='{"image": "http://sm.metheora.com/Images/logo-small.png","link": "/"}'>
 
         <div class="toolbar-top">
           <span style="color:yellow">  999-999-999</span>
         </div>
 
         <div class="toolbar-search">
+          <acre-search-box search-url="http://sm.metheora.com/busca?q=searchPlaceholder"></acre-search-box>
+        </div>
+
+        <div class="toolbar-search-mobile">
           <acre-search-box search-url="http://sm.metheora.com/busca?q=searchPlaceholder"></acre-search-box>
         </div>
 
