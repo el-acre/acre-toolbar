@@ -72,8 +72,12 @@ Custom property | Description | Default
         width: 100%;
         background-color: var(--top-color, --default-primary-color);
         color: var(--top-text-color, --light-text-color);
+        box-shadow: 0px 5px 2px -3px rgba(0, 0, 0, 0.2);
         --app-header-background-rear-layer: {
           background-color: #0b8043;
+        }
+        --app-header-shadow: {
+          box-shadow: none;
         }
       }
 
@@ -147,19 +151,17 @@ Custom property | Description | Default
         margin-right: 10px;
         @apply(--toolbar-logo);
       }
-
       /**
       * BOTTOM
       */
 
       .bottom {
-          background-color: var(--bottom-color, --accent-color);
-          color: var(--bottom-text-color, --primary-text-color);
-          padding: 0;
-          margin: 0;
-          @apply(--toolbar-bottom);
+        background-color: var(--bottom-color, --accent-color);
+        color: var(--bottom-text-color, --primary-text-color);
+        padding: 0;
+        margin: 0;
+        @apply(--toolbar-bottom);
       }
-
     </style>
 
     <iron-media-query query="max-width: 767px"
@@ -196,7 +198,9 @@ Custom property | Description | Default
           </a>
           <div class="group-container">
             <content select=".toolbar-middle"></content>
-            <div class="layout flex"><content select=".toolbar-search"></content></div>
+            <div class="layout flex">
+              <content select=".toolbar-search"></content>
+            </div>
             <content select=".toolbar-actions"></content>
           </div>
         </div>

@@ -31,21 +31,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link rel="import"
         href="../acre-menu-bar.html">
 
+    <link rel="import"
+        href="../acre-cart-presenter.html">
+
   </head>
   <style is="custom-style">
     :root {
       font-family: "Open Sans", sans-serif;
-      --dark-primary-color: #4A2D7F;
-      --default-primary-color: #583694;
-      --light-primary-color: #D1C4E9;
-      --text-primary-color: #FFFFFF;
-      --accent-color: #FBD100;
-      --primary-background-color: #D1C4E9;
-      --primary-text-color: #212121;
-      --secondary-text-color: #727272;
-      --disabled-text-color: #BDBDBD;
-      --light-text-color: white;
-      --divider-color: #B6B6B6;
+          --dark-primary-color: #402572;
+          --default-primary-color: #4d2c88;
+          --light-primary-color: #6a44b0;
+          --dark-secondary-color: #d8374e;
+          --default-secondary-color: #ff3a56;
+
+          --accent-color: #fecb05;
+          --primary-background-color: #D1C4E9;
+          --primary-text-color: #212121;
+          --secondary-text-color: #9075c0;
+          --disabled-text-color: #BDBDBD;
+          --light-text-color: #fdfdfd;
+          --divider-color: #B6B6B6;
     }
 
     acre-toolbar-container {
@@ -96,11 +101,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     .content-demo {
       min-height: 150vh;
       background-color: blue;
+    padding-top: 200px;
     }
   </style>
 
-  <body unresolved
-      style="background-color:gray">
+  <body unresolved>
+
     <acre-toolbar-container id="toolbar"
         logo='{"image": "http://www.mbsquoteline.com/newsletter/clientfileupload/files/medium/Generic_logo.jpg",
              "link": "/"}'>
@@ -111,21 +117,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <acre-search-box search-url="http://sm.metheora.com/busca?q=searchPlaceholder"></acre-search-box>
       </div>
       <div class="toolbar-actions">
-        ACTIONS HERE
+        <acre-cart-presenter id="acre-cart"></acre-cart-presenter>
       </div>
       <div class="toolbar-menu">
         <acre-menu-bar id="menu-bar"><acre-menu-bar>
       </div>
     </acre-toolbar-container>
 
-    <div class="content-demo"></div>
+
+    <div class="content-demo">
+
+<button id="cmd_button" type="button" name="button">ADD ITEM</button>
+
+    </div>
 
     <script type="text/javascript">
       var element = document.getElementById('toolbar');
+      var cart = document.getElementById('acre-cart');
+      var menubar= document.getElementById('menu-bar');
 
-      // element.loggedUser = {
-      //     name: 'Victor Hugo Marques'
-      // };
+      var cmd_button = document.getElementById('cmd_button');
+      cmd_button.addEventListener('click', function(){
+        cart.addItem();
+      });
 
       element.actions = [{
         name: 'Nossas Lojas',
@@ -138,7 +152,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         link: ''
       }, ];
 
-      var menubar= document.getElementById('menu-bar')
 
       menubar.menuItems = [{
         name: "Aço",
@@ -203,7 +216,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         name: "Refrigeração"
       }, ]
     </script>
-
 
   </body>
 
