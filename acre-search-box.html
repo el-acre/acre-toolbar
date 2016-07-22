@@ -61,7 +61,6 @@ Custom property | Description | Default
         color: inherit;
         text-decoration: none;
       }
-
       /*SEARCH BAR*/
 
       .search-bar {
@@ -172,10 +171,18 @@ Custom property | Description | Default
         on-error="_searchBlur">
     </iron-ajax>
 
+    <form is="iron-form"
+        id="searchForm"
+        display="none"
+        method="post"
+        action="[[_searchSubmitUrl]]">
+    </form>
+
     <div class="search-bar">
       <input class="search-input"
           is="iron-input"
           placeholder="[[searchPlaceholder]]"
+          on-keydown="_onSearchSubmit"
           on-blur="_searchBlur"
           on-focus="_searchFocus"
           bind-value="{{query}}" />
@@ -233,6 +240,11 @@ Custom property | Description | Default
           value: ''
         },
 
+        /*
+         * The url to navigate when the user submit the query
+         */
+        searchSubmitUrl: String,
+
         /**
          * The debounce time to execute the search action
          */
@@ -265,6 +277,12 @@ Custom property | Description | Default
           type: Boolean,
           value: false,
         },
+
+        _searchSubmitUrl:{
+          type: String,
+          computed: '_computeSearchSubmitUrl(searchSubmitUrl, query)'
+        },
+
       },
 
       // Element Lifecycle
@@ -329,6 +347,18 @@ Custom property | Description | Default
       _searchFocus: function(e) {
         if (this.query)
           this.$.searchRequest.generateRequest();
+      },
+
+      _computeSearchSubmitUrl: function(searchSubmitUrl, query) {
+        if (!query) return "";
+        return searchSubmitUrl.replace("searchPlaceholder", query);
+      },
+
+      _onSearchSubmit: function(e) {
+        // check if 'enter' was pressed
+        if (e.keyCode === 13) {
+          this.$.searchForm.submit()
+        }
       },
     });
   </script>

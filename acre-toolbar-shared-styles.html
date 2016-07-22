@@ -1,0 +1,103 @@
+<link rel="import"
+    href="../polymer/polymer.html">
+
+<!--
+Styles shared between the acre toolbar components
+
+Example:
+
+    <acre-cart-dropdown>
+        <div> The dropdown content</div>
+    </acre-cart-dropdown>
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--menu-button-icon` | Mixin applied to the menu button icon  | `{}`
+`--menu-button-text` | Mixin applied to the menu butotn text  | `{}`
+`--menu-button-hover-color` | The menu button hover color  | `--dark-primary-color`
+`--primary-button-background-color` | the primary button background color | `--default-secondary-color`
+`--primary-button-background-color-hover` | the primary button background hover color | `--dark-secondary-color`
+`--cart-primary-button` | Mixin applied to the primary button | `{}`
+`--cart-primary-button-hover` | Mixin applied to the primary button hover | `{}`
+`--secondary-button-background-color` | the secondary button background color | `white`
+`--secondary-button-background-color-hover` | the secondary button background hover color | `#F7F7F7`
+`--cart-secondary-button` | Mixin applied to the secondary button | `{}`
+`--cart-secondary-button-hover` | Mixin applied to the secondary button hover | `{}`
+
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="acre-toolbar-shared-styles">
+  <template>
+    <style>
+      a,
+      a:link,
+      a:visited,
+      a:hover,
+      a:focus,
+      a:active {
+        text-decoration: none!important;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .menu-button iron-icon {
+        width: 20px;
+        height: 20px;
+        @apply(--menu-button-icon);
+      }
+
+      .menu-button .message {
+        color: var(--menu-button-text-color, --secondary-text-color);
+        @apply(--menu-button-text);
+      }
+
+      .menu-button:hover {
+        background-color: var(--menu-button-hover-color, --dark-primary-color);
+      }
+
+      .acre-primary-button {
+        padding: 20px;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        margin-left: 20px;
+        border: 1px solid #bfbfbf;
+        text-align: center;
+        background-color: var(--primary-button-background-color, --default-secondary-color);
+        @apply(--cart-primary-button);
+      }
+
+      .acre-primary-button:hover {
+        color: white;
+        background-color: var(--primary-button-background-color-hover, --dark-secondary-color);
+        @apply(--cart-primary-button-hover);
+      }
+
+      .acre-secondary-button {
+        padding: 15px;
+        height: 15px;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        border: 1px solid #bfbfbf;
+        text-align: center;
+        color: var(--secondary-button-color, --default-primary-color);
+        background-color: var(--checkout-button-background-color, white);
+        @apply(--cart-secondary-button);
+      }
+
+      .acre-secondary-button:hover {
+        background-color: #F7F7F7;
+        @apply(--cart-secondary-button-hover);
+      }
+
+
+    </style>
+
+  </template>
+</dom-module>

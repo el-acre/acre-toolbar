@@ -12,22 +12,14 @@
     href="../paper-icon-button/paper-icon-button.html">
 <link rel="import"
     href="../iron-media-query/iron-media-query.html">
+<link rel="import"
+    href="acre-toolbar-shared-styles.html">
 
 <dom-module id="acre-cart-product">
   <template>
-    <style include="iron-flex iron-flex-alignment">
+    <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
       :host {
         display: block;
-      }
-
-      a,
-      a:link,
-      a:visited,
-      a:hover,
-      a:focus,
-      a:active {
-        color: inherit;
-        text-decoration: none!important;
       }
 
       .cart-product {
@@ -99,7 +91,7 @@
         <span class="quantity">[[product.quantity]]</span>
         <span class="price">[[_formatPrice(product.price)]]</span>
       </a>
-      <paper-icon-button class="layout flex-1"
+      <paper-icon-button class="layout flex-1" style="color:black"
           on-click="removeClick"
           icon="clear"></paper-icon-button>
     </div>
@@ -111,6 +103,10 @@
 
       properties: {
 
+        /**
+         * The product
+         * @type {{ id: number, image:string, name: string, quantity: number,price: number, url: string }}
+         */
         product: {
           type: Object,
           value: function() {
@@ -126,6 +122,13 @@
       },
 
       // events
+      /**
+      * The `acre-cart-product-remove-click` event is fired when
+      * the user click on the remove click
+      *
+      * @event acre-cart-product-remove-click
+      * @detail {{product: product}}
+      */
       removeClick: function() {
         this.fire('acre-cart-product-remove-click', {
           product: this.product

@@ -46,6 +46,7 @@
       <div class="toolbar-actions">
         <acre-cart-dropdown cart-url="[[cartUrl]]"
             items-quantity="[[itemsQuantity]]"
+            items-sum-quantity="[[itemsSumQuantity]]"
             cart-message="[[cartMessage]]">
           <acre-cart-presenter cart-items="[[cartItems]]"
               items-sum-quantity="[[itemsSumQuantity]]"
@@ -93,6 +94,7 @@
         showCartMessage: String,
         checkoutMessage: String,
         searchUrl: String,
+        searchSubmitUrl: String,
         actions: {
           type: Array,
           value: function() {

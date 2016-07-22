@@ -1,27 +1,11 @@
 <link rel="import"
     href="../polymer/polymer.html">
 <link rel="import"
-    href="../iron-image/iron-image.html">
-<link rel="import"
-    href="../iron-icon/iron-icon.html">
-<link rel="import"
-    href="../iron-icons/iron-icons.html">
-<link rel="import"
-    href="../paper-button/paper-button.html">
-<link rel="import"
     href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import"
-    href="../paper-badge/paper-badge.html">
-<link rel="import"
-    href="../paper-icon-button/paper-icon-button.html">
-<link rel="import"
-    href="../paper-toast/paper-toast.html">
-    <link rel="import"
-    href="../iron-media-query/iron-media-query.html">
-<link rel="import"
     href="acre-cart-product.html">
-
-
+<link rel="import"
+    href="acre-toolbar-shared-styles.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -32,8 +16,17 @@ Example:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--toolbar-container` | Mixin applied to all rows (middle, top, bottom)  | `{}`
-
+`--show-all-message-text-color` | The show all message text color  | `--default-primary-color`
+`---divider-color` | The the divider color  | `--default-secondary-color`
+`--cart-items-container` | Mixin applied to the cart items container | `{}`
+`--primary-button-background-color` | the primary button background color | `--default-secondary-color`
+`--primary-button-background-color-hover` | the primary button background hover color | `--dark-secondary-color`
+`--cart-primary-button` | Mixin applied to the primary button | `{}`
+`--cart-primary-button-hover` | Mixin applied to the primary button hover | `{}`
+`--secondary-button-background-color` | the secondary button background color | `white`
+`--secondary-button-background-color-hover` | the secondary button background hover color | `#F7F7F7`
+`--cart-secondary-button` | Mixin applied to the secondary button | `{}`
+`--cart-secondary-button-hover` | Mixin applied to the secondary button hover | `{}`
 
 @demo demo/index.html
 @hero hero.svg
@@ -41,21 +34,10 @@ Custom property | Description | Default
 
 <dom-module id="acre-cart-presenter">
   <template>
-    <style include="iron-flex iron-flex-alignment" />
+    <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles" />
     <style>
       :host {
         display: block;
-        box-sizing: border-box;
-      }
-
-      a,
-      a:link,
-      a:visited,
-      a:hover,
-      a:focus,
-      a:active {
-        color: inherit;
-        text-decoration: none!important;
       }
 
       .show-all-message {
@@ -63,14 +45,14 @@ Custom property | Description | Default
         padding: 10px;
         cursor: pointer;
         text-align: center;
-        color: var(--checkout-message-color, --default-secondary-color);
+        color: var(--show-all-message-text-color, --default-primary-color);
         border-top: 1px solid var(red, --default-secondary-color);
         border-bottom: 1px solid var(red, --default-secondary-color);
         @apply(--cart-show-all-message);
       }
 
       .accent-divider {
-        border-top: 1px solid var(red, --default-secondary-color);
+        border-top: 1px solid var(--divider-color, --default-secondary-color);
       }
 
       .cart-actions {
@@ -81,65 +63,18 @@ Custom property | Description | Default
         border-bottom: 1px solid #c7c7c7;
       }
 
-      .cart-primary-button {
-        padding: 20px;
-        color: white;
-        cursor: pointer;
-        font-weight: bold;
-        margin-left: 20px;
-        border: 1px solid #bfbfbf;
-        text-align: center;
-        background-color: var(--checkout-button-background-color, --default-secondary-color);
-        @apply(--cart-primary-button-hover);
-      }
-
-      .cart-primary-button:hover {
-        color: white;
-        background-color: var(--checkout-button-background-color-hover, --dark-secondary-color);
-      }
-
-      .cart-secondary-button {
-        padding: 15px;
-        height: 15px;
-        color: white;
-        cursor: pointer;
-        font-weight: bold;
-        border: 1px solid #bfbfbf;
-        text-align: center;
-        color: var(--secondary-button-color, --default-primary-color);
-        background-color: var(--checkout-button-background-color, white);
-        @apply(--cart-secondary-button);
-      }
-
-      .cart-secondary-button:hover {
-        background-color: #F7F7F7;
-        @apply(--cart-secondary-button-hover);
-      }
-
-      paper-toast#addItemToast {
-        background-color: white;
-        color: black;
-        width: 400px;
-        margin-right: 20px;
-        @apply(--cart-toast);
-      }
-
-      .toast-header {
-        font-size: 18px;
-        margin-bottom: 10px;
-        @apply(--cart-toast-header);
-      }
-
-      .cart-items-container{
+      .cart-items-container {
         height: 100%;
         overflow: auto;
+        @apply(--cart-items-container);
       }
     </style>
 
     <iron-media-query query="max-width: 767px"
         query-matches="{{smallScreen}}"></iron-media-query>
 
-    <div class="layout vertical flex end-justified" style="height:100%">
+    <div class="layout vertical flex end-justified"
+        style="height:100%">
       <div class="cart-items-container">
         <template is="dom-repeat"
             items="[[cartItems]]"
@@ -151,7 +86,8 @@ Custom property | Description | Default
       <template is="dom-if"
           if="[[_showAllMessage]]"
           restamp="true">
-        <a href="[[cartUrl]]" class="show-all-message">
+        <a href="[[cartUrl]]"
+            class="show-all-message">
           Ver todos os [[itemsQuantity]] items
         </a>
       </template>
@@ -162,12 +98,12 @@ Custom property | Description | Default
         </div>
       </template>
       <div class="layout horizontal center self-end cart-actions">
-        <a class="cart-secondary-button"
+        <a class="acre-secondary-button"
             hidden$="[[smallScreen]]"
             href="[[cartUrl]]">
             [[showCartMessage]]
           </a>
-        <a class="cart-primary-button"
+        <a class="acre-primary-button"
             href="[[checkoutUrl]]">
             [[checkoutMessage]]
           </a>
@@ -190,21 +126,26 @@ Custom property | Description | Default
           value: '',
         },
 
+        /*
+         * The checkout message
+         */
         checkoutMessage: {
           type: String,
           value: "FINALIZAR COMPRA"
         },
 
+        /*
+         * The show cart message
+         */
         showCartMessage: {
           type: String,
           value: "VER CARRINHO"
         },
 
-        addItemToastMessage: {
-          type: String,
-          value: 'Produto adicionado ao carrinho'
-        },
-
+        /**
+         * The cart items Array
+         * @type {{ id: number, image:string, name: string, quantity: number,price: number, url: string }}
+         */
         cartItems: {
           type: Array,
           value: function() {
@@ -213,8 +154,14 @@ Custom property | Description | Default
           notify: true
         },
 
+        /*
+         * The max number of items visible in the cart list
+         */
         maxVisibleItems: Number,
 
+        /*
+         * The quantity of items in the cart
+         */
         itemsQuantity: {
           type: Number,
           notify: true
@@ -227,14 +174,19 @@ Custom property | Description | Default
 
       // Computed
 
+      /*
+       * Says if the `show all message` will be visible or not
+       * base on `maxVisibleItems`
+       */
       _computeShowAllMessage: function(items) {
         if (this.cartItems.length > this.maxVisibleItems)
           return true;
-
         return false;
       },
 
-      // Filter
+      /*
+       * Filter by the max number of itens in the cart
+       */
       _cartItemsFilter: function() {
         var _this = this;
         return function(cartItem) {

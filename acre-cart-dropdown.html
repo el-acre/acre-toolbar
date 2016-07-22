@@ -12,27 +12,38 @@
     href="../paper-badge/paper-badge.html">
 <link rel="import"
     href="acre-cart-presenter.html">
+<link rel="import"
+    href="acre-toolbar-shared-styles.html">
+
+<!--
+An element to show a dropdwon within the cart button
+
+Example:
+
+    <acre-cart-dropdown>
+        <div> The dropdown content</div>
+    </acre-cart-dropdown>
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--cart-badge-color` | The cart badge color  | `--accent-color`
+`--cart-badge-text-color` | The cart  badge text color  | `--primary-text-color`
+`--cart-badge` | Mixin applied to the cart badge  | `{}`
+`--cart-dropdown-container` | Mixin applied to the cart dropdown container | `{}`
+`--menu-button-icon` | Mixin applied to the menu button icon  | `{}`
+`--menu-button-text` | Mixin applied to the menu butotn text  | `{}`
+`--menu-button-hover-color` | The menu button hover color  | `--dark-primary-color`
+
+@demo demo/index.html
+@hero hero.svg
+-->
 
 
 <dom-module id="acre-cart-dropdown">
   <template>
-    <style include="iron-flex iron-flex-alignment">
+    <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
       :host {
         display: block;
-      }
-
-      a,
-      a:link,
-      a:visited,
-      a:hover,
-      a:focus,
-      a:active {
-        color: inherit;
-        text-decoration: none!important;
-      }
-
-      [hidden] {
-        display: none !important;
       }
 
       .card-badge {
@@ -46,18 +57,12 @@
         @apply(--cart-badge);
       }
 
-      .menu-button iron-icon {
-        width: 20px;
-        height: 20px;
-        @apply(--menu-button-icon);
-      }
-
-      .menu-button .span {
-        @apply(--menu-button-text);
-      }
-
       .cart-button {
         position: relative;
+      }
+
+      .cart-button:hover> ul {
+        display: block;
       }
 
       .cart-button> ul {
@@ -71,22 +76,13 @@
         max-height: 355px;
         background-color: white;
         box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
-        @apply(--cart-dropdown);
-      }
-
-      .cart-button:hover {
-        background-color: var(--cart-button-hover-color, --dark-primary-color);
-      }
-
-      .cart-button:hover> ul {
-        display: block;
-        color: var(--menu-item-hover-text-color, black);
-        background: var(--dropdown-background-color, white);
+        @apply(--cart-dropdown-container);
       }
 
       .cart-button> ul:hover {
         display: block;
       }
+
     </style>
     <div class="cart-button">
       <a href="[[cartUrl]]">
@@ -95,10 +91,10 @@
           <div class="layout horizontal center-justified">
             <iron-icon icon="shopping-cart"></iron-icon>
             <div class="layout horizontal center-justified card-badge">
-              <span class="layout self-center">[[itemsQuantity]]</span>
+              <span class="layout self-center">[[itemsSumQuantity]]</span>
             </div>
           </div>
-          <span>[[cartMessage]]</span>
+          <span class="message">[[cartMessage]]</span>
         </paper-button>
       </a>
       <ul hidden$="[[!itemsQuantity]]">
@@ -120,12 +116,16 @@
           value: "Meu Carrinho"
         },
 
-        cartItems: {
-          type: Object,
-          value: function() {
-            return [];
-          }
-        },
+        /*
+        * the quantity of items in the cart
+        * <br/> If more greater than 0 shows the dropdown
+        */
+        itemsQuantity: Number,
+
+        /*
+        * the sum of the quantities of items in the cart
+        */
+        itemsSumQuantity: Number,
       },
 
     });

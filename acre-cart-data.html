@@ -68,6 +68,14 @@ Example:
        * addItem()
        * Add an item to the cart
        */
+
+      /**
+       * The `acre-toolbar-cart-product-added` event is fired when
+       * a product is added to the cart
+       *
+       * @event acre-toolbar-cart-product-added
+       * @detail {{product: product}}
+       */
       addItem: function(item) {
 
         var itemsFoundList = this.cartItems.filter(function(x) {
@@ -88,6 +96,14 @@ Example:
        * removeItem()
        * Remove an items from the cart
        */
+
+      /**
+       * The `acre-toolbar-cart-product-removed` event is fired when
+       * a product is removed from the cart
+       *
+       * @event acre-toolbar-cart-product-removed
+       * @detail {{product: product}}
+       */
       removeItem: function(item) {
 
         var itemsFoundIndex = this.cartItems.filter(function(x) {
@@ -103,6 +119,15 @@ Example:
       /**
        * Change the item quantity in the cart,
        * if the quantity is 0 or less the item is removed
+       */
+
+      /**
+       * The `acre-toolbar-cart-product-quantity-changed` event is fired when
+       * a product quantity is changes
+       *
+       * @event acre-toolbar-cart-product-quantity-changed
+       * @detail {{product: product,
+       *   quantity: quantity}}
        */
       changeItemQuantity: function(itemId, quantity) {
 
@@ -123,34 +148,6 @@ Example:
           });
         }
       },
-
-
-      /* Events */
-
-      /**
-       * The `acre-toolbar-cart-product-added` event is fired when
-       * a product is added to the cart
-       *
-       * @event acre-toolbar-cart-product-added
-       * @param {{product: product}}
-       */
-
-      /**
-       * The `acre-toolbar-cart-product-removed` event is fired when
-       * a product is removed from the cart
-       *
-       * @event acre-toolbar-cart-product-removed
-       * @param {{product: product}}
-       */
-
-      /**
-       * The `acre-toolbar-cart-product-quantity-changed` event is fired when
-       * a product quantity is changes
-       *
-       * @event acre-toolbar-cart-product-quantity-changed
-       * @param {{product: product,
-       *   quantity: quantity}}
-       */
 
     });
   </script>

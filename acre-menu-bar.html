@@ -11,31 +11,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import"
     href="../polymer/polymer.html">
 <link rel="import"
-    href="../paper-toolbar/paper-toolbar.html">
-<link rel="import"
     href="../iron-image/iron-image.html">
-<link rel="import"
-    href="../paper-input/paper-input.html">
 <link rel="import"
     href="../iron-icon/iron-icon.html">
 <link rel="import"
     href="../iron-icons/iron-icons.html">
 <link rel="import"
-    href="../paper-button/paper-button.html">
-<link rel="import"
     href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import"
-    href="../paper-badge/paper-badge.html">
-<link rel="import"
-    href="../iron-ajax/iron-ajax.html">
-<link rel="import"
-    href="../paper-progress/paper-progress.html">
-<link rel="import"
-    href="../paper-drawer-panel/paper-drawer-panel.html">
-<link rel="import"
-    href="../paper-header-panel/paper-header-panel.html">
-<link rel="import"
-    href="../iron-collapse/iron-collapse.html">
+    href="acre-toolbar-shared-styles.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -46,20 +30,16 @@ Example:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--menu-button-icon` | Mixin applied to the menu button icon | `{}`
-`--menu-button-text` | Mixin applied to the menu button text | `{}`
-`--menu-item` | Mixin applied to the menu item | `{}`
-`--menu-item-text-color` | The color of the menu item | `--dark-primary-color`
-`--menu-item-hover-background-color` | The background color user when the user hover menu item | `#fff`
-`--menu-item-hover-text-color` | The color text used when the user hover menu item | `#000`
-`--menu-expand-icon` | Mixin applied to the expand icon in the menu bar | `{}`
-`--menu-subitems-container` | Mixin applied to the menu item container | `{}`
-`--menu-image` | Mixin applied to the menu image | `{}`
+`--menu-item-hover-background-color` | The menu hover background color | `white`
+`--menu-item-hover-text-color` | The menu hover text color | `black`
+`--menu-item-text-color` | The menu item text color | `--dark-primary-color`
+`--menu-item` | Mixin applied to the text color | `{}`
+`--dropdown-background-color` | The dropdown background color | `white`
+`--menu-expand-icon` | Mixin applied to the menu item expand icon | `{}`
+`--subitem-text-color` | The subitems text color | `{}`
+`--menu-subitems-container` | Mixin applied to the menu subitems container | `{}`
 `--menu-image-container` | Mixin applied to the menu image container | `{}`
-`--dropdown-background-color` | The menu item dropdown background color | `#fff`
-`--subitem-text-hover-color` | The color user when the user hover the submenu item | `--default-primary-color`
-`--drawer-color` | The drawer color | `--default-primary-color`
-`--drawer-item-text-color` | The drawer item text color color | `--primary-text-color`
+`--subitem-text-hover-color` | The subitem text hover color | `--default-primary-color`
 
 @demo demo/index.html
 @hero hero.svg
@@ -67,22 +47,13 @@ Custom property | Description | Default
 
 <dom-module id="acre-menu-bar">
   <template>
-    <style include="iron-flex iron-flex-alignment" />
+    <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles" />
     <style>
       :host {
         display: block;
         box-sizing: border-box;
       }
-
-      a,
-      a:link,
-      a:visited,
-      a:hover,
-      a:focus,
-      a:active {
-        color: inherit;
-        text-decoration: none;
-      }
+      /* The dropdown logic*/
 
       .dropmenu {
         margin: 0;
@@ -92,22 +63,6 @@ Custom property | Description | Default
       .dropmenu ul {
         margin: 0;
         padding: 0;
-      }
-
-      .dropmenu> li {
-        float: left;
-        list-style: none;
-        color: var(--menu-item-text-color, --dark-primary-color);
-        background-color: var(--bottom-color, --accent-color);
-        position: relative;
-        padding: 10px;
-        @apply(--menu-item);
-      }
-
-      .dropmenu> li .menu-item-name {
-        text-decoration: none;
-        display: block;
-        line-height: 25px;
       }
 
       .dropmenu> li ul {
@@ -149,8 +104,6 @@ Custom property | Description | Default
 
       .dropmenu> li:hover> ul {
         display: block;
-        color: var(--menu-item-hover-text-color, black);
-        background: var(--dropdown-background-color, white);
       }
 
       .dropmenu:after {
@@ -158,12 +111,34 @@ Custom property | Description | Default
         display: table;
         clear: both;
       }
+      /* The menu items*/
+
+      .menu-item {
+        float: left;
+        list-style: none;
+        background-color: transparent;
+        position: relative;
+        padding: 10px;
+        @apply(--menu-item);
+      }
+
+      .menu-item-name {
+        text-decoration: none;
+        color: var(--menu-item-text-color, --dark-primary-color);
+        display: block;
+        line-height: 25px;
+      }
+
+      .menu-dropdown {
+        background: var(--dropdown-background-color, white);
+      }
 
       .expand-icon {
         width: 15px;
         height: 15px;
         @apply(--menu-expand-icon);
       }
+      /* Menu subitem */
 
       .menu-subitems,
       .menu-display {
@@ -173,8 +148,11 @@ Custom property | Description | Default
 
       .menu-subitems {
         padding: 20px 20px 20px 10px;
-        color: var(--subitem-text-color, #636363);
         @apply(--menu-subitems-container);
+      }
+
+      .menu-subitem-name {
+        color: var(--subitem-text-color, #636363);
       }
 
       .menu-display {
@@ -188,22 +166,17 @@ Custom property | Description | Default
 
       .menu-subitem {
         padding: 5px 0;
+        cursor: pointer;
       }
 
-      .menu-subitem .icon,
-      .drawer-subitem .icon {
+      .menu-subitem-icon {
+        margin-left: 10px;
         width: 14px;
         height: 14px;
         color: var(--dropdown-background-color, white);
       }
 
-      .menu-subitem:hover,
-      .menu-subitem:hover> .icon,
-      .drawer-item:hover> .name,
-      .drawer-item:hover> .expand-icon,
-      .drawer-subitem:hover,
-      .drawer-subitem:hover .icon {
-        cursor: pointer;
+      .menu-subitem:hover> .menu-subitem-icon {
         color: var(--subitem-text-hover-color, --default-primary-color);
       }
     </style>
@@ -213,7 +186,7 @@ Custom property | Description | Default
           items=[[menuItems]]
           as=menuItem
           index-as=index>
-        <li>
+        <li class="menu-item">
           <a class="menu-item-name"
               href="[[menuItem.link]]">
             [[menuItem.name]]
@@ -223,7 +196,7 @@ Custom property | Description | Default
           </a>
           <template is="dom-if"
               if="{{menuItem.subitems}}">
-            <ul>
+            <ul class="menu-dropdown">
               <li class="layout horizontal">
                 <template is="dom-repeat"
                     items=[[menuItem.subitems]]
@@ -234,9 +207,10 @@ Custom property | Description | Default
                         items=[[subitemArray]]
                         as=subitem
                         index-as="index">
-                      <div class="menu-subitem layout horizontal flex">
-                        <a href="[[subitem.link]]">[[subitem.name]]</a>
-                        <iron-icon class="layout flex icon"
+                      <div class="menu-subitem layout horizontal center flex">
+                        <a class="menu-subitem-name"
+                            href="[[subitem.link]]">[[subitem.name]]</a>
+                        <iron-icon class="layout menu-subitem-icon"
                             icon="chevron-right"></iron-icon>
                       </div>
                     </template>
