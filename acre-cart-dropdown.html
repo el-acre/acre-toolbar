@@ -1,8 +1,6 @@
 <link rel="import"
     href="../polymer/polymer.html">
 <link rel="import"
-    href="../iron-image/iron-image.html">
-<link rel="import"
     href="../iron-icon/iron-icon.html">
 <link rel="import"
     href="../iron-icons/iron-icons.html">
@@ -12,8 +10,6 @@
     href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import"
     href="../paper-badge/paper-badge.html">
-<link rel="import"
-    href="../paper-icon-button/paper-icon-button.html">
 <link rel="import"
     href="acre-cart-presenter.html">
 
@@ -25,18 +21,18 @@
         display: block;
       }
 
+      a,
+      a:link,
+      a:visited,
+      a:hover,
+      a:focus,
+      a:active {
+        color: inherit;
+        text-decoration: none!important;
+      }
+
       [hidden] {
         display: none !important;
-      }
-
-      paper-button {
-        --paper-button: {
-          text-transform: none;
-        }
-      }
-
-      paper-button iron-icon {
-        margin-bottom: 10px;
       }
 
       .card-badge {
@@ -105,17 +101,8 @@
           <span>[[cartMessage]]</span>
         </paper-button>
       </a>
-      <ul hidden$="[[!cartItems.length]]">
-        <acre-cart-presenter id="cartPresenter"
-            cart-items="[[cartItems]]"
-            items-sum-quantity=[[itemsSumQuantity]]
-            items-quantity=[[itemsQuantity]]
-
-            max-visible-items="3"
-            cart-url=[[cartUrl]]
-            checkout-url=[[checkoutUrl]]
-            show-cart-message=[[showCartMessage]]
-            checkout-message=[[checkoutMessage]]></acre-cart-presenter>
+      <ul hidden$="[[!itemsQuantity]]">
+        <content></content>
       </ul>
     </div>
 

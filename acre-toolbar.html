@@ -1,0 +1,136 @@
+<link rel="import"
+    href="../polymer/polymer.html">
+<link rel="import"
+    href="acre-cart-data.html">
+<link rel="import"
+    href="acre-toolbar-container.html">
+<link rel="import"
+    href="acre-search-box.html">
+<link rel="import"
+    href="acre-cart-dropdown.html">
+<link rel="import"
+    href="acre-menu-bar.html">
+    <link rel="import"
+        href="acre-menu-inline.html">
+
+<dom-module id="acre-toolbar">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <acre-cart-data id="cartData"
+        cart-items="{{cartItems}}"
+        items-quantity="{{itemsQuantity}}"
+        items-sum-quantity="{{itemsSumQuantity}}"></acre-cart-data>
+
+    <acre-toolbar-container id="toolbar"
+        logo-image="[[logoImage]]"
+        logo-url="[[logoUrl]]"
+        top-actions="[[actions]]">
+
+      <div class="toolbar-top">
+        <content select="toolbar-top"></content>
+      </div>
+
+      <div class="toolbar-search">
+        <acre-search-box search-url="[[searchUrl]]"></acre-search-box>
+      </div>
+
+      <div class="toolbar-search-mobile">
+        <acre-search-box search-url="[[searchUrl]]"></acre-search-box>
+      </div>
+
+      <div class="toolbar-actions">
+        <acre-cart-dropdown cart-url="[[cartUrl]]"
+            items-quantity="[[itemsQuantity]]"
+            cart-message="[[cartMessage]]">
+          <acre-cart-presenter cart-items="[[cartItems]]"
+              items-sum-quantity="[[itemsSumQuantity]]"
+              items-quantity="[[itemsQuantity]]"
+              max-visible-items="3"
+              cart-url="[[cartUrl]]"
+              checkout-url="[[checkoutUrl]]"
+              show-cart-message="[[showCartMessage]]"
+              checkout-message="[[checkoutMessage]]"></acre-cart-presenter>
+        </acre-cart-dropdown>
+      </div>
+
+      <div class="toolbar-menu">
+        <acre-menu-bar menu-items="[[menuItems]]">
+          <acre-menu-bar>
+      </div>
+
+      <div class="drawer-right"
+          style="height: 100%; overflow: auto;">
+        <acre-cart-presenter cart-items="[[cartItems]]"
+            items-sum-quantity="[[itemsSumQuantity]]"
+            items-quantity="[[itemsQuantity]]"
+            max-visible-items="12"
+            cart-url="[[cartUrl]]"
+            checkout-url="[[checkoutUrl]]"
+            show-cart-message="[[showCartMessage]]"
+            checkout-message="[[checkoutMessage]]"></acre-cart-presenter>
+      </div>
+
+      <div class="drawer-left">
+        <acre-menu-inline menu-items="[[menuItems]]"></acre-menu-inline>
+      </div>
+    </acre-toolbar-container>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'acre-toolbar',
+
+      properties: {
+        logoImage: String,
+        logoUrl: String,
+        cartUrl: String,
+        checkoutUrl: String,
+        showCartMessage: String,
+        checkoutMessage: String,
+        searchUrl: String,
+        actions: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        },
+        menuItems: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        },
+
+        /*Cart props*/
+        cartItems: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        },
+
+        itemsQuantity: Number,
+        itemsSumQuantity: Number,
+      },
+
+      // Cart actions
+      addItem: function(item) {
+        this.$.cartData.addItem(item);
+      },
+
+      removeItem: function(item) {
+        this.$.cartData.removeItem(item);
+      },
+
+      changeItemQuantity: function(itemId, quantity) {
+        this.$.cartData.changeItemQuantity(item);
+      },
+
+    });
+  </script>
+</dom-module>

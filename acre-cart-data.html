@@ -1,6 +1,17 @@
 <link rel="import"
     href="../polymer/polymer.html">
 
+<!--
+An element to manage the cart data
+
+Example:
+
+    <acre-cart-data></acre-cart-data>
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
 <dom-module id="acre-cart-data">
   <script>
     Polymer({
@@ -8,6 +19,10 @@
 
       properties: {
 
+        /**
+         * The cart items Array
+         * @type {{ id: number, image:string, name: string, quantity: number,price: number, url: string }}
+         */
         cartItems: {
           type: Object,
           value: function() {
@@ -16,11 +31,17 @@
           notify: true
         },
 
+        /**
+         * The total of items in the cart
+         */
         itemsQuantity: {
           type: Number,
           notify: true
         },
 
+        /**
+         * The sum of items quantity in the cart
+         */
         itemsSumQuantity: {
           type: Number,
           notify: true
@@ -42,6 +63,11 @@
       },
 
       // Element Behavior
+
+      /**
+       * addItem()
+       * Add an item to the cart
+       */
       addItem: function(item) {
 
         var itemsFoundList = this.cartItems.filter(function(x) {
@@ -58,6 +84,10 @@
         }
       },
 
+      /**
+       * removeItem()
+       * Remove an items from the cart
+       */
       removeItem: function(item) {
 
         var itemsFoundIndex = this.cartItems.filter(function(x) {
@@ -70,6 +100,10 @@
         });
       },
 
+      /**
+       * Change the item quantity in the cart,
+       * if the quantity is 0 or less the item is removed
+       */
       changeItemQuantity: function(itemId, quantity) {
 
         var itemsFoundList = this.cartItems.filter(function(x) {
@@ -79,16 +113,44 @@
         var itemFoundIndex = this.cartItems.indexOf(itemsFoundList[0]);
         var itemFound = itemsFoundList[0];
 
-        if (quantity === 0) {
+        if (quantity <= 0) {
           this.removeItem(itemFound);
         } else {
           this.set('cartItems.' + itemFoundIndex + '.quantity', quantity);
           this.fire('acre-toolbar-cart-product-quantity-changed', {
-            product: itemId,
+            product: itemFound,
             quantity: quantity
           });
         }
       },
+
+
+      /* Events */
+
+      /**
+       * The `acre-toolbar-cart-product-added` event is fired when
+       * a product is added to the cart
+       *
+       * @event acre-toolbar-cart-product-added
+       * @param {{product: product}}
+       */
+
+      /**
+       * The `acre-toolbar-cart-product-removed` event is fired when
+       * a product is removed from the cart
+       *
+       * @event acre-toolbar-cart-product-removed
+       * @param {{product: product}}
+       */
+
+      /**
+       * The `acre-toolbar-cart-product-quantity-changed` event is fired when
+       * a product quantity is changes
+       *
+       * @event acre-toolbar-cart-product-quantity-changed
+       * @param {{product: product,
+       *   quantity: quantity}}
+       */
 
     });
   </script>

@@ -180,7 +180,7 @@ Custom property | Description | Default
         --app-drawer-width: 356px;
       }
 
-      .drawer-right{
+      .drawer-right {
         @apply(layout-flex);
         @apply(layout-vertical);
         overflow: auto;
@@ -201,7 +201,7 @@ Custom property | Description | Default
           <content select=".toolbar-top"></content>
           <div class="group-container">
             <template is="dom-repeat"
-                items=[[actions]]
+                items=[[topActions]]
                 as=action
                 index-as="index">
               <a class="action"
@@ -211,9 +211,9 @@ Custom property | Description | Default
         </div>
         <div class="middle"
             bottom-item>
-          <a href="[[logo.link]]">
+          <a href="[[logoUrl]]">
             <iron-image class="logo"
-                src="[[logo.image]]"
+                src="[[logoImage]]"
                 preload
                 sizing="contain"></iron-image>
           </a>
@@ -246,10 +246,10 @@ Custom property | Description | Default
           <div class="layout horizontal flex center">
             <paper-icon-button icon="menu"></paper-icon-button>
             <div class="layout horizontal flex">
-              <a href="[[logo.link]]"
+              <a href="[[logoUrl]]"
                   style="position: inherit!important">
                 <iron-image class$="logo {{_smallScreenCss}}"
-                    src="[[logo.image]]"
+                    src="[[logoImage]]"
                     preload
                     sizing="contain"></iron-image>
               </a>
@@ -276,12 +276,14 @@ Custom property | Description | Default
       </app-toolbar>
     </app-header>
 
-    <app-drawer class="drawer-right" id="right"
+    <app-drawer class="drawer-right"
+        id="right"
         align="right"
         swipe-open>
-        <content select=".drawer-right"></content>
+      <content select=".drawer-right"></content>
     </app-drawer>
-    <app-drawer align="left" swipe-open>
+    <app-drawer align="left"
+        swipe-open>
       <div class="layout vertical flex">
         <content select=".drawer-left"></content>
       </div>
@@ -299,19 +301,15 @@ Custom property | Description | Default
          *
          * @type {{image: string, link: string}}
          */
-        logo: {
-          type: Object,
-          value: function() {
-            return {}
-          }
-        },
+        logoImage: String,
+        logoUrl: String,
 
         /**
          * The actions list at the top bar
          *
          * @type {[{image: string, link: string}]}
          */
-        actions: {
+        topActions: {
           type: Array,
           value: function() {
             return []

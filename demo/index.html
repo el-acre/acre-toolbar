@@ -25,8 +25,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </script>
 
     <link rel="import"
-        href="../acre-toolbar-container.html">
-    <link rel="import"
+        href="../acre-toolbar.html">
+    <!-- <link rel="import"
         href="../acre-search-box.html">
     <link rel="import"
         href="../acre-menu-bar.html">
@@ -35,7 +35,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link rel="import"
         href="../acre-cart-data.html">
     <link rel="import"
-        href="../acre-menu-inline.html">
+        href="../acre-menu-inline.html"> -->
 
   </head>
   <style is="custom-style">
@@ -103,53 +103,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <template is="dom-bind">
 
-      <acre-cart-data id="acre-cart-data"
-          cart-items="{{cartItems}}"
-          items-quantity="{{itemsQuantity}}"
-          items-sum-quantity="{{itemsSumQuantity}}"></acre-cart-data>
-
-      <acre-toolbar-container id="toolbar"
-          logo='{"image": "http://sm.metheora.com/Images/logo-small.png","link": "/"}'>
-
-        <div class="toolbar-top">
-          <span style="color:yellow">  999-999-999</span>
-        </div>
-
-        <div class="toolbar-search">
-          <acre-search-box search-url="http://sm.metheora.com/busca?q=searchPlaceholder"></acre-search-box>
-        </div>
-
-        <div class="toolbar-search-mobile">
-          <acre-search-box search-url="http://sm.metheora.com/busca?q=searchPlaceholder"></acre-search-box>
-        </div>
-
-        <div class="toolbar-actions">
-          <acre-cart-dropdown cart-items="[[cartItems]]"
-              items-quantity="[[itemsQuantity]]"
-              items-sum-quantity="[[itemsSumQuantity]]"></acre-cart-dropdown>
-        </div>
-
-        <div class="toolbar-menu">
-          <acre-menu-bar id="menu-bar">
-            <acre-menu-bar>
-        </div>
-
-        <div class="drawer-right"
-            style="height: 100%; overflow: auto;">
-          <acre-cart-presenter cart-items="[[cartItems]]"
-              items-sum-quantity="[[itemsSumQuantity]]"
-              items-quantity="[[itemsQuantity]]"
-              max-visible-items="12"
-              cart-url=[[cartUrl]]
-              checkout-url=[[checkoutUrl]]
-              show-cart-message=[[showCartMessage]]
-              checkout-message=[[checkoutMessage]]></acre-cart-presenter>
-        </div>
-
-        <div class="drawer-left">
-          <acre-menu-inline id="menu-bar-inline"></acre-menu-inline>
-        </div>
-      </acre-toolbar-container>
+      <acre-toolbar id="mainToolbar"
+          logo-image="http://sm.metheora.com/Images/logo-small.png"
+          logo-url="/"
+          cart-url="/cartUrl"
+          cart-message="Sacola"
+          checkout-url="/checkout"
+          show-cart-message="Ver sacola"
+          checkout-message="Fechar compra"></acre-toolbar>
 
       <div class="content-demo">
 
@@ -174,48 +135,118 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
 
       <script type="text/javascript">
-        var element = document.getElementById('toolbar');
-        var cart = document.getElementById('acre-cart');
-        var cart_data = document.getElementById('acre-cart-data');
-        var menubar = document.getElementById('menu-bar');
-        var menubarInline = document.getElementById('menu-bar-inline');
+        var element = document.getElementById('mainToolbar');
+
+        element.actions = [{
+          name: 'Nossas Lojas',
+          link: ''
+        }, {
+          name: 'Tenha sua Loja',
+          link: ''
+        }, {
+          name: 'Atendimento (SAC): (55) 5555-5555',
+          link: ''
+        }, ];
+
+        element.menuItems = [{
+          name: "Aço",
+          link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
+          cover: 'http://www.wcm.ind.br/images/institucional.png',
+          coverSizing: 'contain',
+          opened: true,
+          subitems: [
+            [{
+              name: 'Armário de Aço',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=38'
+            }, {
+              name: 'Estante de Aço',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=28'
+            }, {
+              name: 'Reforço de estante par X',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=29'
+            }, {
+              name: 'Roupeiro de aço',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=75'
+            }]
+          ]
+        }, {
+          name: "Cadeiras",
+          link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
+          cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
+          coverSizing: 'contain',
+          subitems: [
+            [{
+              name: 'Cadeira Caixa',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=48'
+            }, {
+              name: 'Cadeira Empilhavel',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=46'
+            }, {
+              name: 'Cadeira Universitária',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
+            }, {
+              name: 'Cadeira Secretária Fixa',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
+            }, {
+              name: 'Poltrona Diretor',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=36'
+            }, {
+              name: 'Poltrona Presidente',
+              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=7'
+            }, ]
+          ]
+        }, {
+          name: "Escritório"
+        }, {
+          name: "Residência"
+        }, {
+          name: "Informática"
+        }, {
+          name: "Multiuso"
+        }, {
+          name: "Ventiladores"
+        }, {
+          name: "Arcondicionado"
+        }, {
+          name: "Refrigeração"
+        }, ]
 
         document.addEventListener('acre-cart-product-remove-click', function(e) {
           console.log('Product remve click');
           console.log(e.detail.product);
-          cart_data.removeItem(e.detail.product);
+          element.removeItem(e.detail.product);
         });
 
         document.getElementById('add_item1').addEventListener('click', function() {
-          cart_data.addItem(items[0]);
+          element.addItem(items[0]);
         });
         document.getElementById('add_item1_5').addEventListener('click', function() {
-          cart_data.changeItemQuantity(items[0].id, 5);
+          element.changeItemQuantity(items[0].id, 5);
         });
         document.getElementById('remove_item1_2').addEventListener('click', function() {
-          cart_data.changeItemQuantity(items[0].id, 0);
+          element.changeItemQuantity(items[0].id, 0);
         });
 
         document.getElementById('add_item2').addEventListener('click', function() {
-          cart_data.addItem(items[1]);
+          element.addItem(items[1]);
         });
         document.getElementById('add_item3').addEventListener('click', function() {
-          cart_data.addItem(items[2]);
+          element.addItem(items[2]);
         });
         document.getElementById('add_item4').addEventListener('click', function() {
-          cart_data.addItem(items[1]);
-          cart_data.addItem(items[2]);
-          cart_data.addItem(items[3]);
-          cart_data.addItem(items[4]);
-          cart_data.addItem(items[5]);
-          cart_data.addItem(items[6]);
-          cart_data.addItem(items[7]);
-          cart_data.addItem(items[8]);
-          cart_data.addItem(items[9]);
-          cart_data.addItem(items[10]);
-          cart_data.addItem(items[11]);
-          cart_data.addItem(items[12]);
-          cart_data.addItem(items[13]);
+          element.addItem(items[1]);
+          element.addItem(items[2]);
+          element.addItem(items[3]);
+          element.addItem(items[4]);
+          element.addItem(items[5]);
+          element.addItem(items[6]);
+          element.addItem(items[7]);
+          element.addItem(items[8]);
+          element.addItem(items[9]);
+          element.addItem(items[10]);
+          element.addItem(items[11]);
+          element.addItem(items[12]);
+          element.addItem(items[13]);
         });
 
         var items = [{
@@ -303,84 +334,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           price: 222,
           quantity: 1
         }];
-
-        element.actions = [{
-          name: 'Nossas Lojas',
-          link: ''
-        }, {
-          name: 'Tenha sua Loja',
-          link: ''
-        }, {
-          name: 'Atendimento (SAC): (55) 5555-5555',
-          link: ''
-        }, ];
-
-
-        menuItems = [{
-          name: "Aço",
-          link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-          cover: 'http://www.wcm.ind.br/images/institucional.png',
-          coverSizing: 'contain',
-          opened: true,
-          subitems: [
-            [{
-              name: 'Armário de Aço',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=38'
-            }, {
-              name: 'Estante de Aço',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=28'
-            }, {
-              name: 'Reforço de estante par X',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=29'
-            }, {
-              name: 'Roupeiro de aço',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=75'
-            }]
-          ]
-        }, {
-          name: "Cadeiras",
-          link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
-          cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
-          coverSizing: 'contain',
-          subitems: [
-            [{
-              name: 'Cadeira Caixa',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=48'
-            }, {
-              name: 'Cadeira Empilhavel',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=46'
-            }, {
-              name: 'Cadeira Universitária',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
-            }, {
-              name: 'Cadeira Secretária Fixa',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
-            }, {
-              name: 'Poltrona Diretor',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=36'
-            }, {
-              name: 'Poltrona Presidente',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=7'
-            }, ]
-          ]
-        }, {
-          name: "Escritório"
-        }, {
-          name: "Residência"
-        }, {
-          name: "Informática"
-        }, {
-          name: "Multiuso"
-        }, {
-          name: "Ventiladores"
-        }, {
-          name: "Arcondicionado"
-        }, {
-          name: "Refrigeração"
-        }, ]
-
-        menubarInline.menuItems = menuItems;
-        menubar.menuItems = menuItems;
       </script>
     </template>
   </body>

@@ -10,7 +10,7 @@
     "polymer",
     "seed"
   ],
-  "main": "acre-toolbar-container.html",
+  "main": ["acre-cart-data.html", "acre-toolbar-container.html"],
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/<USERNAME>/seed-element/",
   "ignore": [

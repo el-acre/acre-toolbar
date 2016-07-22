@@ -151,9 +151,9 @@ Custom property | Description | Default
       <template is="dom-if"
           if="[[_showAllMessage]]"
           restamp="true">
-        <div class="show-all-message">
+        <a href="[[cartUrl]]" class="show-all-message">
           Ver todos os [[itemsQuantity]] items
-        </div>
+        </a>
       </template>
       <template is="dom-if"
           if="[[!_showAllMessage]]"
