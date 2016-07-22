@@ -26,16 +26,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <link rel="import"
         href="../acre-toolbar.html">
-    <!-- <link rel="import"
-        href="../acre-search-box.html">
-    <link rel="import"
-        href="../acre-menu-bar.html">
-    <link rel="import"
-        href="../acre-cart-dropdown.html">
-    <link rel="import"
-        href="../acre-cart-data.html">
-    <link rel="import"
-        href="../acre-menu-inline.html"> -->
 
   </head>
   <style is="custom-style">
@@ -101,243 +91,250 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <body>
 
-    <template is="dom-bind">
+    <acre-toolbar id="mainToolbar"
+        logo-image="http://sm.metheora.com/Images/logo-small.png"
+        logo-url="/"
+        cart-url="/cartUrl"
+        cart-message="Sacola"
+        checkout-url="/checkout"
+        show-cart-message="Ver sacola"
+        checkout-message="Fechar compra"
+        login-url="/login"
+        profile-url="/profileUrl"
+        search-url="http://localhost:59140/busca?q=searchPlaceholder"
+        search-submit-url="http://localhost:59140/listProdutos?q=searchPlaceholder"></acre-toolbar>
 
-      <acre-toolbar id="mainToolbar"
-          logo-image="http://sm.metheora.com/Images/logo-small.png"
-          logo-url="/"
-          cart-url="/cartUrl"
-          cart-message="Sacola"
-          checkout-url="/checkout"
-          show-cart-message="Ver sacola"
-          checkout-message="Fechar compra"
-          search-url="http://localhost:59140/busca?q=searchPlaceholder"
-          search-submit-url="http://localhost:59140/listProdutos?q=searchPlaceholder"></acre-toolbar>
+    <div class="content-demo">
 
-      <div class="content-demo">
+      <button id="add_item1"
+          type="button"
+          name="button">ADD ITEM 1</button>
+      <button id="add_item1_5"
+          type="button"
+          name="button">ADD ITEM 1 -- 5</button>
+      <button id="remove_item1_2"
+          type="button"
+          name="button">REMOVE ITEM 1 -- 5</button>
+      <button id="add_item2"
+          type="button"
+          name="button">ADD ITEM 2</button>
+      <button id="add_item3"
+          type="button"
+          name="button">ADD ITEM 3</button>
+      <button id="add_item4"
+          type="button"
+          name="button">ADD ALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL</button>
 
-        <button id="add_item1"
-            type="button"
-            name="button">ADD ITEM 1</button>
-        <button id="add_item1_5"
-            type="button"
-            name="button">ADD ITEM 1 -- 5</button>
-        <button id="remove_item1_2"
-            type="button"
-            name="button">REMOVE ITEM 1 -- 5</button>
-        <button id="add_item2"
-            type="button"
-            name="button">ADD ITEM 2</button>
-        <button id="add_item3"
-            type="button"
-            name="button">ADD ITEM 3</button>
-        <button id="add_item4"
-            type="button"
-            name="button">ADD ALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL</button>
-      </div>
+          <button id="login" type="button" name="button">LOGIN</button>
 
-      <script type="text/javascript">
-        var element = document.getElementById('mainToolbar');
+      <div style="height: 500px; width:500px background-color:red"></div>
+    </div>
 
-        element.actions = [{
-          name: 'Nossas Lojas',
-          link: ''
-        }, {
-          name: 'Tenha sua Loja',
-          link: ''
-        }, {
-          name: 'Atendimento (SAC): (55) 5555-5555',
-          link: ''
-        }, ];
+    <script type="text/javascript">
+      var element = document.getElementById('mainToolbar');
 
-        element.menuItems = [{
-          name: "Aço",
-          link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
-          cover: 'http://www.wcm.ind.br/images/institucional.png',
-          coverSizing: 'contain',
-          opened: true,
-          subitems: [
-            [{
-              name: 'Armário de Aço',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=38'
-            }, {
-              name: 'Estante de Aço',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=28'
-            }, {
-              name: 'Reforço de estante par X',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=29'
-            }, {
-              name: 'Roupeiro de aço',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=75'
-            }]
-          ]
-        }, {
-          name: "Cadeiras",
-          link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
-          cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
-          coverSizing: 'contain',
-          subitems: [
-            [{
-              name: 'Cadeira Caixa',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=48'
-            }, {
-              name: 'Cadeira Empilhavel',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=46'
-            }, {
-              name: 'Cadeira Universitária',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
-            }, {
-              name: 'Cadeira Secretária Fixa',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
-            }, {
-              name: 'Poltrona Diretor',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=36'
-            }, {
-              name: 'Poltrona Presidente',
-              link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=7'
-            }, ]
-          ]
-        }, {
-          name: "Escritório"
-        }, {
-          name: "Residência"
-        }, {
-          name: "Informática"
-        }, {
-          name: "Multiuso"
-        }, {
-          name: "Ventiladores"
-        }, {
-          name: "Arcondicionado"
-        }, {
-          name: "Refrigeração"
-        }, ]
+      element.actions = [{
+        name: 'Nossas Lojas',
+        link: ''
+      }, {
+        name: 'Tenha sua Loja',
+        link: ''
+      }, {
+        name: 'Atendimento (SAC): (55) 5555-5555',
+        link: ''
+      }, ];
 
-        document.addEventListener('acre-cart-product-remove-click', function(e) {
-          console.log('Product remve click');
-          console.log(e.detail.product);
-          element.removeItem(e.detail.product);
-        });
+      element.menuItems = [{
+        name: "Aço",
+        link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
+        cover: 'http://www.wcm.ind.br/images/institucional.png',
+        coverSizing: 'contain',
+        opened: true,
+        subitems: [
+          [{
+            name: 'Armário de Aço',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=38'
+          }, {
+            name: 'Estante de Aço',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=28'
+          }, {
+            name: 'Reforço de estante par X',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=29'
+          }, {
+            name: 'Roupeiro de aço',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=75'
+          }]
+        ]
+      }, {
+        name: "Cadeiras",
+        link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=2',
+        cover: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQynatLkYTw5Y8NcGlMVCfuiYPMzgwgGqiP6hzu4v_vdDUYnGiNuA',
+        coverSizing: 'contain',
+        subitems: [
+          [{
+            name: 'Cadeira Caixa',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=48'
+          }, {
+            name: 'Cadeira Empilhavel',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=46'
+          }, {
+            name: 'Cadeira Universitária',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
+          }, {
+            name: 'Cadeira Secretária Fixa',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=44'
+          }, {
+            name: 'Poltrona Diretor',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=36'
+          }, {
+            name: 'Poltrona Presidente',
+            link: 'http://www.link-to.com.br/sm2011/scr/smprodtipo.asp?id=7'
+          }, ]
+        ]
+      }, {
+        name: "Escritório"
+      }, {
+        name: "Residência"
+      }, {
+        name: "Informática"
+      }, {
+        name: "Multiuso"
+      }, {
+        name: "Ventiladores"
+      }, {
+        name: "Arcondicionado"
+      }, {
+        name: "Refrigeração"
+      }, ]
 
-        document.getElementById('add_item1').addEventListener('click', function() {
-          element.addItem(items[0]);
-        });
-        document.getElementById('add_item1_5').addEventListener('click', function() {
-          element.changeItemQuantity(items[0].id, 5);
-        });
-        document.getElementById('remove_item1_2').addEventListener('click', function() {
-          element.changeItemQuantity(items[0].id, 0);
-        });
+      document.addEventListener('acre-cart-product-remove-click', function(e) {
+        console.log('Product remve click');
+        console.log(e.detail.product);
+        element.removeItem(e.detail.product);
+      });
 
-        document.getElementById('add_item2').addEventListener('click', function() {
-          element.addItem(items[1]);
-        });
-        document.getElementById('add_item3').addEventListener('click', function() {
-          element.addItem(items[2]);
-        });
-        document.getElementById('add_item4').addEventListener('click', function() {
-          element.addItem(items[1]);
-          element.addItem(items[2]);
-          element.addItem(items[3]);
-          element.addItem(items[4]);
-          element.addItem(items[5]);
-          element.addItem(items[6]);
-          element.addItem(items[7]);
-          element.addItem(items[8]);
-          element.addItem(items[9]);
-          element.addItem(items[10]);
-          element.addItem(items[11]);
-          element.addItem(items[12]);
-          element.addItem(items[13]);
-        });
+      document.getElementById('login').addEventListener('click', function() {
+        element.loggedUser = "Victor Hugo Maruqes"
+      });
 
-        var items = [{
-          id: 1,
-          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
-          name: 'GAVETEIRO PARA MESA COM 2 GAVETAS E FECHADURA SM ALFA 25 MM',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 2,
-          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-          name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 3,
-          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-          name: 'Produto 3',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 4,
-          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
-          name: 'Produto 4',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 5,
-          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
-          name: 'GAVETEIRO PARA MESA COM 2 GAVETAS E FECHADURA SM ALFA 25 MM',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 6,
-          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-          name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 7,
-          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-          name: 'Produto 3',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 8,
-          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
-          name: 'Produto 4',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 9,
-          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-          name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 10,
-          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-          name: 'Produto 3',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 11,
-          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
-          name: 'Produto 4',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 12,
-          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-          name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 13,
-          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-          name: 'Produto 3',
-          price: 222,
-          quantity: 1
-        }, {
-          id: 14,
-          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
-          name: 'Produto 4',
-          price: 222,
-          quantity: 1
-        }];
-      </script>
-    </template>
+      document.getElementById('add_item1').addEventListener('click', function() {
+        element.addItem(items[0]);
+      });
+      document.getElementById('add_item1_5').addEventListener('click', function() {
+        element.changeItemQuantity(items[0].id, 5);
+      });
+      document.getElementById('remove_item1_2').addEventListener('click', function() {
+        element.changeItemQuantity(items[0].id, 0);
+      });
+
+      document.getElementById('add_item2').addEventListener('click', function() {
+        element.addItem(items[1]);
+      });
+      document.getElementById('add_item3').addEventListener('click', function() {
+        element.addItem(items[2]);
+      });
+      document.getElementById('add_item4').addEventListener('click', function() {
+        element.addItem(items[1]);
+        element.addItem(items[2]);
+        element.addItem(items[3]);
+        element.addItem(items[4]);
+        element.addItem(items[5]);
+        element.addItem(items[6]);
+        element.addItem(items[7]);
+        element.addItem(items[8]);
+        element.addItem(items[9]);
+        element.addItem(items[10]);
+        element.addItem(items[11]);
+        element.addItem(items[12]);
+        element.addItem(items[13]);
+      });
+
+      var items = [{
+        id: 1,
+        image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+        name: 'GAVETEIRO PARA MESA COM 2 GAVETAS E FECHADURA SM ALFA 25 MM',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 2,
+        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+        name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 3,
+        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+        name: 'Produto 3',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 4,
+        image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+        name: 'Produto 4',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 5,
+        image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+        name: 'GAVETEIRO PARA MESA COM 2 GAVETAS E FECHADURA SM ALFA 25 MM',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 6,
+        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+        name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 7,
+        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+        name: 'Produto 3',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 8,
+        image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+        name: 'Produto 4',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 9,
+        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+        name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 10,
+        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+        name: 'Produto 3',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 11,
+        image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+        name: 'Produto 4',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 12,
+        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+        name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 13,
+        image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+        name: 'Produto 3',
+        price: 222,
+        quantity: 1
+      }, {
+        id: 14,
+        image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+        name: 'Produto 4',
+        price: 222,
+        quantity: 1
+      }];
+    </script>
   </body>
 
 </html>

@@ -111,7 +111,7 @@ Custom property | Description | Default
       .group-container {
         @apply(--layout-horizontal);
         @apply(--layout-center-justified);
-        width: 1000px;
+        width: 1200px;
         @apply(--toolbar-container);
       }
       /**
@@ -176,7 +176,7 @@ Custom property | Description | Default
       * MOBILE
       */
 
-      app-drawer#right {
+      app-drawer#drawerRight {
         --app-drawer-width: 356px;
       }
 
@@ -211,20 +211,18 @@ Custom property | Description | Default
         </div>
         <div class="middle"
             bottom-item>
-          <a href="[[logoUrl]]">
-            <iron-image class="logo"
-                src="[[logoImage]]"
-                preload
-                sizing="contain"></iron-image>
-          </a>
-          <div class="group-container">
+          <div class="group-container layout horizontal center">
+            <a href="[[logoUrl]]">
+              <iron-image class="logo"
+                  src="[[logoImage]]"
+                  preload
+                  sizing="contain"></iron-image>
+            </a>
             <content select=".toolbar-middle"></content>
             <div class="layout flex">
-              <content select=".toolbar-search"></content>
+            <content select=".toolbar-search"></content>
             </div>
-            <div style="margin-left:10px;">
-              <content select=".toolbar-actions"></content>
-            </div>
+            <content select=".toolbar-actions"></content>
           </div>
         </div>
       </app-toolbar>
@@ -244,7 +242,8 @@ Custom property | Description | Default
             if="[[!searchVisible]]"
             restamp="true">
           <div class="layout horizontal flex center">
-            <paper-icon-button icon="menu"></paper-icon-button>
+            <paper-icon-button icon="menu"
+                on-click="openLeftDrawer"></paper-icon-button>
             <div class="layout horizontal flex">
               <a href="[[logoUrl]]"
                   style="position: inherit!important">
@@ -271,18 +270,20 @@ Custom property | Description | Default
           </div>
         </template>
 
-        <paper-icon-button icon="shopping-cart"></paper-icon-button>
+        <paper-icon-button on-click="openRightDrawer"
+            icon="shopping-cart"></paper-icon-button>
 
       </app-toolbar>
     </app-header>
 
     <app-drawer class="drawer-right"
-        id="right"
+        id="drawerRight"
         align="right"
         swipe-open>
       <content select=".drawer-right"></content>
     </app-drawer>
     <app-drawer align="left"
+        id="drawerLeft"
         swipe-open>
       <div class="layout vertical flex">
         <content select=".drawer-left"></content>
@@ -370,6 +371,15 @@ Custom property | Description | Default
       hideSearch: function() {
         this.set('searchVisible', false);
       },
+
+      openLeftDrawer: function() {
+        this.$.drawerLeft.open()
+      },
+
+      openRightDrawer: function() {
+        this.$.drawerRight.open()
+      },
+
 
     });
   </script>

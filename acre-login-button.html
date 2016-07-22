@@ -1,0 +1,95 @@
+<link rel="import"
+    href="../polymer/polymer.html">
+<link rel="import"
+    href="../iron-icon/iron-icon.html">
+<link rel="import"
+    href="../iron-icons/iron-icons.html">
+<link rel="import"
+    href="../paper-button/paper-button.html">
+<link rel="import"
+    href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import"
+    href="../paper-badge/paper-badge.html">
+<link rel="import"
+    href="acre-toolbar-shared-styles.html">
+
+<dom-module id="acre-login-button">
+  <template>
+    <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
+      :host {
+        display: block;
+      }
+
+      .menu-button iron-icon {
+        width: 25px;
+        height: 25px;
+        margin-bottom: 5px;
+        @apply(--menu-button-icon);
+      }
+    </style>
+
+    <div class="login">
+      <template is="dom-if"
+          if="{{!loggedUser}}"
+          restamp="true">
+        <a href="[[loginUrl]]">
+          <paper-button class="menu-button layout vertical flex"
+              style="margin:0">
+            <iron-icon icon="account-box"></iron-icon>
+            <span class="message">[[loginMessage]]</span>
+          </paper-button>
+        </a>
+      </template>
+      <template is="dom-if"
+          if="{{loggedUser}}"
+          restamp="true">
+        <a href="[[profileUrl]]">
+          <paper-button class="menu-button layout vertical center"
+              style="margin:0">
+            <iron-icon icon="account-box"></iron-icon>
+            <span class="message">[[loggedUser]]</span>
+          </paper-button>
+        </a>
+      </template>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'acre-login-button',
+
+      properties: {
+        /*
+         * The logged user name
+         *
+         */
+        loggedUser: {
+          type: String,
+          value: null,
+        },
+
+        loginMessage: {
+          type: String,
+          value: 'Entrar'
+        },
+
+        /**
+         * The login url
+         */
+        loginUrl: {
+          type: String,
+          value: '',
+        },
+
+        /**
+         * The profile url
+         */
+        profileUrl: {
+          type: String,
+          value: '',
+        },
+
+      }
+    });
+  </script>
+</dom-module>
