@@ -34,6 +34,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         href="../acre-cart-dropdown.html">
     <link rel="import"
         href="../acre-cart-data.html">
+    <link rel="import"
+        href="../acre-menu-inline.html">
 
   </head>
   <style is="custom-style">
@@ -143,6 +145,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               show-cart-message=[[showCartMessage]]
               checkout-message=[[checkoutMessage]]></acre-cart-presenter>
         </div>
+
+        <div class="drawer-left">
+          <acre-menu-inline id="menu-bar-inline"></acre-menu-inline>
+        </div>
       </acre-toolbar-container>
 
       <div class="content-demo">
@@ -172,6 +178,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var cart = document.getElementById('acre-cart');
         var cart_data = document.getElementById('acre-cart-data');
         var menubar = document.getElementById('menu-bar');
+        var menubarInline = document.getElementById('menu-bar-inline');
 
         document.addEventListener('acre-cart-product-remove-click', function(e) {
           console.log('Product remve click');
@@ -235,7 +242,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           name: 'Produto 4',
           price: 222,
           quantity: 1
-        },{
+        }, {
           id: 5,
           image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
           name: 'GAVETEIRO PARA MESA COM 2 GAVETAS E FECHADURA SM ALFA 25 MM',
@@ -309,7 +316,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }, ];
 
 
-        menubar.menuItems = [{
+        menuItems = [{
           name: "Aço",
           link: 'http://www.link-to.com.br/sm2011/scr/smsessaoexpandida.asp?id=1',
           cover: 'http://www.wcm.ind.br/images/institucional.png',
@@ -371,6 +378,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }, {
           name: "Refrigeração"
         }, ]
+
+        menubarInline.menuItems = menuItems;
+        menubar.menuItems = menuItems;
       </script>
     </template>
   </body>

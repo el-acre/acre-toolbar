@@ -1,0 +1,163 @@
+<link rel="import"
+    href="../iron-collapse/iron-collapse.html">
+<link rel="import"
+    href="../polymer/polymer.html">
+
+<dom-module id="acre-menu-inline">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      a,
+      a:link,
+      a:visited,
+      a:hover,
+      a:focus,
+      a:active {
+        color: inherit;
+        text-decoration: none;
+      }
+      .drawer {
+        font-size: 12px;
+      }
+
+      .drawer-header {
+        padding: 10px;
+        background-color: var(--drawer-color, --default-primary-color);
+        color: white;
+        @apply(--layout-horizontal);
+        @apply(--layout-justified);
+      }
+
+      .drawer .cart {
+        border-left: 1px solid;
+        border-color: var(--cart-badge-color, --dark-primary-color);
+      }
+
+      .drawer-content {
+        padding: 10px;
+        @apply(--layout-vertical);
+      }
+
+      .drawer-item {
+        padding: 10px;
+        color: var(--drawer-item-text-color, --primary-text-color);
+      }
+
+      .drawer-item .name {
+        font-size: 14px;
+      }
+
+      .drawer-subitem {
+        line-height: 27px;
+      }
+
+      .drawer-subitems {
+        margin-left: 10px;
+        padding: 10px;
+      }
+
+      .menu-subitem .icon,
+      .drawer-subitem .icon {
+        width: 14px;
+        height: 14px;
+        color: var(--dropdown-background-color, white);
+      }
+
+      .menu-subitem:hover,
+      .menu-subitem:hover> .icon,
+      .drawer-item:hover> .name,
+      .drawer-item:hover> .expand-icon,
+      .drawer-subitem:hover,
+      .drawer-subitem:hover .icon {
+        cursor: pointer;
+        color: var(--subitem-text-hover-color, --default-primary-color);
+      }
+    </style>
+
+    <template is="dom-repeat"
+        items=[[menuItems]]
+        as=menuItem
+        index-as=index>
+      <div class="drawer-item"
+          on-click="_collapseClick">
+        <span class="name">[[menuItem.name]]</span>
+        <template is="dom-if"
+            if="{{menuItem.subitems}}">
+          <iron-icon class="expand-icon"
+              icon="expand-more"></iron-icon>
+        </template>
+        <iron-collapse opened="{{_isOpened(_itemOpened, index)}}">
+          <div class="collapse-content">
+            <template is="dom-if"
+                if="{{menuItem.subitems}}">
+              <div class="layout horizontal">
+                <template is="dom-repeat"
+                    items=[[menuItem.subitems]]
+                    as=subitemArray
+                    index-as="index">
+                  <div class="drawer-subitems layout flex">
+                    <template is="dom-repeat"
+                        items=[[subitemArray]]
+                        as=subitem
+                        index-as="index">
+                      <div class="drawer-subitem layout horizontal flex center">
+                        <a href="[[subitem.link]]">[[subitem.name]]</a>
+                        <div class="horizontal end-justified layout flex icon">
+                          <iron-icon class="icon"
+                              icon="chevron-right"></iron-icon>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </div>
+        </iron-collapse>
+      </div>
+    </template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'acre-menu-inline',
+
+      properties: {
+        /**
+         * The menu itens with this subitems, this is placed at the bottom bar
+         *
+         * @type {[{
+         * name: string,
+         * link:string,
+         * cover: string,
+         * coverSizing: contain,
+         * subitems: [{name: string, link: string}]
+         * }]}
+         */
+        menuItems: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        },
+
+        _itemOpened: {
+          type: Number,
+          value: 0,
+          notify: true
+        },
+      },
+      _isOpened: function(_itemOpened, index) {
+        return _itemOpened == index;
+      },
+
+      _collapseClick: function(e) {
+        this.set('_itemOpened', e.model.index);
+      },
+
+    });
+  </script>
+</dom-module>
