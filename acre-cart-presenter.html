@@ -16,6 +16,8 @@
     href="../paper-icon-button/paper-icon-button.html">
 <link rel="import"
     href="../paper-toast/paper-toast.html">
+    <link rel="import"
+    href="../iron-media-query/iron-media-query.html">
 <link rel="import"
     href="acre-cart-product.html">
 
@@ -75,6 +77,10 @@ Custom property | Description | Default
         padding: 20px;
       }
 
+      acre-cart-product:not(:last-of-type) {
+        border-bottom: 1px solid #c7c7c7;
+      }
+
       .cart-primary-button {
         padding: 20px;
         color: white;
@@ -123,9 +129,17 @@ Custom property | Description | Default
         margin-bottom: 10px;
         @apply(--cart-toast-header);
       }
+
+      .cart-items-container{
+        height: 100%;
+        overflow: auto;
+      }
     </style>
 
-    <div class="layout vertical">
+    <iron-media-query query="max-width: 767px"
+        query-matches="{{smallScreen}}"></iron-media-query>
+
+    <div class="layout vertical flex end-justified" style="height:100%">
       <div class="cart-items-container">
         <template is="dom-repeat"
             items="[[cartItems]]"
@@ -147,8 +161,9 @@ Custom property | Description | Default
         <div class="accent-divider">
         </div>
       </template>
-      <div class="layout horizontal center end-justified cart-actions">
+      <div class="layout horizontal center self-end cart-actions">
         <a class="cart-secondary-button"
+            hidden$="[[smallScreen]]"
             href="[[cartUrl]]">
             [[showCartMessage]]
           </a>
@@ -213,7 +228,7 @@ Custom property | Description | Default
       // Computed
 
       _computeShowAllMessage: function(items) {
-        if (this.cartItems.length > 3)
+        if (this.cartItems.length > this.maxVisibleItems)
           return true;
 
         return false;
@@ -223,7 +238,9 @@ Custom property | Description | Default
       _cartItemsFilter: function() {
         var _this = this;
         return function(cartItem) {
-          return _this.cartItems.indexOf(cartItem) < _this.maxVisibleItems;
+          if (_this.maxVisibleItems)
+            return _this.cartItems.indexOf(cartItem) < _this.maxVisibleItems;
+          return true;
         }
       },
 

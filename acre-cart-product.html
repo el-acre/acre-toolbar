@@ -10,7 +10,8 @@
     href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import"
     href="../paper-icon-button/paper-icon-button.html">
-
+<link rel="import"
+    href="../iron-media-query/iron-media-query.html">
 
 <dom-module id="acre-cart-product">
   <template>
@@ -36,10 +37,6 @@
         font-weight: bold;
       }
 
-      .cart-product:not(:last-of-type) {
-        border-bottom: 1px solid #c7c7c7;
-      }
-
       .cart-product:hover {
         background-color: #F7F7F7;
         cursor: pointer;
@@ -52,11 +49,18 @@
       }
 
       .cart-product .name {
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-left: 10px;
+        width: 175px;
         color: var(--product-name-text-color, --primary-text-color);
         @apply(--cart-product-name);
       }
 
       .cart-product .quantity {
+        width: 40px;
         text-align: center;
         color: var(--product-quantity-text-color, --default-primary-color);
         @apply(--cart-product-quantity);
@@ -64,23 +68,38 @@
 
       .cart-product .price {
         font-weight: bolder;
+        width: 70px;
         color: var(--product-price-text-color, --default-primary-color);
         @apply(--cart-product-price);
       }
+
+      @media screen and (max-width: 769px) {
+        .cart-product {
+          font-size: 14px;
+          font-weight: normal;
+        }
+        .image {
+          display: none;
+        }
+      }
     </style>
 
+    <iron-media-query query="max-width: 767px"
+        query-matches="{{smallScreen}}"></iron-media-query>
+
     <div class="layout horizontal center cart-product">
-      <a class="layout flex horizontal center"
+      <a class="layout flex horizontal center justified"
           href="[[product.url]]">
-        <iron-image class="image flex"
+        <iron-image class="image"
+            hidden$="[[smallScreen]]"
             src="[[product.image]]"
             preload
             sizing="contain"></iron-image>
-        <span class="name flex">[[product.name]]</span>
-        <span class="quantity flex">[[product.quantity]]</span>
-        <span class="price flex">[[_formatPrice(product.price)]]</span>
+        <span class="name">[[product.name]]</span>
+        <span class="quantity">[[product.quantity]]</span>
+        <span class="price">[[_formatPrice(product.price)]]</span>
       </a>
-      <paper-icon-button class="flex-1"
+      <paper-icon-button class="layout flex-1"
           on-click="removeClick"
           icon="clear"></paper-icon-button>
     </div>

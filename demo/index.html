@@ -51,45 +51,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       --disabled-text-color: #BDBDBD;
       --light-text-color: #fdfdfd;
       --divider-color: #B6B6B6;
-
       --search-input: {
-          font-size: 15px;
-          height: 55px;
-          color: var(--accent-color);
+        font-size: 15px;
+        height: 55px;
+        color: var(--accent-color);
       }
-
-      --toolbar-top:{
+      --toolbar-top: {
         color: var(--secondary-text-color);
       }
       --toolbar-middle: {
-          padding: 5px 10px;
-          color: var(--secondary-text-color);
+        padding: 5px 10px;
+        color: var(--secondary-text-color);
       }
       --toolbar-logo: {
-          width: 160px;
-          height: 100px;
-          margin-left: 5px;
-          margin-right: 10px;
+        width: 160px;
+        height: 100px;
+        margin-left: 5px;
+        margin-right: 10px;
       }
-
       --menu-button-icon: {
-          color: white;
+        color: white;
       }
       --cart-badge: {
-          margin-bottom: 8px;
+        margin-bottom: 8px;
       }
       --menu-item: {
-          padding: 10px 20px;
-          text-transform: uppercase;
-          font-weight: bold;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-weight: bold;
       }
       --menu-expand-icon: {
-          display: none;
+        display: none;
       }
       --menu-subitems-container: {
-          padding: 10px;
-          text-transform: none;
-          font-weight: normal;
+        padding: 10px;
+        text-transform: none;
+        font-weight: normal;
       }
     }
 
@@ -127,17 +124,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="toolbar-actions">
           <acre-cart-dropdown cart-items="[[cartItems]]"
               items-quantity="[[itemsQuantity]]"
-              items-sum-quantity="[[itemsSumQuantity]]"
-              id="acre-cart"></acre-cart-dropdown>
+              items-sum-quantity="[[itemsSumQuantity]]"></acre-cart-dropdown>
         </div>
 
         <div class="toolbar-menu">
           <acre-menu-bar id="menu-bar">
             <acre-menu-bar>
         </div>
+
+        <div class="drawer-right"
+            style="height: 100%; overflow: auto;">
+          <acre-cart-presenter cart-items="[[cartItems]]"
+              items-sum-quantity="[[itemsSumQuantity]]"
+              items-quantity="[[itemsQuantity]]"
+              max-visible-items="12"
+              cart-url=[[cartUrl]]
+              checkout-url=[[checkoutUrl]]
+              show-cart-message=[[showCartMessage]]
+              checkout-message=[[checkoutMessage]]></acre-cart-presenter>
+        </div>
       </acre-toolbar-container>
-
-
 
       <div class="content-demo">
 
@@ -158,7 +164,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             name="button">ADD ITEM 3</button>
         <button id="add_item4"
             type="button"
-            name="button">ADD ITEM 4</button>
+            name="button">ADD ALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL</button>
       </div>
 
       <script type="text/javascript">
@@ -190,19 +196,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           cart_data.addItem(items[2]);
         });
         document.getElementById('add_item4').addEventListener('click', function() {
+          cart_data.addItem(items[1]);
+          cart_data.addItem(items[2]);
           cart_data.addItem(items[3]);
+          cart_data.addItem(items[4]);
+          cart_data.addItem(items[5]);
+          cart_data.addItem(items[6]);
+          cart_data.addItem(items[7]);
+          cart_data.addItem(items[8]);
+          cart_data.addItem(items[9]);
+          cart_data.addItem(items[10]);
+          cart_data.addItem(items[11]);
+          cart_data.addItem(items[12]);
+          cart_data.addItem(items[13]);
         });
 
         var items = [{
           id: 1,
           image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
-          name: 'Produto 1',
+          name: 'GAVETEIRO PARA MESA COM 2 GAVETAS E FECHADURA SM ALFA 25 MM',
           price: 222,
           quantity: 1
         }, {
           id: 2,
           image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
-          name: 'Produto 2',
+          name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
           price: 222,
           quantity: 1
         }, {
@@ -213,6 +231,66 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           quantity: 1
         }, {
           id: 4,
+          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+          name: 'Produto 4',
+          price: 222,
+          quantity: 1
+        },{
+          id: 5,
+          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+          name: 'GAVETEIRO PARA MESA COM 2 GAVETAS E FECHADURA SM ALFA 25 MM',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 6,
+          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+          name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 7,
+          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+          name: 'Produto 3',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 8,
+          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+          name: 'Produto 4',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 9,
+          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+          name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 10,
+          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+          name: 'Produto 3',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 11,
+          image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
+          name: 'Produto 4',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 12,
+          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+          name: 'MESA SECRETÁRIA COM 2 GAVETAS EMBUTIDAS E FECHADURA - 80 CM X 1,20 M X 67 CM SM OFFICE',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 13,
+          image: 'http://www.shoppingmatriz.com.br/img/cadeirasrhodes/ipanema_president_relax%20mil.jpg',
+          name: 'Produto 3',
+          price: 222,
+          quantity: 1
+        }, {
+          id: 14,
           image: 'http://sm.metheora.com/Pictures/d49432b0-47e1-492d-a77e-33dd13cd407a.jpg',
           name: 'Produto 4',
           price: 222,

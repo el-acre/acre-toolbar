@@ -19,6 +19,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import"
     href="../app-layout/app-toolbar/app-toolbar.html">
 <link rel="import"
+    href="../app-layout/app-drawer/app-drawer.html">
+<link rel="import"
     href="../app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import"
     href="../iron-media-query/iron-media-query.html">
@@ -173,6 +175,16 @@ Custom property | Description | Default
       /**
       * MOBILE
       */
+
+      app-drawer#right {
+        --app-drawer-width: 356px;
+      }
+
+      .drawer-right{
+        @apply(layout-flex);
+        @apply(layout-vertical);
+        overflow: auto;
+      }
     </style>
 
     <iron-media-query query="max-width: 767px"
@@ -263,6 +275,17 @@ Custom property | Description | Default
 
       </app-toolbar>
     </app-header>
+
+    <app-drawer class="drawer-right" id="right"
+        align="right"
+        swipe-open>
+        <content select=".drawer-right"></content>
+    </app-drawer>
+    <app-drawer align="left" swipe-open>
+      <div class="layout vertical flex" style="height: 100%; overflow: auto;">
+        <content select=".drawer-right"></content>
+      </div>
+    </app-drawer>
 
   </template>
 
