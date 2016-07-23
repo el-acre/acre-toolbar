@@ -42,11 +42,13 @@
       </div>
 
       <div class="toolbar-search">
-        <acre-search-box search-url="[[searchUrl]]"></acre-search-box>
+        <acre-search-box search-url="[[searchUrl]]"
+            search-post-url="[[searchPostUrl]]"> </acre-search-box>
       </div>
 
       <div class="toolbar-search-mobile">
-        <acre-search-box search-url="[[searchUrl]]"></acre-search-box>
+        <acre-search-box search-url="[[searchUrl]]"
+            search-post-url="[[searchPostUrl]]"></acre-search-box>
       </div>
 
       <div class="toolbar-actions layout horizontal center">
@@ -104,7 +106,7 @@
         showCartMessage: String,
         checkoutMessage: String,
         searchUrl: String,
-        searchSubmitUrl: String,
+        searchPostUrl: String,
         loginMessage: String,
         loginUrl: String,
         profileUrl: String,

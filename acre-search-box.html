@@ -173,9 +173,9 @@ Custom property | Description | Default
 
     <form is="iron-form"
         id="searchForm"
-        display="none"
         method="post"
-        action="[[_searchSubmitUrl]]">
+        style="display: none;">
+        <input is="iron-input" type="text" name="query" value="[[query]]">
     </form>
 
     <div class="search-bar">
@@ -243,7 +243,7 @@ Custom property | Description | Default
         /*
          * The url to navigate when the user submit the query
          */
-        searchSubmitUrl: String,
+        searchPostUrl:  String,
 
         /**
          * The debounce time to execute the search action
@@ -277,12 +277,6 @@ Custom property | Description | Default
           type: Boolean,
           value: false,
         },
-
-        _searchSubmitUrl:{
-          type: String,
-          computed: '_computeSearchSubmitUrl(searchSubmitUrl, query)'
-        },
-
       },
 
       // Element Lifecycle
@@ -310,6 +304,7 @@ Custom property | Description | Default
         // removed from a document.
         //
         // Use this to clean up anything you did in `attached`.
+
       },
 
       // Element Behavior
@@ -349,15 +344,12 @@ Custom property | Description | Default
           this.$.searchRequest.generateRequest();
       },
 
-      _computeSearchSubmitUrl: function(searchSubmitUrl, query) {
-        if (!query) return "";
-        return searchSubmitUrl.replace("searchPlaceholder", query);
-      },
-
       _onSearchSubmit: function(e) {
         // check if 'enter' was pressed
         if (e.keyCode === 13) {
-          this.$.searchForm.submit()
+
+          this.$.searchForm.action = this.searchPostUrl;
+          this.$.searchForm.submit();
         }
       },
     });
