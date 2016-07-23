@@ -171,11 +171,13 @@ Custom property | Description | Default
         on-error="_searchBlur">
     </iron-ajax>
 
-    <form is="iron-form"
-        id="searchForm"
+    <form id="searchForm"
         method="post"
         style="display: none;">
-        <input is="iron-input" type="text" name="query" value="[[query]]">
+      <input is="iron-input"
+          type="text"
+          name="query"
+          value="[[query]]">
     </form>
 
     <div class="search-bar">
@@ -243,7 +245,7 @@ Custom property | Description | Default
         /*
          * The url to navigate when the user submit the query
          */
-        searchPostUrl:  String,
+        searchPostUrl: String,
 
         /**
          * The debounce time to execute the search action
