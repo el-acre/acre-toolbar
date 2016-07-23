@@ -19,13 +19,6 @@
       :host {
         display: block;
       }
-
-      .menu-button iron-icon {
-        width: 25px;
-        height: 25px;
-        margin-bottom: 5px;
-        @apply(--menu-button-icon);
-      }
     </style>
 
     <div class="login">
@@ -33,8 +26,7 @@
           if="{{!loggedUser}}"
           restamp="true">
         <a href="[[loginUrl]]">
-          <paper-button class="menu-button layout vertical flex"
-              style="margin:0;padding-top: 5px;">
+          <paper-button class="menu-button layout vertical flex">
             <iron-icon icon="account-box"></iron-icon>
             <span class="message">[[loginMessage]]</span>
           </paper-button>
@@ -44,8 +36,7 @@
           if="{{loggedUser}}"
           restamp="true">
         <a href="[[profileUrl]]">
-          <paper-button class="menu-button layout vertical center"
-              style="margin:0">
+          <paper-button class="menu-button layout vertical center">
             <iron-icon icon="account-box"></iron-icon>
             <span class="message">[[loggedUser]]</span>
           </paper-button>
