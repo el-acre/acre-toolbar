@@ -54,6 +54,9 @@
       </div>
 
       <div class="toolbar-actions layout horizontal center">
+        <acre-login-button login-url="[[loginUrl]]"
+            profile-url="[[profileUrl]]"
+            logged-user="[[loggedUser]]"></acre-login-button>
         <acre-cart-dropdown cart-url="[[cartUrl]]"
             items-quantity="[[itemsQuantity]]"
             items-sum-quantity="[[itemsSumQuantity]]"
@@ -67,9 +70,6 @@
               show-cart-message="[[showCartMessage]]"
               checkout-message="[[checkoutMessage]]"></acre-cart-presenter>
         </acre-cart-dropdown>
-        <acre-login-button login-url="[[loginUrl]]"
-            profile-url="[[profileUrl]]"
-            logged-user="[[loggedUser]]"></acre-login-button>
       </div>
 
       <div class="toolbar-menu">
