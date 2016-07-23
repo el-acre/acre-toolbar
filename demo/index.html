@@ -43,18 +43,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       --disabled-text-color: #BDBDBD;
       --light-text-color: #fdfdfd;
       --divider-color: #B6B6B6;
-      --search-input: {
-        font-size: 15px;
-        height: 55px;
-        color: var(--accent-color);
+
+      --toolbar-height: 170px;
+      --top-text-color: var(--secondary-text-color);
+      --middle-text-color: var(--secondary-text-color);
+
+      --toolbar-middle:{
+          height: 140px;
       }
-      --toolbar-top: {
-        color: var(--secondary-text-color);
-      }
-      --toolbar-middle: {
-        padding: 5px 10px;
-        color: var(--secondary-text-color);
-      }
+
       --toolbar-logo: {
         width: 160px;
         height: 100px;
@@ -80,12 +77,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         text-transform: none;
         font-weight: normal;
       }
+      --desktop-search-box:{
+        margin: 0 30px;
+      }
+      --search-input: {
+        font-size: 15px;
+        height: 55px;
+        color: var(--accent-color);
+      }
+      --menu-button:{
+        margin: 0 10px;
+      }
     }
 
     .content-demo {
       min-height: 150vh;
       background-color: blue;
-      padding-top: 200px;
+      padding-top: 230px;
     }
   </style>
 

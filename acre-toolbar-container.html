@@ -30,6 +30,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     href="../iron-image/iron-image.html">
 <link rel="import"
     href="../iron-pages/iron-pages.html">
+<link rel="import"
+    href="acre-toolbar-shared-styles.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -60,7 +62,7 @@ Custom property | Description | Default
 
 <dom-module id="acre-toolbar-container">
   <template>
-    <style include="iron-flex iron-flex-alignment">
+    <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
       :host {
         display: block;
       }
@@ -83,20 +85,6 @@ Custom property | Description | Default
         --app-header-shadow: {
           box-shadow: none;
         }
-      }
-
-      [hidden] {
-        display: none !important;
-      }
-
-      a,
-      a:link,
-      a:visited,
-      a:hover,
-      a:focus,
-      a:active {
-        color: inherit;
-        text-decoration: none;
       }
 
       .top,
@@ -141,7 +129,7 @@ Custom property | Description | Default
       */
 
       .middle {
-        padding: 0 10px 5px 10px;
+        padding: 0 10px;
         background-color: var(--middle-color, --default-primary-color);
         color: var(--middle-text-color, --light-text-color);
         @apply(--layout-center);
@@ -190,7 +178,7 @@ Custom property | Description | Default
     <iron-media-query query="max-width: 767px"
         query-matches="{{smallScreen}}"></iron-media-query>
 
-    <app-header hidden$="[[smallScreen]]"
+     <app-header hidden$="[[smallScreen]]"
         condenses
         reveals
         fixed

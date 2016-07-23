@@ -98,15 +98,17 @@ Custom property | Description | Default
         </div>
       </template>
       <div class="layout horizontal center self-end cart-actions">
-        <a class="acre-secondary-button"
-            hidden$="[[smallScreen]]"
-            href="[[cartUrl]]">
-            [[showCartMessage]]
-          </a>
-        <a class="acre-primary-button"
-            href="[[checkoutUrl]]">
-            [[checkoutMessage]]
-          </a>
+        <span class="acre-secondary-button"
+            hidden$="[[smallScreen]]">
+            <a href="[[cartUrl]]"> 
+              [[showCartMessage]]
+            </a>
+          </span>
+        <span class="acre-primary-button">
+            <a href="[[checkoutUrl]]"> 
+              [[checkoutMessage]]
+            </a>
+          </span>
       </div>
     </div>
 

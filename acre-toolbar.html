@@ -1,6 +1,8 @@
 <link rel="import"
     href="../polymer/polymer.html">
 <link rel="import"
+    href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import"
     href="acre-cart-data.html">
 <link rel="import"
     href="acre-toolbar-container.html">
@@ -17,13 +19,17 @@
 <link rel="import"
     href="acre-login-button.html">
 <link rel="import"
-    href="../iron-flex-layout/iron-flex-layout-classes.html">
+    href="acre-toolbar-shared-styles.html">
 
 <dom-module id="acre-toolbar">
   <template>
-    <style include="iron-flex iron-flex-alignment">
+    <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
       :host {
         display: block;
+      }
+
+      .desktop-search-box{
+        @apply(--desktop-search-box);
       }
     </style>
 
@@ -41,7 +47,7 @@
         <content select="toolbar-top"></content>
       </div>
 
-      <div class="toolbar-search">
+      <div class="toolbar-search desktop-search-box">
         <acre-search-box search-url="[[searchUrl]]"
             search-placeholder="[[searchPlaceholder]]"
             search-post-url="[[searchPostUrl]]"> </acre-search-box>
