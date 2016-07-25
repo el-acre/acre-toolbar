@@ -115,6 +115,7 @@ Custom property | Description | Default
 
       .top .action {
         padding-left: 15px;
+        @apply(--toolbar-action);
       }
 
       .top .action:hover {
@@ -122,7 +123,7 @@ Custom property | Description | Default
       }
 
       .top .group-container {
-        @apply(--layout-end-justified);
+        @apply(--layout-justified);
       }
       /**
       * MIDDLE
@@ -178,7 +179,7 @@ Custom property | Description | Default
     <iron-media-query query="max-width: 767px"
         query-matches="{{smallScreen}}"></iron-media-query>
 
-     <app-header hidden$="[[smallScreen]]"
+    <app-header hidden$="[[smallScreen]]"
         condenses
         reveals
         fixed
@@ -186,15 +187,17 @@ Custom property | Description | Default
       <app-toolbar class="tall">
         <div class="top"
             top-item>
-          <content select=".toolbar-top"></content>
           <div class="group-container">
-            <template is="dom-repeat"
-                items=[[topActions]]
-                as=action
-                index-as="index">
-              <a class="action"
-                  href="[[action.link]]">[[action.name]]</a>
-            </template>
+            <content select=".toolbar-top"></content>
+            <div class="layout self-end">
+              <template is="dom-repeat"
+                  items=[[topActions]]
+                  as=action
+                  index-as="index">
+                <a class="action"
+                    href="[[action.link]]">[[action.name]]</a>
+              </template>
+            </div>
           </div>
         </div>
         <div class="middle"
@@ -208,7 +211,7 @@ Custom property | Description | Default
             </a>
             <content select=".toolbar-middle"></content>
             <div class="layout flex">
-            <content select=".toolbar-search"></content>
+              <content select=".toolbar-search"></content>
             </div>
             <content select=".toolbar-actions"></content>
           </div>

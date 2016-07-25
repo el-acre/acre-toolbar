@@ -44,7 +44,7 @@
         top-actions="[[actions]]">
 
       <div class="toolbar-top">
-        <content select="toolbar-top"></content>
+        <content select=".toolbar-top"></content>
       </div>
 
       <div class="toolbar-search desktop-search-box">
@@ -158,6 +158,10 @@
       changeItemQuantity: function(itemId, quantity) {
         this.$.cartData.changeItemQuantity(item);
       },
+
+      setItemWithQuantity: function (item) {
+          this.$.cartData.setItemWithQuantity(item);
+      }
 
     });
   </script>

@@ -149,6 +149,43 @@ Example:
         }
       },
 
+      /**
+       * Set the item with total quantity in the cart,
+       * if the quantity is 0 or less the item is removed
+       */
+      /**
+       * The `acre-toolbar-cart-product-quantity-changed` event is fired when
+       * a product quantity is changes
+       *
+       * @event acre-toolbar-cart-product-quantity-changed
+       * @detail {{product: product,
+       *   quantity: quantity}}
+       */
+      setItemWithQuantity: function(item) {
+        var itemsFoundList = this.cartItems.filter(function(x) {
+          return x.id == item.id;
+        });
+
+        if (itemsFoundList.length === 0) {
+          this.push('cartItems', item);
+          this.fire('acre-toolbar-cart-product-added', {
+            product: item
+          });
+        } else { //replace current item
+          var itemFoundIndex = this.cartItems.indexOf(itemsFoundList[0]);
+          var itemFound = itemsFoundList[0];
+          if (item.quantity <= 0) {
+            this.removeItem(itemFound);
+          } else {
+            this.set('cartItems.' + itemFoundIndex + '.quantity', item.quantity);
+            this.fire('acre-toolbar-cart-product-quantity-changed', {
+              product: itemFound,
+              quantity: item.quantity
+            });
+          }
+        }
+      },
+
     });
   </script>
 </dom-module>
