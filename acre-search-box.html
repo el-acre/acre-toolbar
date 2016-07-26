@@ -181,14 +181,15 @@ Custom property | Description | Default
     </form>
 
     <div class="search-bar">
-      <input class="search-input"
+      <input 
+          class="search-input"
           is="iron-input"
           placeholder="[[searchPlaceholder]]"
           on-keydown="_onSearchSubmit"
           on-blur="_searchBlur"
           on-focus="_searchFocus"
           bind-value="{{query}}" />
-      <iron-icon class="search-button"
+      <iron-icon class="search-button" on-click="_searchSubmit" style="cursor:pointer"
           icon="search"></iron-icon>
       <template is="dom-if"
           if="[[_searchResults.length]]"
@@ -346,12 +347,15 @@ Custom property | Description | Default
           this.$.searchRequest.generateRequest();
       },
 
+      _searchSubmit: function (e) {
+        this.$.searchForm.action = this.searchPostUrl;
+        this.$.searchForm.submit();
+      },
+
       _onSearchSubmit: function(e) {
         // check if 'enter' was pressed
         if (e.keyCode === 13) {
-
-          this.$.searchForm.action = this.searchPostUrl;
-          this.$.searchForm.submit();
+            this._searchSubmit();
         }
       },
     });
