@@ -162,7 +162,7 @@ Custom property | Description | Default
         query-matches="{{smallScreen}}"></iron-media-query>
 
     <iron-ajax id="searchRequest"
-        auto
+        auto="[[_searchUrl]]"
         url="[[_searchUrl]]"
         handle-as="json"
         debounce-duration="[[searchDebounce]]"
