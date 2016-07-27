@@ -179,11 +179,7 @@ Custom property | Description | Default
     <iron-media-query query="max-width: 767px"
         query-matches="{{smallScreen}}"></iron-media-query>
 
-    <app-header hidden$="[[smallScreen]]"
-        condenses
-        reveals
-        fixed
-        effects="waterfall">
+    <app-header hidden$="[[smallScreen]]">
       <app-toolbar class="tall">
         <div class="top"
             top-item>
@@ -200,28 +196,29 @@ Custom property | Description | Default
             </div>
           </div>
         </div>
-        <div class="middle"
-            bottom-item>
-          <div class="group-container layout horizontal center">
-            <a href="[[logoUrl]]">
-              <iron-image class="logo"
-                  src="[[logoImage]]"
-                  preload
-                  sizing="contain"></iron-image>
-            </a>
-            <content select=".toolbar-middle"></content>
-            <div class="layout flex">
-              <content select=".toolbar-search"></content>
+        <div class="layout vertical" bottom-item>
+            <div class="middle">
+                <div class="group-container layout horizontal center">
+                    <a href="[[logoUrl]]">
+                        <iron-image class="logo"
+                                    src="[[logoImage]]"
+                                    preload
+                                    sizing="contain"></iron-image>
+                    </a>
+                    <content select=".toolbar-middle"></content>
+                    <div class="layout flex">
+                        <content select=".toolbar-search"></content>
+                    </div>
+                    <content select=".toolbar-actions"></content>
+                </div>
             </div>
-            <content select=".toolbar-actions"></content>
-          </div>
+            <div class="bottom">
+                <content select=".toolbar-menu"></content>
+            </div>
         </div>
       </app-toolbar>
 
-      <div class="bottom"
-          sticky>
-        <content select=".toolbar-menu"></content>
-      </div>
+      
     </app-header>
 
     <app-header condenses
