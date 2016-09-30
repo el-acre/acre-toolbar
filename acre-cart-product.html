@@ -91,7 +91,9 @@
         <span class="quantity">[[product.quantity]]</span>
         <span class="price">[[_formatPrice(product.price)]]</span>
       </a>
-      <paper-icon-button class="layout flex-1" style="color:black"
+      <paper-icon-button class="layout flex-1"
+          hidden$="[[product.cannotRemove]]"
+          style="color:black"
           on-click="removeClick"
           icon="clear"></paper-icon-button>
     </div>
