@@ -190,12 +190,12 @@ Custom property | Description | Default
           <a class="menu-item-name"
               href="[[menuItem.link]]">
             [[menuItem.name]]
-            <template is="dom-if" if="{{menuItem.subitems && menuItem.subitems.lenght}}">
+            <template is="dom-if" if="{{menuItem.subitems.length}}">
               <iron-icon class="expand-icon" icon="expand-more"></iron-icon>
             </template>
           </a>
           <template is="dom-if"
-              if="{{menuItem.subitems && menuItem.subitems.lenght}}">
+              if="{{menuItem.subitems.length}}">
             <ul class="menu-dropdown">
               <li class="layout horizontal">
                 <template is="dom-repeat"

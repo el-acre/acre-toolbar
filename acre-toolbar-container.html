@@ -63,7 +63,7 @@ Custom property | Description | Default
 <dom-module id="acre-toolbar-container">
   <template>
     <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
-      :host {
+       :host {
         display: block;
       }
 
@@ -184,41 +184,45 @@ Custom property | Description | Default
         <div class="top"
             top-item>
           <div class="group-container">
-            <content select=".toolbar-top"></content>
+            <div class="layout flex">
+              <content select=".toolbar-top"></content>
+            </div>
             <div class="layout self-end">
               <template is="dom-repeat"
                   items=[[topActions]]
                   as=action
                   index-as="index">
-                <a class="action" style$="{{action.style}}"
+                <a class="action"
+                    style$="{{action.style}}"
                     href="[[action.link]]">[[action.name]]</a>
               </template>
             </div>
           </div>
         </div>
-        <div class="layout vertical" bottom-item>
-            <div class="middle">
-                <div class="group-container layout horizontal center">
-                    <a href="[[logoUrl]]">
-                        <iron-image class="logo"
-                                    src="[[logoImage]]"
-                                    preload
-                                    sizing="contain"></iron-image>
-                    </a>
-                    <content select=".toolbar-middle"></content>
-                    <div class="layout flex">
-                        <content select=".toolbar-search"></content>
-                    </div>
-                    <content select=".toolbar-actions"></content>
-                </div>
+        <div class="layout vertical"
+            bottom-item>
+          <div class="middle">
+            <div class="group-container layout horizontal center">
+              <a href="[[logoUrl]]">
+                <iron-image class="logo"
+                    src="[[logoImage]]"
+                    preload
+                    sizing="contain"></iron-image>
+              </a>
+              <content select=".toolbar-middle"></content>
+              <div class="layout flex">
+                <content select=".toolbar-search"></content>
+              </div>
+              <content select=".toolbar-actions"></content>
             </div>
-            <div class="bottom">
-                <content select=".toolbar-menu"></content>
-            </div>
+          </div>
+          <div class="bottom">
+            <content select=".toolbar-menu"></content>
+          </div>
         </div>
       </app-toolbar>
 
-      
+
     </app-header>
 
     <app-header condenses
