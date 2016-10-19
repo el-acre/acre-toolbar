@@ -46,7 +46,10 @@ Custom property | Description | Default
 `--toolbar-container` | Mixin applied to all rows (middle, top, bottom)  | `{}`
 `--toolbar-top` | Mixin applied to the top area of the toolbar | `{}`
 `--top-color` | The color at the top of the bar | `--dark-primary-color`
+`--top-color-mobile` | The toolbar color on mobile | `--top-color`
 `--top-text-color` | The text color for the top of the bar | `--light-text-color`
+`--top-text-color-mobile` | The text toolbar color on mobile | `--top-text-color`
+`--mobile-icons-color` | The color of the icons on mobile | `--accent-color`
 `--toolbar-middle` | Mixin applied to the middle area of the toolbar | `{}`
 `--middle-color` | The color at the middle of the bar | `--default-primary-color`
 `--middle-text-color` | The text color for the middle of the bar | --light-text-color`
@@ -165,6 +168,10 @@ Custom property | Description | Default
       * MOBILE
       */
 
+      .mobile-icons-color{
+        color: var(--mobile-icons-color, --accent-color);
+      }
+
       
       app-drawer {
         --app-drawer-width: 85vw;
@@ -175,6 +182,22 @@ Custom property | Description | Default
         @apply(layout-vertical);
         overflow: auto;
       }
+
+      @media (max-width: 767px) {
+
+        app-header {
+          background-color: var(--top-color-mobile, --top-color);
+          color: var(--top-text-color-mobile, --top-text-color);
+        }
+
+        .top {
+          background-color: var(--top-color-mobile, --top-color);
+          color: var(--top-text-color-mobile, --top-text-color);
+          @apply(--toolbar-top-mobile);
+        }
+      }
+
+      
     </style>
 
     <iron-media-query query="max-width: 767px"
@@ -235,9 +258,9 @@ Custom property | Description | Default
             if="[[!searchVisible]]"
             restamp="true">
           <div class="layout horizontal flex center">
-            <paper-icon-button icon="menu"
+            <paper-icon-button class="mobile-icons-color" icon="menu"
                 on-click="openLeftDrawer"></paper-icon-button>
-            <div class="layout horizontal flex">
+            <div class="layout horizontal flex center-justified">
               <a href="[[logoUrl]]"
                   style="position: inherit!important">
                 <iron-image class$="logo {{_smallScreenCss}}"
@@ -246,7 +269,7 @@ Custom property | Description | Default
                     sizing="contain"></iron-image>
               </a>
             </div>
-            <paper-icon-button on-click="showSearch"
+            <paper-icon-button class="mobile-icons-color" on-click="showSearch"
                 icon="search"></paper-icon-button>
           </div>
         </template>
@@ -254,7 +277,7 @@ Custom property | Description | Default
             if="[[searchVisible]]"
             restamp="true">
           <div class="layout horizontal flex center">
-            <paper-icon-button on-click="hideSearch"
+            <paper-icon-button class="mobile-icons-color" on-click="hideSearch"
                 icon="arrow-back"></paper-icon-button>
             <div class="layout flex"
                 main-title>
@@ -263,7 +286,7 @@ Custom property | Description | Default
           </div>
         </template>
 
-        <paper-icon-button on-click="openRightDrawer"
+        <paper-icon-button class="mobile-icons-color" on-click="openRightDrawer"
             icon="shopping-cart"></paper-icon-button>
 
       </app-toolbar>
