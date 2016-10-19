@@ -97,14 +97,20 @@ Custom property | Description | Default
         <div class="accent-divider">
         </div>
       </template>
-      <div class="layout horizontal center self-end cart-actions">
-        <span class="acre-secondary-button"
-            hidden$="[[smallScreen]]">
+      <div class="layout horizontal center self-end cart-actions" hidden$="[[smallScreen]]">
+        <span class="acre-secondary-button">
             <a href="[[cartUrl]]"> 
               [[showCartMessage]]
             </a>
           </span>
         <span class="acre-primary-button">
+            <a href="[[checkoutUrl]]"> 
+              [[checkoutMessage]]
+            </a>
+          </span>
+      </div>
+       <div class="layout vertical center cart-actions" style="padding: 0 0 12px;" hidden$="[[!smallScreen]]">
+        <span class="acre-primary-button mobile flex">
             <a href="[[checkoutUrl]]"> 
               [[checkoutMessage]]
             </a>
