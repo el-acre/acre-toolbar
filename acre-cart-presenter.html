@@ -83,20 +83,12 @@ Custom property | Description | Default
           <acre-cart-product product="[[item]]"></acre-cart-product>
         </template>
       </div>
-      <template is="dom-if"
-          if="[[_showAllMessage]]"
-          restamp="true">
-        <a href="[[cartUrl]]"
-            class="show-all-message">
-          Ver todos os [[itemsQuantity]] items
-        </a>
-      </template>
-      <template is="dom-if"
-          if="[[!_showAllMessage]]"
-          restamp="true">
-        <div class="accent-divider">
+      <a href="[[cartUrl]]" hidden$="[[!smallScreen]]"
+          class="show-all-message">
+        Ver carrinho
+      </a>
+      <div class="accent-divider" hidden$="[[smallScreen]]">
         </div>
-      </template>
       <div class="layout horizontal center self-end cart-actions" hidden$="[[smallScreen]]">
         <span class="acre-secondary-button">
             <a href="[[cartUrl]]"> 
