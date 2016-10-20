@@ -122,8 +122,11 @@
 
       //utils
       _formatPrice: function(price) {
-        if (!price) return price;
-        return "R$ " + price.toFixed(2);
+        if(!price) return '-';
+
+        return "R$ " + price.toFixed(2)  //TO Decimal
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".") //Set Dots 
+                      .replace(/.([^.]*)$/,',$1'); // Replace last dot do comme
       },
 
       // events
