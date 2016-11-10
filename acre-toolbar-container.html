@@ -224,7 +224,7 @@ Custom property | Description | Default
             <div class="group-container layout horizontal center">
               <a href="[[logoUrl]]">
                 <iron-image class="logo"
-                    src="[[logoImage]]"
+                    src="[[_logoImage]]"
                     preload
                     sizing="contain"></iron-image>
               </a>
@@ -258,7 +258,7 @@ Custom property | Description | Default
               <a href="[[logoUrl]]"
                   style="position: inherit!important">
                 <iron-image class$="logo {{_smallScreenCss}}"
-                    src="[[logoImage]]"
+                    src="[[_logoImage]]"
                     preload
                     sizing="contain"></iron-image>
               </a>
@@ -288,7 +288,8 @@ Custom property | Description | Default
 
       </app-toolbar>
 
-      <div class="layout flex" sticky>
+      <div class="layout flex"
+          sticky>
         <content select=".toolbar-menu-mobile"></content>
       </div>
     </app-header>
@@ -319,7 +320,8 @@ Custom property | Description | Default
          *
          * @type {{image: string, link: string}}
          */
-        logoImage: String,
+        logoImage: {type: String, value: ''},
+        logoImageMobile: {type: String, value: ''},
         logoUrl: String,
 
         /**
@@ -340,16 +342,33 @@ Custom property | Description | Default
           notify: true,
         },
 
+        _logoImage: String,
+
         _smallScreenCss: {
+          type: String,
           computed: '_computeSmallScreenCss(smallScreen)'
         },
       },
 
+      observers: [
+        '_computeLogoImage(logoImage, logoImageMobile, smallScreen)'
+      ],
+
       // Computed
+      _computeLogoImage: function(logoImage, logoImageMobile, smallScreen) {
+        if (this.smallScreen && this.logoImageMobile)
+          this.set("_logoImage", this.logoImageMobile);
+        else
+          this.set("_logoImage", this.logoImage);
+
+        console.log(this._logoImage);
+      },
+
       _computeSmallScreenCss: function(smallScreen) {
         if (smallScreen) {
           return 'smallScreen'
         }
+        this._computeLogoImage();
       },
 
       // Element Lifecycle
