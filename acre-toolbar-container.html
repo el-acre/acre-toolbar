@@ -168,11 +168,10 @@ Custom property | Description | Default
       * MOBILE
       */
 
-      .mobile-icons-color{
+      .mobile-icons-color {
         color: var(--mobile-icons-color, --accent-color);
       }
 
-      
       app-drawer {
         --app-drawer-width: 85vw;
       }
@@ -184,20 +183,16 @@ Custom property | Description | Default
       }
 
       @media (max-width: 767px) {
-
         app-header {
           background-color: var(--top-color-mobile, --top-color);
           color: var(--top-text-color-mobile, --top-text-color);
         }
-
         .top {
           background-color: var(--top-color-mobile, --top-color);
           color: var(--top-text-color-mobile, --top-text-color);
           @apply(--toolbar-top-mobile);
         }
       }
-
-      
     </style>
 
     <iron-media-query query="max-width: 767px"
@@ -245,8 +240,6 @@ Custom property | Description | Default
           </div>
         </div>
       </app-toolbar>
-
-
     </app-header>
 
     <app-header condenses
@@ -258,7 +251,8 @@ Custom property | Description | Default
             if="[[!searchVisible]]"
             restamp="true">
           <div class="layout horizontal flex center">
-            <paper-icon-button class="mobile-icons-color" icon="menu"
+            <paper-icon-button class="mobile-icons-color"
+                icon="menu"
                 on-click="openLeftDrawer"></paper-icon-button>
             <div class="layout horizontal flex center-justified">
               <a href="[[logoUrl]]"
@@ -269,7 +263,8 @@ Custom property | Description | Default
                     sizing="contain"></iron-image>
               </a>
             </div>
-            <paper-icon-button class="mobile-icons-color" on-click="showSearch"
+            <paper-icon-button class="mobile-icons-color"
+                on-click="showSearch"
                 icon="search"></paper-icon-button>
           </div>
         </template>
@@ -277,7 +272,8 @@ Custom property | Description | Default
             if="[[searchVisible]]"
             restamp="true">
           <div class="layout horizontal flex center">
-            <paper-icon-button class="mobile-icons-color" on-click="hideSearch"
+            <paper-icon-button class="mobile-icons-color"
+                on-click="hideSearch"
                 icon="arrow-back"></paper-icon-button>
             <div class="layout flex"
                 main-title>
@@ -286,10 +282,15 @@ Custom property | Description | Default
           </div>
         </template>
 
-        <paper-icon-button class="mobile-icons-color" on-click="openRightDrawer"
+        <paper-icon-button class="mobile-icons-color"
+            on-click="openRightDrawer"
             icon="shopping-cart"></paper-icon-button>
 
       </app-toolbar>
+
+      <div class="layout flex" sticky>
+        <content select=".toolbar-menu-mobile"></content>
+      </div>
     </app-header>
 
     <app-drawer class="drawer-right"
@@ -342,8 +343,6 @@ Custom property | Description | Default
         _smallScreenCss: {
           computed: '_computeSmallScreenCss(smallScreen)'
         },
-
-
       },
 
       // Computed

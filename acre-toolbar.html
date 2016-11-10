@@ -13,7 +13,9 @@
 <link rel="import"
     href="acre-menu-bar.html">
 <link rel="import"
-    href="acre-menu-inline.html">
+    href="acre-menu-bar-mobile.html">
+<link rel="import"
+    href="acre-menu-for-drawer.html">
 <link rel="import"
     href="acre-cart-presenter.html">
 <link rel="import"
@@ -24,11 +26,11 @@
 <dom-module id="acre-toolbar">
   <template>
     <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
-      :host {
+       :host {
         display: block;
       }
 
-      .desktop-search-box{
+      .desktop-search-box {
         @apply(--desktop-search-box);
       }
     </style>
@@ -83,8 +85,13 @@
           <acre-menu-bar>
       </div>
 
+      <div class="toolbar-menu-mobile">
+        <acre-menu-bar-mobile menu-items-mobile="[[menuItemsMobile]]" hidden="[[!menuItemsMobile.length]]">
+          <acre-menu-bar-mobile>
+      </div>
+
       <div class="drawer-left">
-        <acre-menu-inline menu-items="[[menuItems]]"></acre-menu-inline>
+        <acre-menu-for-drawer menu-items="[[menuItems]]"></acre-menu-for-drawer>
       </div>
 
       <div class="drawer-right"
@@ -134,6 +141,13 @@
           }
         },
 
+        menuItemsMobile: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        },
+
         /*Cart props*/
         cartItems: {
           type: Array,
@@ -159,8 +173,8 @@
         this.$.cartData.changeItemQuantity(item);
       },
 
-      setItemWithQuantity: function (item) {
-          this.$.cartData.setItemWithQuantity(item);
+      setItemWithQuantity: function(item) {
+        this.$.cartData.setItemWithQuantity(item);
       }
 
     });
