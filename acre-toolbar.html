@@ -44,7 +44,9 @@
         logo-image="[[logoImage]]"
         logo-image-mobile="[[logoImageMobile]]"
         logo-url="[[logoUrl]]"
-        top-actions="[[actions]]">
+        top-actions="[[actions]]"
+        swipe-open-right="[[swipeOpenRight]]"
+        swipe-open-left="[[swipeOpenLeft]]">
 
       <div class="toolbar-top">
         <content select=".toolbar-top"></content>
@@ -155,6 +157,22 @@
           value: function() {
             return []
           }
+        },
+
+        /**
+        * Swipe open right drawer
+        */
+        swipeOpenRight: {
+          type: Boolean,
+          value: true
+        },
+
+        /**
+        * Swipe open left drawer
+        */
+        swipeOpenLeft: {
+          type: Boolean,
+          value: true
         },
 
         itemsQuantity: Number,

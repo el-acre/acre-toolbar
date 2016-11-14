@@ -297,12 +297,12 @@ Custom property | Description | Default
     <app-drawer class="drawer-right"
         id="drawerRight"
         align="right"
-        swipe-open>
+        swipe-open="[[swipeOpenRight]]">
       <content select=".drawer-right"></content>
     </app-drawer>
     <app-drawer align="left"
         id="drawerLeft"
-        swipe-open>
+        swipe-open="[[swipeOpenLeft]]">
       <div class="layout vertical flex">
         <content select=".drawer-left"></content>
       </div>
@@ -323,6 +323,22 @@ Custom property | Description | Default
         logoImage: {type: String, value: ''},
         logoImageMobile: {type: String, value: ''},
         logoUrl: String,
+
+        /**
+        * Swipe open right drawer
+        */
+        swipeOpenRight: {
+          type: Boolean,
+          value: true
+        },
+
+        /**
+        * Swipe open left drawer
+        */
+        swipeOpenLeft: {
+          type: Boolean,
+          value: true
+        },
 
         /**
          * The actions list at the top bar
