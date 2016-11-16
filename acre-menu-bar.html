@@ -180,14 +180,13 @@ Custom property | Description | Default
         color: var(--subitem-text-hover-color, --default-primary-color);
       }
     </style>
-
     <ul class="dropmenu">
       <template is="dom-repeat"
           items=[[menuItems]]
           as=menuItem
           index-as=index>
-        <li class="menu-item">
-          <a class="menu-item-name"
+        <li class="menu-item" data-cover$="[[menuItem.cover]]" on-mouseover='onHovered' >
+          <a class="menu-item-name"  
               href="[[menuItem.link]]">
             [[menuItem.name]]
             <template is="dom-if" if="{{menuItem.subitems.length}}">
@@ -196,7 +195,7 @@ Custom property | Description | Default
           </a>
           <template is="dom-if"
               if="{{menuItem.subitems.length}}">
-            <ul class="menu-dropdown">
+            <ul class="menu-dropdown" >
               <li class="layout horizontal">
                 <template is="dom-repeat"
                     items=[[menuItem.subitems]]
@@ -208,8 +207,8 @@ Custom property | Description | Default
                         as=subitem
                         index-as="index">
                       <div class="menu-subitem layout horizontal center flex">
-                        <a class="menu-subitem-name"
-                            href="[[subitem.link]]">[[subitem.name]]</a>
+                        <a class="menu-subitem-name"  data-cover$="[[subitem.cover]]" on-mouseover='onHovered'
+                            href="[[subitem.link]]">[[subitem.name]] </a>
                         <iron-icon class="layout menu-subitem-icon"
                             icon="chevron-right"></iron-icon>
                       </div>
@@ -221,9 +220,10 @@ Custom property | Description | Default
                     restamp="true">
                   <div class="menu-display vertical layout">
                     <iron-image class="flex"
-                        src="[[menuItem.cover]]"
+                        src="{{cover}}"
                         preload
                         sizing="[[menuItem.coverSizing]]"></iron-image>
+
                   </div>
                 </template>
               </li>
@@ -232,7 +232,6 @@ Custom property | Description | Default
         </li>
       </template>
     </ul>
-
   </template>
 
   <script>
@@ -242,7 +241,7 @@ Custom property | Description | Default
       properties: {
 
         /**
-         * The menu itens with this subitems, this is placed at the bottom bar
+         * The menu itens with this subitems, this is pserioaced at the bottom bar
          *
          * @type {[{
          * name: string,
@@ -258,16 +257,18 @@ Custom property | Description | Default
             return []
           }
         },
-
         _itemOpened: {
           type: Number,
           value: 0,
           notify: true
         },
       },
-
       // Element Lifecycle
 
+        onHovered: function(e) {
+          if(e.target.dataset.cover)
+            this.cover = e.target.dataset.cover;
+        },
       ready: function() {
         // `ready` is called after all elements have been configured, but
         // propagates bottom-up. This element's children are ready, but parents
