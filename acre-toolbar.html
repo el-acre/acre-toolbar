@@ -22,6 +22,8 @@
     href="acre-login-button.html">
 <link rel="import"
     href="acre-toolbar-shared-styles.html">
+<link rel="import"
+    href="acre-actions-mobile.html">
 
 <dom-module id="acre-toolbar">
   <template>
@@ -94,6 +96,8 @@
       </div>
 
       <div class="drawer-left">
+        <content select=".drawer-left"></content>
+        <acre-actions-mobile hidden$="[[!actionsMobile.length]]" actions="[[actionsMobile]]"></acre-actions-mobile>
         <acre-menu-for-drawer menu-items="[[menuItems]]"></acre-menu-for-drawer>
       </div>
 
@@ -145,6 +149,13 @@
         },
 
         menuItemsMobile: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        },
+
+        actionsMobile: {
           type: Array,
           value: function() {
             return []

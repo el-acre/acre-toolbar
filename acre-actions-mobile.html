@@ -1,0 +1,72 @@
+<link rel="import"
+    href="../polymer/polymer.html">
+<link rel="import"
+    href="../iron-icon/iron-icon.html">
+<link rel="import"
+    href="../iron-icons/iron-icons.html">
+<link rel="import"
+    href="../paper-button/paper-button.html">
+<link rel="import"
+    href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import"
+    href="../paper-badge/paper-badge.html">
+<link rel="import"
+    href="acre-toolbar-shared-styles.html">
+
+<dom-module id="acre-actions-mobile">
+  <template>
+    <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
+       :host {
+        display: block;
+      }
+      /**
+      * TOP
+      */
+
+      .top-mobile {
+        padding: 10px 10px 5px 10px;
+        background-color: var(--top-color, --dark-primary-color);
+        color: var(--top-text-color, --light-text-color);
+        @apply(--toolbar-top);
+      }
+
+      .top-mobile .action {
+        padding: 10px;
+        @apply(--toolbar-mobile-action);
+      }
+
+      .top-mobile .action:hover {
+        cursor: pointer;
+      }
+
+      .top-mobile .group-container {
+        @apply(--layout-justified);
+      }
+    </style>
+
+    <div class="top-mobile">
+      <div class="layout flex">
+        <content select=".toolbar-top-mobile"></content>
+      </div>
+      <div class="layout horizontal wrap">
+        <template is="dom-repeat"
+            items=[[actions]]
+            as=action
+            index-as="index">
+            <a class="action layout flex"
+                style$="{{action.style}}"
+                href="[[action.link]]">
+              <iron-icon icon="[[action.icon]]"
+                  hidden="[[!action.icon]]"
+                  style="[[action.iconStyle]]"></iron-icon>
+              [[action.name]]</a>
+        </template>
+      </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'acre-actions-mobile'
+    });
+  </script>
+</dom-module>
