@@ -13,22 +13,26 @@
 <link rel="import"
     href="acre-menu-bar.html">
 <link rel="import"
-    href="acre-menu-inline.html">
+    href="acre-menu-bar-mobile.html">
+<link rel="import"
+    href="acre-menu-for-drawer.html">
 <link rel="import"
     href="acre-cart-presenter.html">
 <link rel="import"
     href="acre-login-button.html">
 <link rel="import"
     href="acre-toolbar-shared-styles.html">
+<link rel="import"
+    href="acre-actions-mobile.html">
 
 <dom-module id="acre-toolbar">
   <template>
     <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
-      :host {
+       :host {
         display: block;
       }
 
-      .desktop-search-box{
+      .desktop-search-box {
         @apply(--desktop-search-box);
       }
     </style>
@@ -40,8 +44,11 @@
 
     <acre-toolbar-container id="toolbar"
         logo-image="[[logoImage]]"
+        logo-image-mobile="[[logoImageMobile]]"
         logo-url="[[logoUrl]]"
-        top-actions="[[actions]]">
+        top-actions="[[actions]]"
+        swipe-open-right="[[swipeOpenRight]]"
+        swipe-open-left="[[swipeOpenLeft]]">
 
       <div class="toolbar-top">
         <content select=".toolbar-top"></content>
@@ -83,8 +90,15 @@
           <acre-menu-bar>
       </div>
 
+      <div class="toolbar-menu-mobile">
+        <acre-menu-bar-mobile menu-items-mobile="[[menuItemsMobile]]" hidden="[[!menuItemsMobile.length]]">
+          <acre-menu-bar-mobile>
+      </div>
+
       <div class="drawer-left">
-        <acre-menu-inline menu-items="[[menuItems]]"></acre-menu-inline>
+        <content select=".drawer-left"></content>
+        <acre-actions-mobile hidden$="[[!actionsMobile.length]]" actions="[[actionsMobile]]"></acre-actions-mobile>
+        <acre-menu-for-drawer menu-items="[[menuItems]]"></acre-menu-for-drawer>
       </div>
 
       <div class="drawer-right"
@@ -134,12 +148,42 @@
           }
         },
 
+        menuItemsMobile: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        },
+
+        actionsMobile: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        },
+
         /*Cart props*/
         cartItems: {
           type: Array,
           value: function() {
             return []
           }
+        },
+
+        /**
+        * Swipe open right drawer
+        */
+        swipeOpenRight: {
+          type: Boolean,
+          value: true
+        },
+
+        /**
+        * Swipe open left drawer
+        */
+        swipeOpenLeft: {
+          type: Boolean,
+          value: true
         },
 
         itemsQuantity: Number,
@@ -159,8 +203,8 @@
         this.$.cartData.changeItemQuantity(item);
       },
 
-      setItemWithQuantity: function (item) {
-          this.$.cartData.setItemWithQuantity(item);
+      setItemWithQuantity: function(item) {
+        this.$.cartData.setItemWithQuantity(item);
       }
 
     });
