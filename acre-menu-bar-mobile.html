@@ -1,20 +1,13 @@
-<link rel="import"
-    href="../polymer/polymer.html">
-<link rel="import"
-    href="acre-toolbar-shared-styles.html">
-<link rel="import"
-    href="../iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import"
-    href="../paper-tabs/paper-tabs.html">
-<link rel="import"
-    href="../paper-tabs/paper-tab.html">
-<link rel="import"
-    href="../iron-icons/iron-icons.html">
-<link rel="import"
-    href="../iron-icon/iron-icon.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="acre-toolbar-shared-styles.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../paper-tabs/paper-tabs.html">
+<link rel="import" href="../paper-tabs/paper-tab.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
 
 <dom-module id="acre-menu-bar-mobile">
-  <template>
+    <template>
     <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
        :host {
         display: block;
@@ -37,7 +30,7 @@
       paper-tab a.menu-item-name iron-icon{
         margin-right:10px;
         width:20px;
-        heigth:20px;
+        height:20px;
       }
     </style>
 
@@ -63,30 +56,30 @@
       </template>
     </paper-tabs>
 
-  </template>
-  <script>
-    Polymer({
-      is: 'acre-menu-bar-mobile',
+    </template>
+    <script>
+        Polymer({
+            is: 'acre-menu-bar-mobile',
 
-      properties: {
-        /**
-         * The menu itens with this subitems, this is placed at the bottom bar
-         *
-         * @type {[{
-         * name: string,
-         * link:string,
-         * cover: string,
-         * coverSizing: contain,
-         * subitems: [{name: string, link: string}]
-         * }]}
-         */
-        menuItemsMobile: {
-          type: Array,
-          value: function() {
-            return []
-          }
-        },
-      }
-    });
-  </script>
+            properties: {
+                /**
+                 * The menu itens with this subitems, this is placed at the bottom bar
+                 *
+                 * @type {[{
+                 * name: string,
+                 * link:string,
+                 * cover: string,
+                 * coverSizing: contain,
+                 * subitems: [{name: string, link: string}]
+                 * }]}
+                 */
+                menuItemsMobile: {
+                    type: Array,
+                    value: function() {
+                        return []
+                    }
+                },
+            }
+        });
+    </script>
 </dom-module>
