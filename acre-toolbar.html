@@ -1,32 +1,19 @@
-<link rel="import"
-    href="../polymer/polymer.html">
-<link rel="import"
-    href="../iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import"
-    href="acre-cart-data.html">
-<link rel="import"
-    href="acre-toolbar-container.html">
-<link rel="import"
-    href="acre-search-box.html">
-<link rel="import"
-    href="acre-cart-dropdown.html">
-<link rel="import"
-    href="acre-menu-bar.html">
-<link rel="import"
-    href="acre-menu-bar-mobile.html">
-<link rel="import"
-    href="acre-menu-for-drawer.html">
-<link rel="import"
-    href="acre-cart-presenter.html">
-<link rel="import"
-    href="acre-login-button.html">
-<link rel="import"
-    href="acre-toolbar-shared-styles.html">
-<link rel="import"
-    href="acre-actions-mobile.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="acre-cart-data.html">
+<link rel="import" href="acre-toolbar-container.html">
+<link rel="import" href="acre-search-box.html">
+<link rel="import" href="acre-cart-dropdown.html">
+<link rel="import" href="acre-menu-bar.html">
+<link rel="import" href="acre-menu-bar-mobile.html">
+<link rel="import" href="acre-menu-for-drawer.html">
+<link rel="import" href="acre-cart-presenter.html">
+<link rel="import" href="acre-login-button.html">
+<link rel="import" href="acre-toolbar-shared-styles.html">
+<link rel="import" href="acre-actions-mobile.html">
 
 <dom-module id="acre-toolbar">
-  <template>
+    <template>
     <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
        :host {
         display: block;
@@ -95,14 +82,15 @@
           <acre-menu-bar-mobile>
       </div>
 
-      <div class="drawer-left">
+      <div class="drawer-left"
+          style="height: 100vh; overflow: auto;">
         <content select=".drawer-left"></content>
         <acre-actions-mobile hidden$="[[!actionsMobile.length]]" actions="[[actionsMobile]]"></acre-actions-mobile>
         <acre-menu-for-drawer menu-items="[[menuItems]]"></acre-menu-for-drawer>
       </div>
 
       <div class="drawer-right"
-          style="height: 100%; overflow: auto;">
+          style="height: 100vh; overflow: auto;">
         <acre-cart-presenter cart-items="[[cartItems]]"
             items-sum-quantity="[[itemsSumQuantity]]"
             items-quantity="[[itemsQuantity]]"
@@ -116,97 +104,97 @@
     </acre-toolbar-container>
 
   </template>
-  <script>
-    Polymer({
-      is: 'acre-toolbar',
+    <script>
+        Polymer({
+            is: 'acre-toolbar',
 
-      properties: {
-        logoImage: String,
-        logoUrl: String,
-        cartUrl: String,
-        checkoutUrl: String,
-        showCartMessage: String,
-        checkoutMessage: String,
-        searchUrl: String,
-        searchPostUrl: String,
-        searchPlaceholder: String,
-        loginMessage: String,
-        loginUrl: String,
-        profileUrl: String,
-        loggedUser: String,
+            properties: {
+                logoImage: String,
+                logoUrl: String,
+                cartUrl: String,
+                checkoutUrl: String,
+                showCartMessage: String,
+                checkoutMessage: String,
+                searchUrl: String,
+                searchPostUrl: String,
+                searchPlaceholder: String,
+                loginMessage: String,
+                loginUrl: String,
+                profileUrl: String,
+                loggedUser: String,
 
-        actions: {
-          type: Array,
-          value: function() {
-            return []
-          }
-        },
-        menuItems: {
-          type: Array,
-          value: function() {
-            return []
-          }
-        },
+                actions: {
+                    type: Array,
+                    value: function() {
+                        return []
+                    }
+                },
+                menuItems: {
+                    type: Array,
+                    value: function() {
+                        return []
+                    }
+                },
 
-        menuItemsMobile: {
-          type: Array,
-          value: function() {
-            return []
-          }
-        },
+                menuItemsMobile: {
+                    type: Array,
+                    value: function() {
+                        return []
+                    }
+                },
 
-        actionsMobile: {
-          type: Array,
-          value: function() {
-            return []
-          }
-        },
+                actionsMobile: {
+                    type: Array,
+                    value: function() {
+                        return []
+                    }
+                },
 
-        /*Cart props*/
-        cartItems: {
-          type: Array,
-          value: function() {
-            return []
-          }
-        },
+                /*Cart props*/
+                cartItems: {
+                    type: Array,
+                    value: function() {
+                        return []
+                    }
+                },
 
-        /**
-        * Swipe open right drawer
-        */
-        swipeOpenRight: {
-          type: Boolean,
-          value: true
-        },
+                /**
+                 * Swipe open right drawer
+                 */
+                swipeOpenRight: {
+                    type: Boolean,
+                    value: true
+                },
 
-        /**
-        * Swipe open left drawer
-        */
-        swipeOpenLeft: {
-          type: Boolean,
-          value: true
-        },
+                /**
+                 * Swipe open left drawer
+                 */
+                swipeOpenLeft: {
+                    type: Boolean,
+                    value: true
+                },
 
-        itemsQuantity: Number,
-        itemsSumQuantity: Number,
-      },
+                itemsQuantity: Number,
+                itemsSumQuantity: Number,
+            },
 
-      // Cart actions
-      addItem: function(item) {
-        this.$.cartData.addItem(item);
-      },
+            // Cart actions
+            addItem: function(item) {
+                this.$.cartData.addItem(item);
+            },
 
-      removeItem: function(item) {
-        this.$.cartData.removeItem(item);
-      },
+            removeItem: function(item) {
+                this.$.cartData.removeItem(item);
+            },
 
-      changeItemQuantity: function(itemId, quantity) {
-        this.$.cartData.changeItemQuantity(item);
-      },
+            changeItemQuantity: function(itemId, quantity) {
+                this.$.cartData.changeItemQuantity(item);
+            },
 
-      setItemWithQuantity: function(item) {
-        this.$.cartData.setItemWithQuantity(item);
-      }
+            setItemWithQuantity: function(item) {
+                this.$.cartData.setItemWithQuantity(item);
+            }
 
-    });
-  </script>
+        });
+    </script>
 </dom-module>
