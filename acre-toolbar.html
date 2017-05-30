@@ -91,7 +91,9 @@
       </div>
 
       <div class="toolbar-menu-mobile">
-        <acre-menu-bar-mobile menu-items-mobile="[[menuItemsMobile]]" hidden="[[!menuItemsMobile.length]]">
+        <acre-menu-bar-mobile menu-items-mobile="[[menuItemsMobile]]"
+        hidden="[[!menuItemsMobile.length]]"
+        hide-scroll-buttons=[[hideMobileMenuScrollButtons]]>
           <acre-menu-bar-mobile>
       </div>
 
@@ -153,6 +155,11 @@
           value: function() {
             return []
           }
+        },
+
+        hideMobileMenuScrollButtons:{
+          type: Boolean,
+          value: true
         },
 
         actionsMobile: {

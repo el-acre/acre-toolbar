@@ -31,7 +31,6 @@
         color: black!important;
         @apply(--layout-horizontal);
         @apply(--layout-center);
-        @apply(--menu-bar-mobile-item);
       }
 
       paper-tab a.menu-item-name iron-icon{
@@ -46,7 +45,7 @@
         noink
         noBar
         scrollable
-        hide-scroll-buttons>
+        hide-scroll-buttons=[[hideScrollButtons]]>
       <template is="dom-repeat"
           items=[[menuItemsMobile]]
           as=menuItem
