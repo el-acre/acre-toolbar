@@ -1,32 +1,19 @@
-<link rel="import"
-    href="../polymer/polymer.html">
-<link rel="import"
-    href="../iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import"
-    href="acre-cart-data.html">
-<link rel="import"
-    href="acre-toolbar-container.html">
-<link rel="import"
-    href="acre-search-box.html">
-<link rel="import"
-    href="acre-cart-dropdown.html">
-<link rel="import"
-    href="acre-menu-bar.html">
-<link rel="import"
-    href="acre-menu-bar-mobile.html">
-<link rel="import"
-    href="acre-menu-for-drawer.html">
-<link rel="import"
-    href="acre-cart-presenter.html">
-<link rel="import"
-    href="acre-login-button.html">
-<link rel="import"
-    href="acre-toolbar-shared-styles.html">
-<link rel="import"
-    href="acre-actions-mobile.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="acre-cart-data.html">
+<link rel="import" href="acre-toolbar-container.html">
+<link rel="import" href="acre-search-box.html">
+<link rel="import" href="acre-cart-dropdown.html">
+<link rel="import" href="acre-menu-bar.html">
+<link rel="import" href="acre-menu-bar-mobile.html">
+<link rel="import" href="acre-menu-for-drawer.html">
+<link rel="import" href="acre-cart-presenter.html">
+<link rel="import" href="acre-login-button.html">
+<link rel="import" href="acre-toolbar-shared-styles.html">
+<link rel="import" href="acre-actions-mobile.html">
 
 <dom-module id="acre-toolbar">
-  <template>
+    <template>
     <style include="iron-flex iron-flex-alignment acre-toolbar-shared-styles">
        :host {
         display: block;
@@ -97,14 +84,15 @@
           <acre-menu-bar-mobile>
       </div>
 
-      <div class="drawer-left">
+      <div class="drawer-left"
+          style="height: 100vh; overflow: auto;">
         <content select=".drawer-left"></content>
         <acre-actions-mobile hidden$="[[!actionsMobile.length]]" actions="[[actionsMobile]]"></acre-actions-mobile>
         <acre-menu-for-drawer menu-items="[[menuItems]]"></acre-menu-for-drawer>
       </div>
 
       <div class="drawer-right"
-          style="height: 100%; overflow: auto;">
+          style="height: 100vh; overflow: auto;">
         <acre-cart-presenter cart-items="[[cartItems]]"
             items-sum-quantity="[[itemsSumQuantity]]"
             items-quantity="[[itemsQuantity]]"
