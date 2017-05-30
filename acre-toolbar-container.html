@@ -182,6 +182,24 @@ Custom property | Description | Default
         overflow: auto;
       }
 
+      .drawer-left-close{
+        right: calc(15vw - 35px);
+        position: fixed;
+        margin: auto;
+        top:0;
+        background-color: var(--top-color, --dark-primary-color);
+        color: var(--top-text-color, --light-text-color);
+      }
+
+      .drawer-right-close{
+        left: calc(15vw - 35px);
+        position: fixed;
+        margin: auto;
+        top:0;
+        background-color: white;
+        color: black;
+      }
+
       @media (max-width: 767px) {
         app-header {
           background-color: var(--top-color-mobile, --top-color);
@@ -297,16 +315,30 @@ Custom property | Description | Default
     <app-drawer class="drawer-right"
         id="drawerRight"
         align="right"
-        swipe-open="[[swipeOpenRight]]">
+        swipe-open="[[swipeOpenRight]]"
+        opened={{rightDrawerOpened}}>
       <content select=".drawer-right"></content>
     </app-drawer>
     <app-drawer align="left"
         id="drawerLeft"
-        swipe-open="[[swipeOpenLeft]]">
+        swipe-open="[[swipeOpenLeft]]"
+        opened={{leftDrawerOpened}}>
       <div class="layout vertical flex">
         <content select=".drawer-left"></content>
       </div>
     </app-drawer>
+
+    <div class="drawer-right-close"
+        hidden="[[!rightDrawerOpened]]">
+      <paper-icon-button icon="close"
+        on-click="closeRightDrawer"></paper-icon-button>
+    </div>
+
+    <div class="drawer-left-close"
+        hidden="[[!leftDrawerOpened]]">
+      <paper-icon-button icon="close"
+        on-click="closeLeftDrawer"></paper-icon-button>
+    </div>
 
   </template>
 
@@ -430,6 +462,16 @@ Custom property | Description | Default
         this.$.drawerRight.open()
       },
 
+      closeLeftDrawer: function() {
+        console.log(1)
+
+        this.$.drawerLeft.close()
+      },
+
+      closeRightDrawer: function() {
+        console.log(1)
+        this.$.drawerRight.close()
+      },
 
     });
   </script>
